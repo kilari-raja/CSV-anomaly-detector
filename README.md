@@ -3,13 +3,11 @@ CSV-anamoly-detector :
 
 Description of the tool :
 
-	This tool is handy if you are working with a large csv file. Given such a file with 
-	thousands of lines it is a daunting task to go through each line and find out the 
-	anamolies, if any. Even if the file is received from a reliable source it is always 
-	safe to verify the veracity of the file before proceeding further.
+	This tool is handy if you are working with a large csv file wherein scanning each 
+	line for anamolies is a daunting task. Even if the file is received from a reliable source it is always safe to verify the veracity of the file before proceeding further.
 
-	Each column has a title, all of which will be mentioned in the very first line of any csv 
-	file which we shall refer as "HEADER" throughout this page.
+	Each column has a title, all of which will be mentioned in the very first line of any 
+	csv file which we shall refer as "HEADER" throughout this page.
 
 	The tool takes a header-wise scanning approach.After scanning each Header, the dominant
 	datatype is identified and any another datatype is assumed ("we are not concluding 
@@ -33,6 +31,10 @@ Command line execution:
 	
 	To verify the entries in the each header (say email) :
 		python automation.py executeColumns --filename=mock.csv --columns=email
+
+	Upon completion of the scanning process, you will see either of these two responses:
+	1) This Column appears bug free.
+	2) PLEASE OPEN improperData.txt (this file contains all the error prone entries)
 
 	To know the commands available:
 		python automation.py --help
