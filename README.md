@@ -3,8 +3,9 @@ CSV-anamoly-detector :
 
 Description of the tool :
 
-	This tool is handy if you are working with a large csv file wherein scanning each 
-	line for anamolies is a daunting task. Even if the file is received from a reliable source it is always safe to verify the veracity of the file before proceeding further.
+	This tool is handy if you are working with a large csv file wherein scanning each
+	line for anamolies is a daunting task. Even if the file is received from a reliable
+	source it is always safe to verify the veracity of the file before proceeding further.
 
 	Each column has a title, all of which will be mentioned in the very first line of any 
 	csv file which we shall refer as "HEADER" throughout this page.
