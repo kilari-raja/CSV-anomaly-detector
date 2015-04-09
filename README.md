@@ -14,8 +14,8 @@ Description of the tool :
 	datatype is identified and any another datatype is assumed ("we are not concluding 
 	because the final decision rests with the user") to be defective. 
 
-	Datatypes described in the tool are so exhaustive that even what plain eye may miss will
-	be detected by the tool.
+	Datatypes described in the tool are so exhaustive that even what plain eye may miss 
+	will be detected by the tool.
 	Ex.R0HAN is different from ROHAN (notice zero instead of 'o' in the first case.)
 
 
