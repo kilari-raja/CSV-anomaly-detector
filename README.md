@@ -18,7 +18,7 @@ Command line execution:
 	Let us assume that we have a file named mock.csv and our source code is in automation.py
 	
 	To view the headers of the file:	
-		python automation.py Columns --filename=mock.csv
+		python automation.py columns --filename=mock.csv
 
 	We will be shown the following result:
 		['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']

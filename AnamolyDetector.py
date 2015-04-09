@@ -46,7 +46,7 @@ class ColumnPrint(object):
 			print arrt		
 
 @app.command
-def Columns(filename="something"):
+def columns(filename="something"):
 	x = HeaderPrint()
 	x.funky(filename)
 
