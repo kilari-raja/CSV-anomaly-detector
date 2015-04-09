@@ -30,7 +30,7 @@ Command line execution:
 		['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
 	where each element of the above array is a header
 	
-	To verify the entries in the each header (say email) :
+	To find out the anamolies in each header (say email) :
 		python automation.py executeColumns --filename=mock.csv --columns=email
 
 	Upon completion of the scanning process, you will see either of these two responses:
