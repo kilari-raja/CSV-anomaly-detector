@@ -505,23 +505,26 @@ class ExecuteProgram(object):
 				for row in real_data :
 					for i in range(int(globvar),int(globar)):				
 						row_no_in_original_file += 1										
-						if (row[mylist[i]] in state_code_array) and (row[mylist[i]] not in states_and_cities) :		
-							with open('improperData.txt','a') as fp :
-								defective_rows+=1
-								if defective_rows == 1 : 
-									global func_count
-									func_count += 1	
-									fp.write("***************************************************************************************\n")
-									fp.write("THIS ROW IS PRINTED BECAUSE THE ENTRY IN THE COLUMN ") 
-									fp.write(mylist[a])
-									fp.write(" OF THE CSV FILE IS A US STATE\n")
-									fp.write("***************************************************************************************\n")
-								fp.write(str(row)+ "\n")
-								fp.write("Defective row No:")
-								fp.write(str(defective_rows) + "\n")
-								new_row_no_in_original_file = row_no_in_original_file + 1
-								fp.write("Row no in original file is ")
-								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+						if (row[mylist[i]] in state_code_array) and (row[mylist[i]] not in states_and_cities) :	
+							for j in range(i+1,len(row)):
+								key = (row[mylist[i]], row[mylist[j]])
+								if key[0] == key[1] :	
+									with open('improperData.txt','a') as fp :
+										defective_rows+=1
+										if defective_rows == 1 : 
+											global func_count
+											func_count += 1	
+											fp.write("***************************************************************************************\n")
+											fp.write("THIS ROW IS PRINTED BECAUSE THE ENTRY IN THE COLUMN ") 
+											fp.write(mylist[a])
+											fp.write(" OF THE CSV FILE IS A US STATE\n")
+											fp.write("***************************************************************************************\n")
+										fp.write(str(row)+ "\n")
+										fp.write("Defective row No:")
+										fp.write(str(defective_rows) + "\n")
+										new_row_no_in_original_file = row_no_in_original_file + 1
+										fp.write("Row no in original file is ")
+										fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 						else : 
 							pass
 			

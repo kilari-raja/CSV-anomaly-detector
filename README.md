@@ -39,3 +39,11 @@ Command line execution:
 
 	To know the commands available:
 		python automation.py --help
+
+	Please "avoid" spacing in the following areas:
+		--filename = mock.csv (will throw error)
+		--filename= mock.csv (will throw error)
+		--filename =mock.csv(will throw error)
+		--filename=mock.csv (will give result)
+
+		The above set of rules also apply for --columns
