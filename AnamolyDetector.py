@@ -15,6 +15,7 @@ func_count = 0
 local_count = 0
 arr=[]
 zipcode_array =[]
+open('improperData.txt', 'w').close()
 
 class HeaderPrint(object):
 	def funky(self,header):
@@ -760,7 +761,7 @@ class ExecuteProgram(object):
 			for row in real_data :	
 				row_no_in_original_file += 1	
 				if (len(row) != len(mylist)) :
-					open('improperData.txt', 'w').close()
+					# open('improperData.txt', 'w').close()
 					defective_rows += 1
 					with open('improperData.txt','a') as fp :
 						count+=1
@@ -777,7 +778,7 @@ class ExecuteProgram(object):
 						fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 					
 				if (len(row) == len(mylist)) :
-					open('improperData.txt', 'w').close()
+					# open('improperData.txt', 'w').close()
 					counter+=1									
 					for i in range(int(globvar),int(globar)):
 						a = i
@@ -1312,12 +1313,32 @@ class executerHeader(object):
 		elif else_count == 0:
 			print "header is not available"
 
+class executeAll(object):
+	def whole_file(self,filesname):
+		global filename				
+		filename = filesname
+		with open(filename,'rU') as data :
+			r = csv.reader(open(filesname, "rU"), dialect=csv.excel_tab)
+			line1=r.next()	
+			arrt = []
+			for element in line1:
+				mylist = element.split(',')
+
+			for i in range(0,len(mylist)):
+				start = i
+				end = i+1
+				x = ExecuteProgram()
+				x.fix_file(filename,start,end)
+
 @app.command
 def executeColumns(filename="filename",columns="headerName"):
 	x = executerHeader()
-	columns=columns.lower()
 	x.work_header(filename,columns)
 
+@app.command
+def execute(filename="filename"):
+	x = executeAll()
+	x.whole_file(filename)
 
 if __name__ == '__main__': 
 	app.run()				
