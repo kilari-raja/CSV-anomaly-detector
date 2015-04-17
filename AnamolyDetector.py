@@ -1315,6 +1315,7 @@ class executerHeader(object):
 @app.command
 def executeColumns(filename="filename",columns="headerName"):
 	x = executerHeader()
+	columns=columns.lower()
 	x.work_header(filename,columns)
 
 
