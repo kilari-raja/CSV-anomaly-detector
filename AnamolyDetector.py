@@ -15,6 +15,7 @@ func_count = 0
 local_count = 0
 arr=[]
 zipcode_array =[]
+email_array = []
 open('improperData.txt', 'w').close()
 
 class HeaderPrint(object):
@@ -710,7 +711,9 @@ class ExecuteProgram(object):
 										fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 
 		def print_improper_email_entries():
+
 			with open(filename,'rU') as data :
+
 				real_data = csv.DictReader(data)	
 				defective_rows = 0
 				row_no_in_original_file = 0	
@@ -720,7 +723,8 @@ class ExecuteProgram(object):
 						find_space = re.findall(pattern_space,row[mylist[i]])
 						find_dot = re.findall(pattern_dot,row[mylist[i]])
 						find_email = re.findall(pattern_email,row[mylist[i]])
-						row_no_in_original_file += 1								
+						row_no_in_original_file += 1
+						print "find_email length:", len(find_email)
 						if find_string and find_space :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
@@ -740,7 +744,7 @@ class ExecuteProgram(object):
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 							
 
-						elif find_string and not find_dot :
+						if len(find_email)>1 and not find_dot :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
 								if defective_rows == 1 : 
@@ -759,11 +763,10 @@ class ExecuteProgram(object):
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 							
 
-						elif find_string and not find_email :
+						if len(find_email)==1 and find_string and not find_email :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
-								if defective_rows == 1 :
-									
+								if defective_rows == 1 :									
 									func_count += 1	 							
 									fp.write("***************************************************************************************\n")
 									fp.write("THIS ROW IS PRINTED BECAUSE @ IS NOT PRESENT IN THE COLUMN ")
@@ -848,6 +851,7 @@ class ExecuteProgram(object):
 							elif find_string and find_dot and find_integer and find_email and not find_empty :
 								#print "possible email with integer"
 								email+=1
+								email_array.append(row[mylist[i]])
 							elif find_string and not find_space and find_integer and not find_email and not find_website and not find_dot and not find_phone:
 								#print "string with integer without spaces"
 								string_with_integer_without_spaces+=1
@@ -857,6 +861,7 @@ class ExecuteProgram(object):
 							elif find_string and find_email and find_dot and not find_empty and not find_integer:
 								#print "possible email but without integer"
 								email+=1
+								email_array.append(row[mylist[i]])
 							elif find_string and find_email and not find_dot :
 								#print "string with @ instead of at"
 								string_with_symbol_instead_of_at+=1
@@ -1221,7 +1226,7 @@ class ExecuteProgram(object):
 
 			if(email > (counter/2)) :
 				print "\tVery high probability that this column represents email"
-				print_duplicate_email_entries()
+				print_improper_email_entries()
 				if(empty):
 					print "\tThere are empty records in this column"
 
