@@ -680,6 +680,35 @@ class ExecuteProgram(object):
 						else : 
 							pass										
 
+		def print_duplicate_email_entries():
+			# print "email_array is :",email_array
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)	
+				defective_rows = 0
+				row_no_in_original_file = 0							
+				# for i in range(int(globvar),int(globar)):
+				for one in range(0,len(email_array)):
+					for two in range(one+1,len(email_array)):		
+						if email_array[one] == email_array[two] :							
+							for row in real_data :										
+								if email_array[one] in str(row) :									
+									with open('improperData.txt','a') as fp :							
+										defective_rows += 1
+										if defective_rows == 1 :
+											global func_count
+											func_count += 1								
+											fp.write("***************************************************************************************\n")
+											fp.write("THIS ROW IS PRINTED BECAUSE THE EMAIL ENTRY IN THE COLUMN ")
+											fp.write(mylist[a])
+											fp.write(" IS DUPLICATED \n")
+											fp.write("***************************************************************************************\n")
+										fp.write(str(row)+ "\n")
+										fp.write("Defective row No:")
+										fp.write(str(defective_rows) + "\n")
+										new_row_no_in_original_file = row_no_in_original_file + 1
+										fp.write("Row no in original file is ")
+										fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
 		def print_improper_email_entries():
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)	
@@ -1192,6 +1221,7 @@ class ExecuteProgram(object):
 
 			if(email > (counter/2)) :
 				print "\tVery high probability that this column represents email"
+				print_duplicate_email_entries()
 				if(empty):
 					print "\tThere are empty records in this column"
 
