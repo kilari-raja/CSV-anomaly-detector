@@ -36,6 +36,8 @@ Command line execution:
 	To find out anamolies in all headers (i.e the whole file) :
 		python automation.py execute --filename=mock.csv
 
+		The above command executes the scanning process across all columns in one-go.
+
 	Upon completion of the scanning process, you will see either of these two responses:
 	1) This Column appears bug free.
 	2) PLEASE OPEN improperData.txt (this file contains all the error prone entries)
