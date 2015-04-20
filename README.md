@@ -33,6 +33,9 @@ Command line execution:
 	To find out the anamolies in each header (say email) :
 		python automation.py executeColumns --filename=mock.csv --columns=email
 
+	To find out anamolies in all headers (i.e the whole file) :
+		python automation.py execute --filename=mock.csv
+
 	Upon completion of the scanning process, you will see either of these two responses:
 	1) This Column appears bug free.
 	2) PLEASE OPEN improperData.txt (this file contains all the error prone entries)
