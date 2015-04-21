@@ -1296,6 +1296,10 @@ class ExecuteProgram(object):
 				if(email !=0) :
 					print_email_entries()
 
+			if(total_string < (10*(counter-empty)/100)) :
+				print "Few string entries are found. Hence printed"
+				print_string_entries()
+
 			if (state_code > (9*counter)/10) :
 				if(local_count == 0):
 					print "\tHigh probability that this column represents state code"
