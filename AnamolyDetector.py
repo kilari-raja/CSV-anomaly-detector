@@ -686,29 +686,33 @@ class ExecuteProgram(object):
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)	
 				defective_rows = 0
-				row_no_in_original_file = 0							
+				row_no_in_original_file = 0
+				duplicate_emails = [k for k,v in Counter(email_array).items() if v>1]							
+				# print "*************************************************************"
+				# print "Duplicate emails are:",duplicate_emails
+				# print "*************************************************************"
 				# for i in range(int(globvar),int(globar)):
-				for one in range(0,len(email_array)):
-					for two in range(one+1,len(email_array)):		
-						if email_array[one] == email_array[two] :							
-							for row in real_data :										
-								if email_array[one] in str(row) :									
-									with open('improperData.txt','a') as fp :							
-										defective_rows += 1
-										if defective_rows == 1 :
-											global func_count
-											func_count += 1								
-											fp.write("***************************************************************************************\n")
-											fp.write("THIS ROW IS PRINTED BECAUSE THE EMAIL ENTRY IN THE COLUMN ")
-											fp.write(mylist[a])
-											fp.write(" IS DUPLICATED \n")
-											fp.write("***************************************************************************************\n")
-										fp.write(str(row)+ "\n")
-										fp.write("Defective row No:")
-										fp.write(str(defective_rows) + "\n")
-										new_row_no_in_original_file = row_no_in_original_file + 1
-										fp.write("Row no in original file is ")
-										fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+				if len(duplicate_emails) > 0 :							
+					for row in real_data :
+						row_no_in_original_file += 1
+						for x in range(0,len(duplicate_emails))	:
+							if duplicate_emails[x] in str(row) :						
+								with open('improperData.txt','a') as fp :							
+									defective_rows += 1
+									if defective_rows == 1 :
+										global func_count
+										func_count += 1								
+										fp.write("***************************************************************************************\n")
+										fp.write("THIS ROW IS PRINTED BECAUSE THE EMAIL ENTRY IN THE COLUMN ")
+										fp.write(mylist[a])
+										fp.write(" IS DUPLICATED \n")
+										fp.write("***************************************************************************************\n")
+									fp.write(str(row)+ "\n")
+									fp.write("Defective row No:")
+									fp.write(str(defective_rows) + "\n")
+									new_row_no_in_original_file = row_no_in_original_file + 1
+									fp.write("Row no in original file is ")
+									fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 
 		def print_improper_email_entries():
 
@@ -724,12 +728,30 @@ class ExecuteProgram(object):
 						find_dot = re.findall(pattern_dot,row[mylist[i]])
 						find_email = re.findall(pattern_email,row[mylist[i]])
 						row_no_in_original_file += 1
-						print "find_email length:", len(find_email)
-						if find_string and find_space :
+						# print "find_email length:", len(find_email)
+						if len(find_email) >=2 :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
 								if defective_rows == 1 :
 									global func_count
+									func_count += 1								
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE @ OCCURS TWICE IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
+						if find_string and find_space :
+							with open('improperData.txt','a') as fp :
+								defective_rows += 1
+								if defective_rows == 1 :
+									
 									func_count += 1								
 									fp.write("***************************************************************************************\n")
 									fp.write("THIS ROW IS PRINTED BECAUSE AN EMPTY SPACE IS PRESENT IN PLACE OF EMAIL IN THE COLUMN ")
@@ -744,7 +766,7 @@ class ExecuteProgram(object):
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 							
 
-						if len(find_email)>1 and not find_dot :
+						if find_email and not find_dot :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
 								if defective_rows == 1 : 
@@ -763,7 +785,7 @@ class ExecuteProgram(object):
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 							
 
-						if len(find_email)==1 and find_string and not find_email :
+						if find_string and not find_email :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
 								if defective_rows == 1 :									
@@ -1173,7 +1195,7 @@ class ExecuteProgram(object):
 				print "\tEmail dominates this column. Hence any other type of entries is considered a defective entry."
 				print_improper_email_entries()		
 				print_integer_only_entries()
-				print_no_dots()
+				
 				print_integer_more_than_string()
 
 			if(empty) < (counter/10) and empty > 0 :
@@ -1227,6 +1249,7 @@ class ExecuteProgram(object):
 			if(email > (counter/2)) :
 				print "\tVery high probability that this column represents email"
 				print_improper_email_entries()
+				# print_duplicate_email_entries()
 				if(empty):
 					print "\tThere are empty records in this column"
 
