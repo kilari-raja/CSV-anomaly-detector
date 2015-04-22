@@ -1,4 +1,4 @@
-CSV-anamoly-detector :
+CSV-anamoly-detector 
 	A tool to detect anamolies in CSV files (especially large files)
 
 Description of the tool :
