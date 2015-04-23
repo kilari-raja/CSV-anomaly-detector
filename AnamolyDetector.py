@@ -104,7 +104,7 @@ class ExecuteProgram(object):
 		pattern_zipcode_without_hyphen = re.compile('^\d{5}$')
 		patter_zipcode_four_digits = re.compile('^\d{4}$')
 		pattern_zipcode_two_hyphen = re.compile('^\d{5}--\d{4}$')
-		pattern_special_characters = re.compile("[!|$|%|^|*|&|~|:|`|<|>]")
+		pattern_special_characters = re.compile("[!|$|%|^|*|~|:|`|<|>]")
 
 		def print_empty_entries():			
 			with open(filename,'rU') as data :
@@ -204,7 +204,7 @@ class ExecuteProgram(object):
 									global func_count
 									func_count += 1								
 									fp.write("***************************************************************************************\n")
-									fp.write("THIS ROW IS PRINTED BECAUSE A STRING (only string) IS PRESENT IN PLACE OF INTEGER IN COLUMN ") 
+									fp.write("THIS ROW IS PRINTED BECAUSE ONLY STRING IS PRESENT IN COLUMN ") 
 									fp.write(mylist[a])
 									fp.write(" OF THE CSV FILE\n")
 									fp.write("***************************************************************************************\n")
@@ -214,6 +214,34 @@ class ExecuteProgram(object):
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
+		def print_string_with_integer_and_space_entries():
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)
+				defective_rows = 0
+				row_no_in_original_file = 0	
+				for row in real_data :
+					for i in range(int(globvar),int(globar)):
+						find_string = re.findall(pattern_string,row[mylist[i]])
+						row_no_in_original_file += 1				
+						if find_string and find_integer and find_space :
+							with open('improperData.txt','a') as fp :
+								defective_rows+=1
+								if defective_rows == 1 : 
+									global func_count
+									func_count += 1								
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE A STRING WITH INTEGER AND SPACE IS PRESENT IN COLUMN ") 
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
 
 		def print_integer_entries():
 			with open(filename,'rU') as data :
@@ -313,17 +341,34 @@ class ExecuteProgram(object):
 					for i in range(int(globvar),int(globar)):				
 						find_email = re.findall(pattern_email,row[mylist[i]])
 						find_dot = re.findall(pattern_dot,row[mylist[i]])
-						row_no_in_original_file += 1								
-						if find_email and find_dot:
+						row_no_in_original_file += 1
+						global func_count								
+						if find_email and find_dot and not find_space :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
-								if defective_rows == 1 : 
-									global func_count
+								if defective_rows == 1 :									
 									func_count += 1	
 									fp.write("***************************************************************************************\n")
 									fp.write("THIS ROW IS PRINTED BECAUSE AN EMAIL IS PRESENT IN PLACE OF STRING IN THE COLUMN ")
 									fp.write(mylist[a])
 									fp.write(" OF THE CSV FILE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
+						if find_email and find_dot and find_space :
+							with open('improperData.txt','a') as fp :
+								defective_rows += 1
+								if defective_rows == 1 : 									
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE THE ENTRY IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE CONTAINS A EMAIL SIGNATURE BUT ALSO HAS SPACES. THUS IT IS NOT A PERFECT EMAIL ENTRY\n")
 									fp.write("***************************************************************************************\n")
 								fp.write(str(row)+ "\n")
 								fp.write("Defective row No:")
@@ -510,7 +555,7 @@ class ExecuteProgram(object):
 				for row in real_data :
 					for i in range(int(globvar),int(globar)):				
 						row_no_in_original_file += 1										
-						if (row[mylist[i]] in states) or (row[mylist[i]] in lower_states) or (row[mylist[i]] in upper_states)or (row[mylist[i]] == " ") :					
+						if (row[mylist[i]] in states) or (row[mylist[i]] in lower_states) or (row[mylist[i]] in upper_states)or (row[mylist[i]] == " ") or (row[mylist[i]] == "") :
 							pass					
 						else :
 							with open('improperData.txt','a') as fp :
@@ -716,6 +761,7 @@ class ExecuteProgram(object):
 
 		def print_improper_email_entries():
 			with open(filename,'rU') as data :
+
 				real_data = csv.DictReader(data)	
 				defective_rows = 0
 				row_no_in_original_file = 0	
@@ -1168,8 +1214,9 @@ class ExecuteProgram(object):
 			total_phone_only_integers = phone_no_two_hyphens + phone_no_without_hyphen_or_alphabets + phone_no_with_parantheses + phone_no_one_hyphen + phone_no_with_only_open_parantheses + phone_no_with_only_close_parantheses
 			total_string = string_with_space_no_integer + string_with_integer_spaces + pure_uppercase_string + string_with_integer_hyphen + string_without_integer_without_spaces + string_with_symbol_instead_of_at + two_letter_uppercase_string_not_state_code + string_first_line_address + string_with_dots_not_email + two_letter_lowercase_string_not_state_code + string_with_integer_without_spaces
 			total_website = website + website_without_www
-			total_pure_string = string_without_integer_without_spaces + string_with_space_no_integer + pure_uppercase_string + two_letter_uppercase_string_not_state_code + email_without_integer
+			total_pure_string = string_without_integer_without_spaces + string_with_space_no_integer + pure_uppercase_string + two_letter_uppercase_string_not_state_code + email_without_integer+state_code
 			total_special_characters = string_with_special_characters + integer_with_special_characters
+			total_email = email_with_integer + email_without_integer			
 
 			
 			if total_zipcode != 0 :
@@ -1223,6 +1270,10 @@ class ExecuteProgram(object):
 				if(state_code > (6*(counter - empty))/10):
 					print_integer_entries()
 					print_email_entries()			
+				if(total_email > counter/2):
+					print_integer_only_entries()
+					print_space_entries()
+					print_no_dots()
 				else :
 					print_integer_entries()
 					print_email_entries()
@@ -1296,9 +1347,14 @@ class ExecuteProgram(object):
 				if(email !=0) :
 					print_email_entries()
 
-			if(total_pure_string < (10*(counter-empty)/100)) :
-				print "Few string entries are found. Hence printed"
-				print_string_entries()
+			if(total_pure_string < (10*(counter-empty)/100)) and total_pure_string !=0 :
+				if(total_string > counter-empty/2):
+					print "\tString with other datatypes dominate but pure strings are also present"
+				if(total_website > 5*(counter-empty)/10 ):
+					pass
+				else :
+					print "\tFew string entries are found. Hence printed"
+					print_string_only_entries()
 
 			if (state_code > (9*counter)/10) :
 				if(local_count == 0):
