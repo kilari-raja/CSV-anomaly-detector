@@ -108,6 +108,7 @@ class ExecuteProgram(object):
 		pattern_open_parantheses =  re.compile("[()]")
 		pattern_close_parantheses = re.compile("[)]")
 
+
 		def print_empty_entries():			
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)
@@ -584,7 +585,9 @@ class ExecuteProgram(object):
 			print_string_with_parantheses()
 			print_integer_with_symbol_at_but_not_email()
 			print_integer_with_symbol_at_and_dot()
-			print_integer_with_parantheses()			
+			print_integer_with_parantheses()
+			print_string_with_hashtag_without_space()
+			print_integer_with_hashtag_without_space()			
 
 
 		def print_string_with_symbol_at_but_not_email () :
@@ -599,11 +602,9 @@ class ExecuteProgram(object):
 						find_string = re.findall(pattern_string,row[mylist[i]])
 						find_email = re.findall(pattern_email,row[mylist[i]])
 						find_dot = re.findall(pattern_dot,row[mylist[i]])
-						find_open_parantheses=re.findall(pattern_open_parantheses,row[mylist[i]])
-						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])						
-
+						
 						if find_string and find_email and not find_dot :							
-							print "defective_rowspoi:,",defective_rows
+							#print "defective_rowspoi:,",defective_rows
 							with open('improperData.txt','a') as fp :
 								defective_rows+=1
 								if defective_rows == 1 :
@@ -612,6 +613,72 @@ class ExecuteProgram(object):
 									func_count += 1	
 									fp.write("***************************************************************************************\n")
 									fp.write("THIS ROW IS PRINTED BECAUSE @ IS FOUND (alongside strings) IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE \n")
+									fp.write("***************************************************************************************\n")								
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
+		def print_string_with_hashtag_without_space () :
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)				
+				row_no_in_original_file = 0	
+				defective_rows = 0
+				for row in real_data :					
+					for i in range(int(globvar),int(globar)):				
+						row_no_in_original_file += 1
+						global func_count
+						find_string = re.findall(pattern_string,row[mylist[i]])
+						find_hashtag = re.findall(pattern_hashtag,row[mylist[i]])
+						find_space = re.findall(pattern_space,row[mylist[i]])						
+
+						if find_string and find_hashtag and not find_space :							
+							#print "defective_rowspoi:,",defective_rows
+							with open('improperData.txt','a') as fp :
+								defective_rows+=1
+								if defective_rows == 1 :
+									# print "Defective",row[mylist[i]] 
+									# global func_count
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE # IS FOUND (alongside strings) IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE \n")
+									fp.write("***************************************************************************************\n")								
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
+		def print_integer_with_hashtag_without_space () :
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)				
+				row_no_in_original_file = 0	
+				defective_rows = 0
+				for row in real_data :					
+					for i in range(int(globvar),int(globar)):				
+						row_no_in_original_file += 1
+						global func_count
+						find_integer = re.findall(pattern_integer,row[mylist[i]])						
+						find_hashtag = re.findall(pattern_hashtag,row[mylist[i]])
+						find_space = re.findall(pattern_space,row[mylist[i]])						
+
+						if find_integer and find_hashtag and not find_space :							
+							#print "defective_rowspoi:,",defective_rows
+							with open('improperData.txt','a') as fp :
+								defective_rows+=1
+								if defective_rows == 1 :
+									# print "Defective",row[mylist[i]] 
+									# global func_count
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE # IS FOUND (alongside integers) IN THE COLUMN ")
 									fp.write(mylist[a])
 									fp.write(" OF THE CSV FILE \n")
 									fp.write("***************************************************************************************\n")								
@@ -631,14 +698,12 @@ class ExecuteProgram(object):
 					for i in range(int(globvar),int(globar)):				
 						row_no_in_original_file += 1
 						global func_count
-						find_string = re.findall(pattern_string,row[mylist[i]])
-						find_email = re.findall(pattern_email,row[mylist[i]])
-						find_dot = re.findall(pattern_dot,row[mylist[i]])
+						find_string = re.findall(pattern_string,row[mylist[i]])						
 						find_open_parantheses=re.findall(pattern_open_parantheses,row[mylist[i]])
 						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])							
 
 						if (find_string and find_open_parantheses) or (find_string and find_close_paranthses):							
-							print "defective_rows:,",defective_rows							
+							#print "defective_rows:,",defective_rows							
 							with open('improperData.txt','a') as fp :								
 								defective_rows+=1
 								if defective_rows == 1 :									
@@ -657,8 +722,7 @@ class ExecuteProgram(object):
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 		
-		def print_integer_with_symbol_at_but_not_email ():
-			
+		def print_integer_with_symbol_at_but_not_email ():			
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)				
 				row_no_in_original_file = 0	
@@ -667,11 +731,9 @@ class ExecuteProgram(object):
 					for i in range(int(globvar),int(globar)):				
 						row_no_in_original_file += 1
 						global func_count
-						find_string = re.findall(pattern_string,row[mylist[i]])
+						find_integer = re.findall(pattern_integer,row[mylist[i]])						
 						find_email = re.findall(pattern_email,row[mylist[i]])
-						find_dot = re.findall(pattern_dot,row[mylist[i]])
-						find_open_parantheses=re.findall(pattern_open_parantheses,row[mylist[i]])
-						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])										
+						find_dot = re.findall(pattern_dot,row[mylist[i]])						
 
 						if find_integer and find_email and not find_dot :															
 							defective_rows+=1
@@ -696,7 +758,6 @@ class ExecuteProgram(object):
 						# print "defective_rows:,",defective_rows
 
 		def print_integer_with_symbol_at_and_dot ():
-
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)				
 				row_no_in_original_file = 0	
@@ -705,11 +766,9 @@ class ExecuteProgram(object):
 					for i in range(int(globvar),int(globar)):				
 						row_no_in_original_file += 1
 						global func_count
-						find_string = re.findall(pattern_string,row[mylist[i]])
+						find_integer = re.findall(pattern_integer,row[mylist[i]])						
 						find_email = re.findall(pattern_email,row[mylist[i]])
-						find_dot = re.findall(pattern_dot,row[mylist[i]])
-						find_open_parantheses=re.findall(pattern_open_parantheses,row[mylist[i]])
-						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])				
+						find_dot = re.findall(pattern_dot,row[mylist[i]])						
 
 						if find_integer and find_email and find_dot :															
 							defective_rows+=1
@@ -740,16 +799,13 @@ class ExecuteProgram(object):
 					for i in range(int(globvar),int(globar)):				
 						row_no_in_original_file += 1
 						global func_count
-						find_string = re.findall(pattern_string,row[mylist[i]])
-						find_email = re.findall(pattern_email,row[mylist[i]])
-						find_dot = re.findall(pattern_dot,row[mylist[i]])
+						find_integer = re.findall(pattern_integer,row[mylist[i]])						
 						find_open_parantheses=re.findall(pattern_open_parantheses,row[mylist[i]])
 						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])
 
 						if (find_integer and find_open_parantheses) or (find_integer and find_close_paranthses):							
 							defective_rows+=1
-							with open('improperData.txt','a') as fp :
-															
+							with open('improperData.txt','a') as fp :															
 								if defective_rows == 1 :									
 									# print "Defective",row[mylist[i]] 
 									# global func_count
