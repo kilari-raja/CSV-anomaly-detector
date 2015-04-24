@@ -14,7 +14,7 @@ Suggestions to improve the tool (when you are hard pressed for time to write the
 
 <h2>Pull requests<h2>
 
-	Good pull requests are a fantastic help as long as they remain within the ambit of the tool's scope.
+Good pull requests are a fantastic help as long as they remain within the ambit of the tool's scope.
 
 The following steps if followed would be highly appreciated :
 
