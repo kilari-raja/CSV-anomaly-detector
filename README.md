@@ -58,4 +58,4 @@ Command line execution:
 
 		python automation.py executeColumns --filename=mock.csv --columns=first name  (WON'T WORK)
 
-		python automation.py executeColumns --filename=mock.csv --columns="first name" (WILL WORK)
+		python automation.py executeColumns --filename=mock.csv --columns="first name" (WORKS LIKE A CHARM)
