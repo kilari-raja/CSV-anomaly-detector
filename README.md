@@ -1,7 +1,7 @@
-CSV-anamoly-detector 
+<h1>CSV-anamoly-detector </h1>
 	A tool to detect anamolies in CSV files (especially large files)
 
-Description of the tool :
+<h2> Description </h2>
 
 	This tool is handy if you are working with a large csv file wherein scanning each
 	line for anamolies is a daunting task. Even if the file is received from a reliable
@@ -19,7 +19,7 @@ Description of the tool :
 	Ex.R0HAN is different from ROHAN (notice zero instead of 'o' in the first case.)
 
 
-Command line execution:
+<h2> Command line execution </h2>
 
 	Let us assume that we have a file named mock.csv & our source code is in automation.py
 	
@@ -53,7 +53,7 @@ Command line execution:
 
 		The above set of rules also apply for --columns
 
-	Note :
+	<b>Note :</b>
 		If you are using compound words (more than a word ex. first name), please make sure it is enclosed inside quotes.
 
 		python automation.py executeColumns --filename=mock.csv --columns=first name  (WON'T WORK)
