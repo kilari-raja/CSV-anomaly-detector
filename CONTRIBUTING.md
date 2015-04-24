@@ -23,7 +23,7 @@ The following steps if followed would be highly appreciated :
 	# Clone your fork of the repo into the current directory
 	git clone https://github.com/<your-username>/CSV-anamoly-detector.git
 	# Assign the original repo to a remote called "upstream"
-	git remote add upstream https://github.com/h5bp/html5-boilerplate.git
+	git remote add upstream https://github.com/h5bp/CSV-anamoly-detector.git
 
 2) If you cloned a long back pull the latest from the master:
 
@@ -32,6 +32,7 @@ The following steps if followed would be highly appreciated :
 
 
 3) Please make your commits in tiny chunks rather than one goliathic commit.
+   
    Kindly name the commits in such a way that even a layman could make sense out of it.
 
 
@@ -47,4 +48,4 @@ The following steps if followed would be highly appreciated :
 
 	git push origin <topic-branch-name>
 
-7) Open a Pull Request with a clear title and description.
+7) <a href= "https://help.github.com/articles/using-pull-requests/">Open a Pull Request </a> with a clear title and description.
