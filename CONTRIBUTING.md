@@ -12,7 +12,7 @@ Before contributing towards this tool, we recommend you to use this tool with an
 
 Suggestions to improve the tool (when you are hard pressed for time to write the code) is also welcome.
 
-<h2>Pull requests<h2>
+<h2>Pull requests</h2>
 
 Good pull requests are a fantastic help as long as they remain within the ambit of the tool's scope.
 
