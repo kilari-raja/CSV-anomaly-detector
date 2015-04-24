@@ -107,6 +107,7 @@ class ExecuteProgram(object):
 		pattern_special_characters = re.compile("[!|$|%|^|*|~|:|`|<|>]")
 		pattern_open_parantheses =  re.compile("[()]")
 		pattern_close_parantheses = re.compile("[)]")
+		pattern_at_the_rate = re.compile("@")
 
 
 		def print_empty_entries():			
@@ -600,10 +601,10 @@ class ExecuteProgram(object):
 						row_no_in_original_file += 1
 						global func_count
 						find_string = re.findall(pattern_string,row[mylist[i]])
-						find_email = re.findall(pattern_email,row[mylist[i]])
+						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
 						find_dot = re.findall(pattern_dot,row[mylist[i]])
 						
-						if find_string and find_email and not find_dot :							
+						if find_string and find_at_the_rate and not find_dot :							
 							#print "defective_rowspoi:,",defective_rows
 							with open('improperData.txt','a') as fp :
 								defective_rows+=1
@@ -732,10 +733,10 @@ class ExecuteProgram(object):
 						row_no_in_original_file += 1
 						global func_count
 						find_integer = re.findall(pattern_integer,row[mylist[i]])						
-						find_email = re.findall(pattern_email,row[mylist[i]])
+						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
 						find_dot = re.findall(pattern_dot,row[mylist[i]])						
 
-						if find_integer and find_email and not find_dot :															
+						if find_integer and find_at_the_rate and not find_dot :															
 							defective_rows+=1
 							with open('improperData.txt','a') as fp :
 								
@@ -767,10 +768,10 @@ class ExecuteProgram(object):
 						row_no_in_original_file += 1
 						global func_count
 						find_integer = re.findall(pattern_integer,row[mylist[i]])						
-						find_email = re.findall(pattern_email,row[mylist[i]])
+						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
 						find_dot = re.findall(pattern_dot,row[mylist[i]])						
 
-						if find_integer and find_email and find_dot :															
+						if find_integer and find_at_the_rate and find_dot :															
 							defective_rows+=1
 							with open('improperData.txt','a') as fp :
 								
@@ -1197,6 +1198,7 @@ class ExecuteProgram(object):
 						find_special_characters=re.findall(pattern_special_characters,row[mylist[i]])
 						find_open_parantheses=re.findall(pattern_open_parantheses,row[mylist[i]])
 						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])
+						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
 
 						if find_string :
 							if find_string and find_integer and find_space:						
