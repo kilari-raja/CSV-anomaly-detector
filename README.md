@@ -53,9 +53,9 @@
 
 		The above set of rules also apply for --columns
 
-	<b>Note :</b>
-		If you are using compound words (more than a word ex. first name), please make sure it is enclosed inside quotes.
+<b> Note </b>
+	If you are using compound words (more than a word ex. first name), please make sure it is enclosed inside quotes.
 
-		python automation.py executeColumns --filename=mock.csv --columns=first name  (WON'T WORK)
+	python automation.py executeColumns --filename=mock.csv --columns=first name  (WON'T WORK)
 
-		python automation.py executeColumns --filename=mock.csv --columns="first name" (WORKS LIKE A CHARM)
+	python automation.py executeColumns --filename=mock.csv --columns="first name" (WORKS LIKE A CHARM)
