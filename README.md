@@ -53,13 +53,13 @@
 
 		The above set of rules also apply for --columns
 
-	** improperData.txt contains all errors. It will be created automatically when the .py
+	** improperData.txt contains all errors. It will be created automatically when .py
 	file is executed.
 
 <b> Note </b>
 
-	If you are using compound words (more than a word ex. first name), please make sure it 
-	is enclosed inside quotes.
+	If you are using compound words (more than a word ex. first name), please make sure 
+	it is enclosed inside quotes.
 
 	python automation.py executeColumns --filename=mock.csv --columns=first name 
 	(WON'T WORK)
