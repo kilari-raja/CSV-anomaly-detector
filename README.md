@@ -40,7 +40,7 @@
 
 	Upon completion of the scanning process, you will see either of these two responses:
 	1) This Column appears bug free.
-	2) PLEASE OPEN improperData.txt (this file contains all the error prone entries)
+	2) PLEASE OPEN improperData.txt** (this file contains all the error prone entries)
 
 	To know the commands available:
 		python automation.py --help
@@ -60,3 +60,5 @@
 	python automation.py executeColumns --filename=mock.csv --columns=first name  (WON'T WORK)
 
 	python automation.py executeColumns --filename=mock.csv --columns="first name" (WORKS LIKE A CHARM)
+
+** improperData.txt contains all errors. It will be created automatically when the .py file is executed.
