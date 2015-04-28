@@ -16,6 +16,7 @@ local_count = 0
 arr=[]
 zipcode_array =[]
 email_array = []
+decimal_integer_lengths=[]
 open('improperData.txt', 'w').close()
 
 class HeaderPrint(object):
@@ -291,7 +292,7 @@ class ExecuteProgram(object):
 									global func_count
 									func_count += 1								
 									fp.write("***************************************************************************************\n")
-									fp.write("THIS ROW IS PRINTED BECAUSE A PURE INTEGER IS PRESENT IN PLACE OF STRING IN THE COLUMN ")
+									fp.write("THIS ROW IS PRINTED BECAUSE A PURE INTEGER IS PRESENT IN THE COLUMN ")
 									fp.write(mylist[a])
 									fp.write(" OF THE CSV FILE\n")
 									fp.write("***************************************************************************************\n")
@@ -300,7 +301,37 @@ class ExecuteProgram(object):
 								fp.write(str(defective_rows) + "\n")
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write("Row no in original file is ")
-								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")				
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+
+		def print_improper_decimal_integers():
+			with open(filename,'rU') as data :		
+				real_data = csv.DictReader(data)	
+				defective_rows = 0
+				row_no_in_original_file = 0	
+				for row in real_data :			
+					for i in range(int(globvar),int(globar)):				
+						find_integer = re.findall(pattern_integer,row[mylist[i]])
+						find_string = re.findall(pattern_string,row[mylist[i]])
+						find_dot = re.findall(pattern_dot,row[mylist[i]])
+						row_no_in_original_file += 1
+
+						if find_integer and not find_string and len(find_dot) != counter_decimal_integer.most_common(1)[0][0]:
+							with open('improperData.txt','a') as fp :
+								defective_rows += 1
+								if defective_rows == 1 : 
+									global func_count
+									func_count += 1								
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE IMPROPER DECIMAL INTEGER IS PRESENT IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")												
 
 		def improper_integer_entries():
 			with open(filename,'rU') as data :
@@ -1429,6 +1460,8 @@ class ExecuteProgram(object):
 							if not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and find_dot:
 								#print "Integer with decimals"
 								decimal_integer += 1
+								# print "no of dots is",len(find_dot)
+								decimal_integer_lengths.append(len(find_dot))
 							if not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and not find_dot:
 								#print "Pure integer"
 								pure_integer += 1
@@ -1436,6 +1469,8 @@ class ExecuteProgram(object):
 						if find_integer and find_dot and find_phone and not find_string and row[mylist[i]][0] == "-" :
 								#print "Negative integer with decimals"
 								decimal_integer += 1
+								# print "no of dots is",len(find_dot)
+								decimal_integer_lengths.append(len(find_dot))
 
 						if find_integer and not find_dot and find_phone and not find_string and row[mylist[i]][0] == "-" :
 							#print "Negative integer without decimals"
@@ -1544,6 +1579,10 @@ class ExecuteProgram(object):
 			total_special_characters = string_with_special_characters + integer_with_special_characters
 			total_email = email_with_integer + email_without_integer			
 
+			counter_decimal_integer = Counter(decimal_integer_lengths)
+			print "comman find_dot lenght is ",counter_decimal_integer.most_common(1)[0][0]
+			print "length of decimal_integer_lengths array is", len(decimal_integer_lengths)
+
 			
 			if total_zipcode != 0 :
 				print "Total Zipcode",total_zipcode
@@ -1584,6 +1623,8 @@ class ExecuteProgram(object):
 				# print_email_entries()
 				print_symbols()
 				print_string_entries()
+				print_integer_only_entries()
+				print_improper_decimal_integers()
 
 			if(total_website > 5*(counter-empty)/10 ):
 				print "\tWebsite entries dominate more than half of the column. Hence email entries and only integer entries are considered defective."		
@@ -1611,6 +1652,9 @@ class ExecuteProgram(object):
 					print_special_characters()
 					print_symbols()
 					print_integer_entries()
+
+			
+
 
 			# if(empty > (9.5*counter)/10):
 			# 	print "\tThis column is predominantly empty. Hence any rows where data is present is considered defective."
@@ -1737,6 +1781,9 @@ class ExecuteProgram(object):
 				print "****************************"
 				print "This column appears bug free"
 				print "****************************"
+
+			# print "decimals array is", decimal_integer_lengths
+			
 
 # @app.command
 # def execute(filename="filename",begin="something",to="small"):
