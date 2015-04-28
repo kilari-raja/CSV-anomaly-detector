@@ -56,6 +56,9 @@
 	** improperData.txt contains all errors. It will be created automatically when .py
 	file is executed.
 
+<h1> Please ensure that the source file (AnamolyDetector.py) and the .csv file are in the 
+same directory. </h1>
+
 <b> Note </b>
 
 	If you are using compound words (more than a word ex. first name), please make sure 
