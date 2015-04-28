@@ -104,7 +104,7 @@ class ExecuteProgram(object):
 		pattern_zipcode_without_hyphen = re.compile('^\d{5}$')
 		patter_zipcode_four_digits = re.compile('^\d{4}$')
 		pattern_zipcode_two_hyphen = re.compile('^\d{5}--\d{4}$')
-		pattern_special_characters = re.compile("[!|$|%|^|*|}|~|\[|\]|:|`|<|>|{]")
+		pattern_special_characters = re.compile("[!|$|\\\\|/|%|^|+|=|\-|_|*|}|~|\[|\]|:|?|`|<|>|{]")
 		pattern_open_parantheses =  re.compile("[()]")
 		pattern_close_parantheses = re.compile("[)]")
 		pattern_at_the_rate = re.compile("@")
@@ -1123,8 +1123,7 @@ class ExecuteProgram(object):
 					if find_string and not find_email :
 						with open('improperData.txt','a') as fp :
 							defective_rows += 1
-							if defective_rows == 1 :
-								
+							if defective_rows == 1 :								
 								func_count += 1	 							
 								fp.write("***************************************************************************************\n")
 								fp.write("THIS ROW IS PRINTED BECAUSE @ IS NOT PRESENT IN THE COLUMN ")
@@ -1136,7 +1135,39 @@ class ExecuteProgram(object):
 							fp.write(str(defective_rows) + "\n")
 							new_row_no_in_original_file = row_no_in_original_file + 1
 							fp.write("Row no in original file is ")
-							fp.write(str(new_row_no_in_original_file)+"\n" + "\n")									
+							fp.write(str(new_row_no_in_original_file)+"\n" + "\n")	
+
+		def print_string_with_dots_not_email():	
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)	
+				defective_rows = 0
+				row_no_in_original_file = 0	
+				global func_count
+				for row in real_data :			
+					for i in range(int(globvar),int(globar)):	
+						find_string = re.findall(pattern_string,row[mylist[i]])			
+						find_space = re.findall(pattern_space,row[mylist[i]])
+						find_dot = re.findall(pattern_dot,row[mylist[i]])
+						find_email = re.findall(pattern_email,row[mylist[i]])
+						find_integer = re.findall(pattern_integer,row[mylist[i]])
+						find_empty = re.findall(pattern_empty,row[mylist[i]])
+						row_no_in_original_file += 1
+					if (find_string and find_integer and not find_empty and find_dot and not find_email) or (find_string and not find_integer and not find_empty and find_dot and not find_email):
+						with open('improperData.txt','a') as fp :
+							defective_rows += 1
+							if defective_rows == 1 :								
+								func_count += 1	 							
+								fp.write("***************************************************************************************\n")
+								fp.write("THIS ROW IS PRINTED BECAUSE DOT IS PRESENT IN THE COLUMN ")
+								fp.write(mylist[a])
+								fp.write(" OF THE CSV FILE\n")
+								fp.write("***************************************************************************************\n")
+							fp.write(str(row)+ "\n")
+							fp.write("Defective row No:")
+							fp.write(str(defective_rows) + "\n")
+							new_row_no_in_original_file = row_no_in_original_file + 1
+							fp.write("Row no in original file is ")
+							fp.write(str(new_row_no_in_original_file)+"\n" + "\n")															
 
 		#this loop checks for any extra commas which might cause an error prone data
 		with open(filename,'rU') as data :
@@ -1657,6 +1688,9 @@ class ExecuteProgram(object):
 				else :
 					print "\tFew string entries are found. Hence printed"
 					print_string_only_entries()
+
+			if string_with_dots_not_email > 0 :
+				print_string_with_dots_not_email()
 
 			if (state_code > (9*counter)/10) :
 				if(local_count == 0):
