@@ -104,7 +104,7 @@ class ExecuteProgram(object):
 		pattern_zipcode_without_hyphen = re.compile('^\d{5}$')
 		patter_zipcode_four_digits = re.compile('^\d{4}$')
 		pattern_zipcode_two_hyphen = re.compile('^\d{5}--\d{4}$')
-		pattern_special_characters = re.compile("[!|$|%|^|*|~|:|`|<|>]")
+		pattern_special_characters = re.compile("[!|$|%|^|*|}|~|\[|\]|:|`|<|>|{]")
 		pattern_open_parantheses =  re.compile("[()]")
 		pattern_close_parantheses = re.compile("[)]")
 		pattern_at_the_rate = re.compile("@")
