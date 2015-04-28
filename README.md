@@ -59,7 +59,7 @@
 <h5> Please ensure that the source file (AnamolyDetector.py) and the .csv file are in the 
 same directory. </h5>
 
-<h2> Note: </h2>
+<h4> Note: </h4>
 
 	If you are using compound words (more than a word ex. first name), please make sure 
 	it is enclosed inside quotes.
