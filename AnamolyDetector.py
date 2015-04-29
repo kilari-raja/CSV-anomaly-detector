@@ -13,10 +13,11 @@ filename = ''
 else_count = 0
 func_count = 0
 local_count = 0
-arr=[]
-zipcode_array =[]
-email_array = []
-decimal_integer_lengths=[]
+columnsd = ' '
+# arr=[]
+# zipcode_array =[]
+# email_array = []
+# decimal_integer_lengths=[]
 open('improperData.txt', 'w').close()
 
 class HeaderPrint(object):
@@ -72,6 +73,10 @@ class ExecuteProgram(object):
 		counter = 0
 		lower_states = []
 		upper_states = []
+		arr=[]
+		zipcode_array =[]
+		email_array = []
+		decimal_integer_lengths=[]
 
 		two_letter_lowercase_string_not_state_code = string_with_integer_spaces = email = website = string_with_space_no_integer = phone_no_with_alphabets = website_without_www = state_code = pure_uppercase_string = phone_no_two_hyphens = phone_no_with_parantheses = phone_no_without_hyphen_or_alphabets = valid_verified_zipcode_without_hyphen = empty = valid_verified_zipcode_with_two_hyphen = string_with_integer_without_spaces = pure_integer =  valid_verified_zipcode_with_one_hyphen = two_letter_uppercase_string_not_state_code = zipcode_with_two_not_successive_hyphens = string_without_integer_without_spaces = string_with_symbol_instead_of_at = string_first_line_address = integer_seperated_by_hyphen_not_zip_or_phone =  phone_no_one_hyphen = phone_no_with_only_open_parantheses = phone_no_with_only_close_parantheses = uncertain_entries = string_with_dots_not_email_not_website = mostly_zipcode_with_one_hyphen = mostly_zipcode_without_hyphen = mostly_zipcode_with_two_hyphen = mostly_zipcode_four_digits = requests_made = decimal_integer = string_with_integer_hyphen = string_with_special_characters = integer_with_special_characters = email_with_integer = email_without_integer = print_empty_count = 0
 		states = [ "AK","Alaska","AL","Alabama","AR","Arkansas","AS","American Samoa","AZ","Arizona","CA","California","CO","Colorado","CT","Connecticut","DC","District of Columbia","DE","Delaware","FL","Florida","GA","Georgia","GU","Guam","HI","Hawaii","IA","Iowa","ID","Idaho","IL","Illinois","IN","Indiana","KS","Kansas","KY","Kentucky","LA","Louisiana","MA","Massachusetts","MD","Maryland","ME","Maine","MI","Michigan","MN","Minnesota","MO","Missouri","MS","Mississippi","MT","Montana","NC","North Carolina","ND","North Dakota","NE","Nebraska","NH","New Hampshire","NJ","New Jersey","NM","New Mexico","NV","Nevada","NY","New York","OH","Ohio","OK","Oklahoma","OR","Oregon","PA","Pennsylvania","PR","Puerto Rico","RI","Rhode Island","SC","South Carolina","SD","South Dakota","TN","Tennessee","TX","Texas","UT","Utah","VA","Virginia","VI","Virgin Islands","VT","Vermont","WA","Washington","WI","Wisconsin","WV","West Virginia","WY","Wyoming" ]
@@ -1851,7 +1856,7 @@ class ExecuteProgram(object):
 				print "This column appears bug free"
 				print "****************************"
 
-			# print "decimals array is", decimal_integer_lengths
+			print "decimals array of",columnsd,"is", decimal_integer_lengths
 			
 
 # @app.command
@@ -1864,6 +1869,8 @@ class executerHeader(object):
 		global filename				
 		filename = filesname
 		global else_count 
+		global columnsd
+		columnsd = columns
 		with open(filename,'rU') as data :
 			r = csv.reader(open(filesname, "rU"), dialect=csv.excel_tab)
 			line1=r.next()	
