@@ -854,6 +854,39 @@ class ExecuteProgram(object):
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")							
 
+		def print_decimal_values():
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)				
+				row_no_in_original_file = 0	
+				defective_rows = 0
+				for row in real_data :					
+					for i in range(int(globvar),int(globar)):				
+						row_no_in_original_file += 1
+						global func_count
+						find_integer = re.findall(pattern_integer,row[mylist[i]])												
+						find_zipcode_without_hyphen= re.findall(pattern_zipcode_without_hyphen,row[mylist[i]])
+						find_zipcode_four_digits=re.findall(patter_zipcode_four_digits,row[mylist[i]])
+						find_string = re.findall(pattern_string,row[mylist[i]])
+						find_dot = re.findall(pattern_dot,row[mylist[i]])
+
+						if find_integer and not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and find_dot:
+							defective_rows+=1
+							with open('improperData.txt','a') as fp :															
+								if defective_rows == 1 :									
+									# print "Defective",row[mylist[i]] 
+									# global func_count
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE DECIMAL INTEGER IS FOUND IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE \n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 
 		def print_state_code() :
 			with open(filename,'rU') as data :
@@ -1653,9 +1686,6 @@ class ExecuteProgram(object):
 					print_symbols()
 					print_integer_entries()
 
-			
-
-
 			# if(empty > (9.5*counter)/10):
 			# 	print "\tThis column is predominantly empty. Hence any rows where data is present is considered defective."
 			# 	print_integer_only_entries()
@@ -1690,10 +1720,11 @@ class ExecuteProgram(object):
 						print_zip_code()
 
 			if(total_phone_only_integers + pure_integer) > (5*counter)/10 :	
-				print "\tPure integer occupy a large portion of this column. Hence any string integers are considered defective"
+				print "\tPure integer occupy a large portion of this column. Hence any string entries are considered defective"
 				print_string_without_hyphen_entries()
 				print_special_characters()
 				print_symbols()
+				print_decimal_values()
 
 			if(total_phone) > (4*counter)/10 :	
 				print "\tPhone numbers occupy a large portion of this column. Hence any string integers are considered defective"
@@ -1782,7 +1813,7 @@ class ExecuteProgram(object):
 				print "This column appears bug free"
 				print "****************************"
 
-			# print "decimals array is", decimal_integer_lengths
+			print "decimals array is", decimal_integer_lengths
 			
 
 # @app.command
