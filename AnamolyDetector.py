@@ -116,6 +116,7 @@ class ExecuteProgram(object):
 		pattern_close_parantheses = re.compile("[)]")
 		pattern_at_the_rate = re.compile("@")
 		pattern_uppercase = re.compile("[A-Z]")
+		pattern_lowercase = re.compile("[a-z]")
 
 
 		def print_uppercase_entries():			
@@ -938,6 +939,40 @@ class ExecuteProgram(object):
 										fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 						else : 
 							pass
+
+		def print_state_code_lowercase() :
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)
+				defective_rows = 0
+				row_no_in_original_file = 0	
+				for row in real_data :					
+					for i in range(int(globvar),int(globar)):										
+						row_no_in_original_file += 1
+						find_lowercase = re.findall(pattern_lowercase,row[mylist[i]])						
+						if (row[mylist[i]].upper() in state_code_array) and find_lowercase:
+							print "HERE"
+							# for j in range(i+1,len(row)):
+							# 	key = (row[mylist[i]], row[mylist[j]])
+							# 	print "key is",key
+							# 	if key[0] == key[1] :	
+							with open('improperData.txt','a') as fp :
+								defective_rows+=1
+								if defective_rows == 1 : 
+									global func_count
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE THE ENTRY IN THE COLUMN ") 
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE IS A US STATE ,BUT IN LOWERCASE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+						else : 
+							pass							
 			
 		def print_zip_code() :
 			with open(filename,'rU') as data :
@@ -1316,6 +1351,7 @@ class ExecuteProgram(object):
 						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])
 						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
 						find_uppercase = re.findall(pattern_uppercase,row[mylist[i]])
+						find_lowercase = re.findall(pattern_lowercase,row[mylist[i]])
 
 						if find_string :
 							if find_string and find_integer and find_space:						
@@ -1676,6 +1712,7 @@ class ExecuteProgram(object):
 			if(state_code > (6*(counter - empty))/10):
 				print "\tThis column is dominated by state codes. Hence integer dataypes are considered defective"		
 				print_not_state_code()
+				print_state_code_lowercase()
 
 			if(decimal_integer > (5*counter)/10) :
 				print "\tDecimal integers dominate this column."
