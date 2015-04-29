@@ -52,6 +52,7 @@
 		--filename=mock.csv (will give result)
 
 		The above set of rules also apply for --columns
+		All entries are case sensitive
 
 	** improperData.txt contains all errors. It will be created automatically when .py
 	file is executed.
