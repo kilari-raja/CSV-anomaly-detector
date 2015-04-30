@@ -490,6 +490,33 @@ class ExecuteProgram(object):
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 
+		def print_hyphen():
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)	
+				defective_rows = 0
+				row_no_in_original_file = 0	
+				for row in real_data :			
+					for i in range(int(globvar),int(globar)):				
+						find_phone=re.findall(pattern_phone,row[mylist[i]])
+						row_no_in_original_file += 1
+						if find_phone :
+							with open('improperData.txt','a') as fp :
+								defective_rows += 1
+								if defective_rows == 1 : 
+									global func_count
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE A HYPHEN IS PRESENT IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")								
+
 
 		def print_space_entries() :
 			with open(filename,'rU') as data :
@@ -1755,6 +1782,7 @@ class ExecuteProgram(object):
 					print_email_entries()
 					print_state_code()					
 					print_special_characters()
+					print_hyphen()
 					print_symbols()
 					print_integer_entries()
 					print_string_with_dots_not_email_not_website()
