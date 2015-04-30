@@ -111,7 +111,7 @@ class ExecuteProgram(object):
 		pattern_zipcode_without_hyphen = re.compile('^\d{5}$')
 		patter_zipcode_four_digits = re.compile('^\d{4}$')
 		pattern_zipcode_two_hyphen = re.compile('^\d{5}--\d{4}$')
-		pattern_special_characters = re.compile("[!|$|\\\\|/|%|^|+|=|\-|_|*|}|~|\[|\]|:|?|`|<|>|{]")
+		pattern_special_characters = re.compile("[!|$|\\\\|/|%|^|+|=|_|*|}|~|\[|\]|:|?|`|<|>|{]")
 		pattern_open_parantheses =  re.compile("[()]")
 		pattern_close_parantheses = re.compile("[)]")
 		pattern_at_the_rate = re.compile("@")
@@ -471,7 +471,7 @@ class ExecuteProgram(object):
 				for row in real_data :			
 					for i in range(int(globvar),int(globar)):				
 						find_special_characters=re.findall(pattern_special_characters,row[mylist[i]])
-						row_no_in_original_file += 1								
+						row_no_in_original_file += 1
 						if find_special_characters :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
@@ -1271,7 +1271,7 @@ class ExecuteProgram(object):
 						find_empty = re.findall(pattern_empty,row[mylist[i]])
 						find_no_entry = re.findall(pattern_no_entry,row[mylist[i]])
 						row_no_in_original_file += 1
-					if (find_string and find_integer and not find_empty and not find_no_entry  and find_dot and not find_email and not find_website) or (find_string and not find_integer and not find_empty and find_dot and not find_email and not find_website and not find_no_entry):
+		 			if (find_string and find_integer and not find_empty and not find_no_entry  and find_dot and not find_email and not find_website) or (find_string and not find_integer and not find_empty and find_dot and not find_email and not find_website and not find_no_entry):
 						with open('improperData.txt','a') as fp :
 							defective_rows += 1
 							if defective_rows == 1 :								
@@ -1788,7 +1788,7 @@ class ExecuteProgram(object):
 				if(total_zipcode <= (counter/10)):
 					print "\tSome Zipcodes have been wrongly placed in this column"
 					if ((string_with_integer_spaces > (7*(counter-empty))/10)) :
-						print "Since this column seems to be dominated by one of the lines of address it is hard to distinguish between door no and zipcode. Hence such rows are not flaged here."
+						print "\tSince this column seems to be dominated by one of the lines of address it is hard to distinguish between door no and zipcode. Hence such rows are not flaged here."
 						pass
 					else :	
 						print_zip_code()
@@ -1843,6 +1843,8 @@ class ExecuteProgram(object):
 					print "\tThis column is dominated by website entries"
 				elif total_email > 5*(counter-empty)/10 :
 					print "\tThis column is dominated by email entries"
+				elif ((string_with_integer_spaces > (7*(counter-empty))/10)) :
+					print "\tCould be a line of address"
 				else :
 					print "\tthis column is dominated by string with dots but they are not email or website"
 					print_string_with_dots_not_email_not_website()
