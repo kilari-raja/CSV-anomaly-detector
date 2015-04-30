@@ -1825,7 +1825,15 @@ class ExecuteProgram(object):
 				print "\tPure integer occupy a large portion of this column. Hence any string entries are considered defective"
 				print_string_without_hyphen_entries()
 				print_special_characters()
-				print_symbols()
+
+				print_string_with_symbol_at_but_not_email()
+				print_string_with_parantheses()
+				print_integer_with_symbol_at_but_not_email()
+				print_integer_with_symbol_at_and_dot()
+				# print_integer_with_parantheses()
+				print_string_with_hashtag_without_space()
+				print_integer_with_hashtag_without_space()
+				
 				print_decimal_values()
 
 			if(total_phone) > (4*counter)/10 :	
