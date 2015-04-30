@@ -95,7 +95,7 @@ class ExecuteProgram(object):
 		pattern_integer = re.compile("[0-9]")
 		pattern_email = re.compile("[\w+|\W+]@[\w+|\W+]")
 		pattern_phone = re.compile("-")
-		pattern_empty = re.compile(",[\s],")
+		pattern_empty = re.compile("[\s]")
 		pattern_no_entry = re.compile("^(?![\s\S])")
 		pattern_website = re.compile("www+|WWW+")
 		pattern_dot = re.compile("[.]")
