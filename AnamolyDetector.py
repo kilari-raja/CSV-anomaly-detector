@@ -574,6 +574,41 @@ class ExecuteProgram(object):
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+		
+		def print_pure_integer_not_zipcode() :
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)	
+				defective_rows = 0
+				row_no_in_original_file = 0	
+
+				for row in real_data :			
+					for i in range(int(globvar),int(globar)):				
+						find_integer = re.findall(pattern_integer,row[mylist[i]])
+						find_string = re.findall(pattern_string,row[mylist[i]])
+						find_phone = re.findall(pattern_phone,row[mylist[i]])
+						find_zipcode_without_hyphen= re.findall(pattern_zipcode_without_hyphen,row[mylist[i]])	
+						find_zipcode_four_digits=re.findall(patter_zipcode_four_digits,row[mylist[i]])				
+						find_dot = re.findall(pattern_dot,row[mylist[i]])
+
+						row_no_in_original_file += 1						
+						if find_integer and not find_phone and not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and not find_dot:
+							# print "ERERERWE"
+							with open('improperData.txt','a') as fp :
+								defective_rows += 1
+								if defective_rows == 1 : 
+									global func_count
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE PURE INTEGER (but not zipcode) IS PRESENT IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")								
 
 		def print_integer_more_than_string() :
 			with open(filename,'rU') as data :
@@ -1833,7 +1868,7 @@ class ExecuteProgram(object):
 				# print_integer_with_parantheses()
 				print_string_with_hashtag_without_space()
 				print_integer_with_hashtag_without_space()
-				
+
 				print_decimal_values()
 
 			if(total_phone) > (4*counter)/10 :	
@@ -1846,6 +1881,7 @@ class ExecuteProgram(object):
 				print_string_entries()
 				print_email_entries()
 				print_special_characters()
+				print_pure_integer_not_zipcode()
 
 			# if(total_phone > (counter/2)) :
 			# 	print "\tHigh probability that this column represents phone no"
