@@ -1633,9 +1633,9 @@ class ExecuteProgram(object):
 						if find_integer and find_special_characters :
 							integer_with_special_characters+=1
 
-						if find_empty :
-							# print "empty entries are",find_empty
-							empty+=1
+						# if find_empty :
+						# 	# print "empty entries are",find_empty
+						# 	empty+=1
 						if find_no_entry :
 							empty+=1
 						#print row[mylist[i]]			
