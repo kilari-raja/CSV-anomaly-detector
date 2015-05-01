@@ -119,7 +119,7 @@ class ExecuteProgram(object):
 		pattern_lowercase = re.compile("[a-z]")
 
 
-		def print_uppercase_entries():			
+		def print_uppercase_entries():
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)
 				defective_rows = 0
@@ -146,8 +146,7 @@ class ExecuteProgram(object):
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 
-
-		def print_empty_entries():			
+		def print_empty_entries():
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)
 				defective_rows = 0
@@ -283,7 +282,6 @@ class ExecuteProgram(object):
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
-
 
 		def print_integer_entries():
 			with open(filename,'rU') as data :
@@ -462,7 +460,6 @@ class ExecuteProgram(object):
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 
-
 		def print_special_characters():
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)	
@@ -516,7 +513,6 @@ class ExecuteProgram(object):
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")								
-
 
 		def print_space_entries() :
 			with open(filename,'rU') as data :
@@ -704,7 +700,6 @@ class ExecuteProgram(object):
 			print_string_with_hashtag_without_space()
 			print_integer_with_hashtag_without_space()			
 
-
 		def print_string_with_symbol_at_but_not_email () :
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)				
@@ -837,7 +832,7 @@ class ExecuteProgram(object):
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 		
-		def print_integer_with_symbol_at_but_not_email ():			
+		def print_integer_with_symbol_at_but_not_email ():
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)				
 				row_no_in_original_file = 0	
@@ -885,7 +880,7 @@ class ExecuteProgram(object):
 						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
 						find_dot = re.findall(pattern_dot,row[mylist[i]])						
 
-						if find_integer and find_at_the_rate and find_dot :															
+						if find_integer and find_at_the_rate and find_dot and not find_string :															
 							defective_rows+=1
 							with open('improperData.txt','a') as fp :
 								
@@ -1790,9 +1785,9 @@ class ExecuteProgram(object):
 				print_integer_only_entries()
 				print_space_entries()
 				print_no_dots()
-				print_integer_more_than_string()
+				# print_integer_more_than_string()
 				print_string_only_entries()
-				print_uppercase_entries()
+				# print_uppercase_entries()
 				if(empty) < (counter/10) and empty > 0 :
 					if print_empty_count == 0:
 						print "\tCertain empty entries are found which are printed"
@@ -1844,7 +1839,7 @@ class ExecuteProgram(object):
 			if((email_without_integer + email_with_integer) > (counter/2)) :
 				print "\tVery high probability that this column represents email"
 				print_improper_email_entries()
-				print_uppercase_entries()
+				# print_uppercase_entries()
 				# print_duplicate_email_entries()
 				if(empty):
 					print "\tThere are empty records in this column"
