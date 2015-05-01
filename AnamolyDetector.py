@@ -1636,8 +1636,8 @@ class ExecuteProgram(object):
 						if find_empty :
 							# print "empty entries are",find_empty
 							empty+=1
-						if find_no_entry :
-							empty+=1
+						# if find_no_entry :
+						# 	empty+=1
 						#print row[mylist[i]]			
 						# #print type(row[mylist[i]])
 					# sys.stdout.write(".......................................\n")
