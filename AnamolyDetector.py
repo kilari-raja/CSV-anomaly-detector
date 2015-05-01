@@ -1847,14 +1847,13 @@ class ExecuteProgram(object):
 				if(empty):
 					print "\tThere are empty records in this column"
 
-			if (total_zipcode > 0):
-				if(total_zipcode <= (counter/10)):
-					print "\tSome Zipcodes have been wrongly placed in this column"
-					if ((string_with_integer_spaces > (7*(counter-empty))/10)) :
-						print "\tSince this column seems to be dominated by one of the lines of address it is hard to distinguish between door no and zipcode. Hence such rows are not flaged here."
-						pass
-					else :	
-						print_zip_code()
+			if (total_zipcode > 0) and (total_zipcode <= (counter/10)):
+					# print "\tSome Zipcodes have been wrongly placed in this column"
+					# if ((string_with_integer_spaces > (7*(counter-empty))/10)) :
+					# 	print "\tSince this column seems to be dominated by one of the lines of address it is hard to distinguish between door no and zipcode. Hence such rows are not flaged here."
+					# 	pass
+					# else :	
+					print_zip_code()
 
 			if(total_phone_only_integers + pure_integer) > (5*counter)/10 :	
 				print "\tPure integer occupy a large portion of this column. Hence any string entries are considered defective"
@@ -1882,6 +1881,10 @@ class ExecuteProgram(object):
 				print_email_entries()
 				print_special_characters()
 				print_pure_integer_not_zipcode()
+
+			if(total_special_characters > 0):
+				print "\tthis column contains special characters"
+				print_special_characters()
 
 			# if(total_phone > (counter/2)) :
 			# 	print "\tHigh probability that this column represents phone no"
