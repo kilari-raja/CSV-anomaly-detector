@@ -1891,7 +1891,7 @@ class ExecuteProgram(object):
 					special_characters_print+=1
 				print_pure_integer_not_zipcode()
 
-			if(total_special_characters > 0):
+			if(total_special_characters > 0) and (total_special_characters < (10*(counter-empty)/100)):
 				print "\tthis column contains special characters"
 				if special_characters_print == 0:
 					print_special_characters()
