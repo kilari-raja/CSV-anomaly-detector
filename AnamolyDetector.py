@@ -95,7 +95,7 @@ class ExecuteProgram(object):
 		pattern_integer = re.compile("[0-9]")
 		pattern_email = re.compile("[\w+|\W+]@[\w+|\W+]")
 		pattern_phone = re.compile("-")
-		pattern_empty = re.compile("[\s]")
+		pattern_empty = re.compile("^\s*$")
 		pattern_no_entry = re.compile("^(?![\s\S])")
 		pattern_website = re.compile("www+|WWW+")
 		pattern_dot = re.compile("[.]")
@@ -1633,9 +1633,9 @@ class ExecuteProgram(object):
 						if find_integer and find_special_characters :
 							integer_with_special_characters+=1
 
-						# if find_empty :
-						# 	# print "empty entries are",find_empty
-						# 	empty+=1
+						if find_empty :
+							# print "empty entries are",find_empty
+							empty+=1
 						if find_no_entry :
 							empty+=1
 						#print row[mylist[i]]			
@@ -1701,8 +1701,8 @@ class ExecuteProgram(object):
 			# print "No of valid zipcode with two hyphen as verified from unitedstateszipcodes.org", valid_verified_zipcode_with_two_hyphen
 			if zipcode_with_two_not_successive_hyphens != 0 :
 				print "No of possible zip codes but with two but not succesive hyphens", zipcode_with_two_not_successive_hyphens
-			if empty != 0 :
-				print "No of empty entries", empty
+			# if empty != 0 :
+			print "No of empty entries", empty
 			if counter != 0 :
 				print "Total no of lines", counter
 			if decimal_integer != 0 :
@@ -1793,7 +1793,7 @@ class ExecuteProgram(object):
 				print_integer_more_than_string()
 				print_string_only_entries()
 				print_uppercase_entries()
-				if empty > 0 :
+				if(empty) < (counter/10) and empty > 0 :
 					if print_empty_count == 0:
 						print "\tCertain empty entries are found which are printed"
 						print_empty_entries()
