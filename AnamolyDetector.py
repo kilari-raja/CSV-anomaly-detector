@@ -1763,7 +1763,7 @@ class ExecuteProgram(object):
 
 			if(empty) < (counter/10) and empty > 0 :
 				print "\tMore than 90 percent of this column is filled with entries. Hence any empty entry is considered defective."
-				print_empty_entries()
+				# print_empty_entries()
 				print_empty_count+=1
 
 			if(state_code > (6*(counter - empty))/10):
@@ -1791,7 +1791,7 @@ class ExecuteProgram(object):
 				if(empty) < (counter/10) and empty > 0 :
 					if print_empty_count == 0:
 						print "\tCertain empty entries are found which are printed"
-						print_empty_entries()
+						# print_empty_entries()
 					else :
 						pass
 				else :
