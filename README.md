@@ -1,18 +1,18 @@
 <h1>CSV-anomaly-detector </h1>
-	A tool to detect anomalies in CSV files (especially large files)
+A tool to detect anomalies in CSV files (especially large files)
 
 <h2> Description </h2>
 
-	This tool is handy if you are working with a large csv file wherein scanning each
-	line for anomalies is a daunting task. Even if the file is received from a reliable
-	source it is always safe to verify the veracity of the file before proceeding further.
+This tool is handy if you are working with a large csv file wherein scanning each
+line for anomalies is a daunting task. Even if the file is received from a reliable
+source it is always safe to verify the veracity of the file before proceeding further.
 
-	Each column has a title, all of which will be mentioned in the very first line of any 
-	csv file which we shall refer as "HEADER" throughout this page.
+Each column has a title, all of which will be mentioned in the very first line of any 
+csv file which we shall refer as "HEADER" throughout this page.
 
-	The tool takes a header-wise scanning approach.After scanning each Header, the dominant
-	datatype is identified and any another datatype is assumed ("we are not concluding 
-	because the final decision rests with the user") to be defective. 
+The tool takes a header-wise scanning approach.After scanning each Header, the dominant
+datatype is identified and any another datatype is assumed ("we are not concluding 
+because the final decision rests with the user") to be defective. 
 
 <h2> Command line execution </h2>
 
@@ -26,6 +26,7 @@ We will be shown the following result:
 where each element of the above array is a header
 
 To find out the anomalies in each header (say email) :
+
 	<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email </code>
 
 To find out anomalies in all headers (i.e the whole file) :
