@@ -65,3 +65,6 @@ same directory. </h5>
 
 	python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name" 
 	(WORKS LIKE A CHARM)
+
+
+<code> sample text within code tag </code>	
