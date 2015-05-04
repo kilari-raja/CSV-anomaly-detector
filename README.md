@@ -69,3 +69,9 @@ it is enclosed inside quotes.
 
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name"</code>
 (WORKS LIKE A CHARM)
+
+From the terminal, we can also access .csv files within another directory. Let's assume sample
+.csv inside a directory "Verticals" placed alongside .py file.
+
+Then the terminal would read:
+<code>python AnomalyDetector.py execute --filename="./Verticals/sample.csv"</code>
