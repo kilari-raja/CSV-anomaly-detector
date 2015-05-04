@@ -64,7 +64,8 @@ same directory. </h5>
 If you are using compound words (more than a word ex. first name), please make sure 
 it is enclosed inside quotes.
 
-<code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name </code>
+<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name </code>
 (WON'T WORK)
+
 <code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name" </code>
 (WORKS LIKE A CHARM)
