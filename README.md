@@ -19,32 +19,36 @@ because the final decision rests with the user") to be defective.
 Let us assume that our .csv file is mock.csv & our source code is AnomalyDetector.py
 
 To view the headers of the file:	
-	<code> python AnomalyDetector.py columns --filename=mock.csv </code>
+
+<code> python AnomalyDetector.py columns --filename=mock.csv </code>
 
 We will be shown the following result:
 ['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
 where each element of the above array is a header
 
-To find out the anomalies in each header (say email) :
-	<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email </code>
+To find out the anomalies in each header (say email):
+
+<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email</code>
 
 To find out anomalies in all headers (i.e the whole file) :
-	<code> python AnomalyDetector.py execute --filename=mock.csv </code>
+
+<code> python AnomalyDetector.py execute --filename=mock.csv </code>
 
 The above command executes the scanning process across all columns in one-go.
 
 Upon completion of the scanning process, you will see either of these two responses:
-1) This Column appears bug free.
-2) PLEASE OPEN improperData.txt** 
+<li>This Column appears bug free.</li>
+<li>PLEASE OPEN improperData.txt**</li>
 
 To know the commands available:
-	<code> python AnomalyDetector.py --help </code>
+
+<code> python AnomalyDetector.py --help </code>
 
 Please "avoid" spacing in the following areas:
---filename = mock.csv (will throw error)
---filename= mock.csv (will throw error)
---filename =mock.csv(will throw error)
---filename=mock.csv (will give result)
+<li>--filename = mock.csv (will throw error)</li>
+<li>--filename= mock.csv (will throw error)</li>
+<li>--filename =mock.csv(will throw error)</li>
+<li>--filename=mock.csv (will give result)</li>
 
 The above set of rules also apply for --columns
 All entries are case sensitive
