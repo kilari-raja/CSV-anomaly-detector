@@ -1651,7 +1651,7 @@ class ExecuteProgram(object):
 								else :
 									#print row[mylist[i]], "is a four digit integer"
 									pure_integer += 1
-									
+
 							if not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and find_dot:
 								#print "Integer with decimals"
 								decimal_integer += 1
@@ -1781,7 +1781,7 @@ class ExecuteProgram(object):
 				print "No of integer entries with special characters :", integer_with_special_characters
 
 			total_zipcode =  valid_verified_zipcode_without_hyphen + valid_verified_zipcode_with_two_hyphen + zipcode_with_two_not_successive_hyphens + valid_verified_zipcode_with_one_hyphen + mostly_zipcode_with_one_hyphen + mostly_zipcode_without_hyphen + mostly_zipcode_with_two_hyphen + mostly_zipcode_four_digits
-			total_phone = phone_no_two_hyphens + phone_no_without_hyphen_or_alphabets + phone_no_with_alphabets + phone_no_with_parantheses + phone_no_one_hyphen + phone_no_with_only_open_parantheses + phone_no_with_only_close_parantheses + phone_three_parts_two_hyphens + phone_three_parts_one_hyphen_one_parantheses + phone_three_parts_plus_one + phone_11_digits + phone_10_digits                                                            
+			total_phone = phone_no_two_hyphens + phone_no_without_hyphen_or_alphabets + phone_no_with_alphabets + phone_no_with_parantheses + phone_no_one_hyphen + phone_no_with_only_open_parantheses + phone_no_with_only_close_parantheses + phone_three_parts_two_hyphens + phone_three_parts_one_hyphen_one_parantheses + phone_three_parts_plus_one + phone_10_digits                                                            
 			total_phone_only_integers = phone_no_two_hyphens + phone_no_without_hyphen_or_alphabets + phone_no_with_parantheses + phone_no_one_hyphen + phone_no_with_only_open_parantheses + phone_no_with_only_close_parantheses
 			total_string = string_with_space_no_integer + string_with_integer_spaces + pure_uppercase_string + string_with_integer_hyphen + string_without_integer_without_spaces + string_with_symbol_instead_of_at + two_letter_uppercase_string_not_state_code + string_first_line_address + string_with_dots_not_email_not_website + two_letter_lowercase_string_not_state_code + string_with_integer_without_spaces
 			total_website = website + website_without_www
