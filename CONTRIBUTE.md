@@ -19,7 +19,7 @@ We are only human and To err is human. Thus there is a chance that there might b
 
 Creating/Submitting issues has never been so easier.
 
-Use this handy <a href= "https://help.github.com/articles/creating-an-issue/">link</a> when in doubt
+Use this handy <a href= "https://help.github.com/articles/creating-an-issue/" target="_blank">link</a> when in doubt
 
 
 
