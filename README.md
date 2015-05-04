@@ -73,7 +73,7 @@ it is enclosed inside quotes.
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name"</code>
 (WORKS LIKE A CHARM)
 
-From the terminal, we can also access .csv files within another directory. Let's assume sample
+From the terminal, we can also access .csv files within inner directory. Let's assume sample
 .csv inside a directory "Verticals" placed alongside .py file.
 
 Then the terminal would read:
