@@ -25,6 +25,7 @@ To view the headers of the file:
 We will be shown the following result:
 
 ['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
+
 where each element of the above array is a header
 
 To find out the anomalies in each header (say email):
