@@ -14,11 +14,6 @@
 	datatype is identified and any another datatype is assumed ("we are not concluding 
 	because the final decision rests with the user") to be defective. 
 
-	Datatypes described in the tool are so exhaustive that even what plain eye may miss 
-	will be detected by the tool.
-	Ex.R0HAN is different from ROHAN (notice zero instead of 'o' in the first case.)
-
-
 <h2> Command line execution </h2>
 
 	Let us assume that we have a file named mock.csv & our source code is in automation.py
