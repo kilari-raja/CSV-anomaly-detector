@@ -45,10 +45,10 @@ To know the commands available:
 <code> python AnomalyDetector.py --help </code>
 
 Please "avoid" spacing in the following areas:
-<code>--filename = mock.csv </code>(will throw error)
-<code>--filename= mock.csv</code>(will throw error)
-<code>--filename =mock.csv</code>(will throw error)
-<code>--filename=mock.csv</code>(will give result)
+<p><code>--filename = mock.csv </code>(will throw error)</p>
+<p><code>--filename= mock.csv</code>(will throw error)</p>
+<p><code>--filename =mock.csv</code>(will throw error)</p>
+<p><code>--filename=mock.csv</code>(will give result)</p>
 
 The above set of rules also apply for --columns
 All entries are case sensitive
