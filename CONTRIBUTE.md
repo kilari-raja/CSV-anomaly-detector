@@ -73,4 +73,4 @@ The following steps if followed would be highly appreciated :
 
 	git push origin <topic-branch-name>
 
-7) <a href= "https://help.github.com/articles/using-pull-requests/">Open a Pull Request </a> with a clear title and description.
+7) <a href= "https://help.github.com/articles/using-pull-requests/" target="_blank">Open a Pull Request </a> with a clear title and description.
