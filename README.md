@@ -23,6 +23,7 @@ To view the headers of the file:
 <code> python AnomalyDetector.py columns --filename=mock.csv </code>
 
 We will be shown the following result:
+
 ['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
 where each element of the above array is a header
 
@@ -50,7 +51,8 @@ Please "avoid" spacing in the following areas:
 <p><code>--filename =mock.csv</code>(will throw error)</p>
 <p><code>--filename=mock.csv</code>(will give result)</p>
 
-The above set of rules also apply for --columns
+The above set of rules also apply for --columns.
+
 All entries are case sensitive
 
 ** improperData.txt contains all errors. It will be created automatically when .py
@@ -59,7 +61,7 @@ file is executed.
 <h5> Please ensure that the source file (AnomalyDetector.py) and the .csv file are in the 
 same directory. </h5>
 
-<h4> Note: </h4>
+<h3> Note: </h3>
 
 If you are using compound words (more than a word ex. first name), please make sure 
 it is enclosed inside quotes.
