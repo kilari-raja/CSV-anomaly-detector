@@ -1,10 +1,10 @@
-<h1>CSV-anamoly-detector </h1>
-	A tool to detect anamolies in CSV files (especially large files)
+<h1>CSV-anomaly-detector </h1>
+	A tool to detect anomalies in CSV files (especially large files)
 
 <h2> Description </h2>
 
 	This tool is handy if you are working with a large csv file wherein scanning each
-	line for anamolies is a daunting task. Even if the file is received from a reliable
+	line for anomalies is a daunting task. Even if the file is received from a reliable
 	source it is always safe to verify the veracity of the file before proceeding further.
 
 	Each column has a title, all of which will be mentioned in the very first line of any 
@@ -16,20 +16,20 @@
 
 <h2> Command line execution </h2>
 
-	Let us assume that we have a file named mock.csv & our source code is in automation.py
+	Let us assume that our .csv file is mock.csv & our source code is AnomalyDetector.py
 	
 	To view the headers of the file:	
-		python automation.py columns --filename=mock.csv
+		python AnomalyDetector.py columns --filename=mock.csv
 
 	We will be shown the following result:
 		['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
 	where each element of the above array is a header
 	
-	To find out the anamolies in each header (say email) :
-		python automation.py executeColumns --filename=mock.csv --columns=email
+	To find out the anomalies in each header (say email) :
+		python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email
 
-	To find out anamolies in all headers (i.e the whole file) :
-		python automation.py execute --filename=mock.csv
+	To find out anomalies in all headers (i.e the whole file) :
+		python AnomalyDetector.py execute --filename=mock.csv
 
 		The above command executes the scanning process across all columns in one-go.
 
@@ -38,7 +38,7 @@
 	2) PLEASE OPEN improperData.txt** 
 
 	To know the commands available:
-		python automation.py --help
+		python AnomalyDetector.py --help
 
 	Please "avoid" spacing in the following areas:
 		--filename = mock.csv (will throw error)
@@ -52,7 +52,7 @@
 	** improperData.txt contains all errors. It will be created automatically when .py
 	file is executed.
 
-<h5> Please ensure that the source file (AnamolyDetector.py) and the .csv file are in the 
+<h5> Please ensure that the source file (AnomalyDetector.py) and the .csv file are in the 
 same directory. </h5>
 
 <h4> Note: </h4>
@@ -60,8 +60,8 @@ same directory. </h5>
 	If you are using compound words (more than a word ex. first name), please make sure 
 	it is enclosed inside quotes.
 
-	python automation.py executeColumns --filename=mock.csv --columns=first name 
+	python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name 
 	(WON'T WORK)
 
-	python automation.py executeColumns --filename=mock.csv --columns="first name" 
+	python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name" 
 	(WORKS LIKE A CHARM)
