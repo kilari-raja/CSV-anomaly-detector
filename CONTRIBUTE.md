@@ -21,22 +21,6 @@ Creating/Submitting issues has never been so easier.
 
 Use this handy <a href= "https://help.github.com/articles/creating-an-issue/" target="_blank">link</a> when in doubt
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <h2>Pull requests</h2>
 
 Good pull requests are a fantastic help as long as they remain within the ambit of the tool's scope.
