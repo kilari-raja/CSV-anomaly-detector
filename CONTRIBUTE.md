@@ -15,9 +15,9 @@ Suggestions to improve the tool (when you are hard pressed for time to write the
 
 <h2> Submit Issues </h2>
 
-	We are only human and To err is human. Thus there is a chance that there might be a loophole in our code that we missed. You can always contribute to our tool by submitting issues.
+We are only human and To err is human. Thus there is a chance that there might be a loophole in our code that we missed. You can always contribute to our tool by submitting issues.
 
-	Creating/Submitting issues has never been so easier.
+Creating/Submitting issues has never been so easier.
 
 Use this handy <a href= "https://help.github.com/articles/creating-an-issue/">link</a> when in doubt
 
