@@ -26,7 +26,6 @@ We will be shown the following result:
 where each element of the above array is a header
 
 To find out the anomalies in each header (say email) :
-
 	<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email </code>
 
 To find out anomalies in all headers (i.e the whole file) :
