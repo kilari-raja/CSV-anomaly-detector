@@ -74,4 +74,5 @@ From the terminal, we can also access .csv files within another directory. Let's
 .csv inside a directory "Verticals" placed alongside .py file.
 
 Then the terminal would read:
+
 <code>python AnomalyDetector.py execute --filename="./Verticals/sample.csv"</code>
