@@ -16,55 +16,52 @@
 
 <h2> Command line execution </h2>
 
-	Let us assume that our .csv file is mock.csv & our source code is AnomalyDetector.py
-	
-	To view the headers of the file:	
-		python AnomalyDetector.py columns --filename=mock.csv
+Let us assume that our .csv file is mock.csv & our source code is AnomalyDetector.py
 
-	We will be shown the following result:
-		['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
-	where each element of the above array is a header
-	
-	To find out the anomalies in each header (say email) :
-		python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email
+To view the headers of the file:	
+	<code> python AnomalyDetector.py columns --filename=mock.csv </code>
 
-	To find out anomalies in all headers (i.e the whole file) :
-		python AnomalyDetector.py execute --filename=mock.csv
+We will be shown the following result:
+['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
+where each element of the above array is a header
 
-		The above command executes the scanning process across all columns in one-go.
+To find out the anomalies in each header (say email) :
+	<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email </code>
 
-	Upon completion of the scanning process, you will see either of these two responses:
-	1) This Column appears bug free.
-	2) PLEASE OPEN improperData.txt** 
+To find out anomalies in all headers (i.e the whole file) :
+	<code> python AnomalyDetector.py execute --filename=mock.csv </code>
 
-	To know the commands available:
-		python AnomalyDetector.py --help
+The above command executes the scanning process across all columns in one-go.
 
-	Please "avoid" spacing in the following areas:
-		--filename = mock.csv (will throw error)
-		--filename= mock.csv (will throw error)
-		--filename =mock.csv(will throw error)
-		--filename=mock.csv (will give result)
+Upon completion of the scanning process, you will see either of these two responses:
+1) This Column appears bug free.
+2) PLEASE OPEN improperData.txt** 
 
-		The above set of rules also apply for --columns
-		All entries are case sensitive
+To know the commands available:
+	<code> python AnomalyDetector.py --help </code>
 
-	** improperData.txt contains all errors. It will be created automatically when .py
-	file is executed.
+Please "avoid" spacing in the following areas:
+--filename = mock.csv (will throw error)
+--filename= mock.csv (will throw error)
+--filename =mock.csv(will throw error)
+--filename=mock.csv (will give result)
+
+The above set of rules also apply for --columns
+All entries are case sensitive
+
+** improperData.txt contains all errors. It will be created automatically when .py
+file is executed.
 
 <h5> Please ensure that the source file (AnomalyDetector.py) and the .csv file are in the 
 same directory. </h5>
 
 <h4> Note: </h4>
 
-	If you are using compound words (more than a word ex. first name), please make sure 
-	it is enclosed inside quotes.
+If you are using compound words (more than a word ex. first name), please make sure 
+it is enclosed inside quotes.
 
-	python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name 
+	<code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name </code>
 	(WON'T WORK)
 
-	python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name" 
+	<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name" </code>
 	(WORKS LIKE A CHARM)
-
-
-<code> sample text within code tag </code>	
