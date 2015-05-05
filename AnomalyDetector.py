@@ -117,7 +117,7 @@ class ExecuteProgram(object):
 		patter_zipcode_four_digits = re.compile('^\d{4}$')
 		pattern_zipcode_two_hyphen = re.compile('^\d{5}--\d{4}$')
 		pattern_special_characters = re.compile("[!|$|\\\\|/|%|^|+|=|_|*|}|~|\[|\]|:|?|`|<|>|{]")
-		pattern_special_characters_website = re.compile("[!|$|\\\\|%|^|+|=|_|*|}|~|\[|\]|:|?|`|<|>|{]")
+		pattern_special_characters_website = re.compile("[\\\\|%|^|\||}|`|<|>|{]")
 		pattern_special_characters_phone = re.compile("[!|$|\\\\|/|%|^|=|_|*|}|~|\[|\]|:|?|`|<|>|{]")
 		pattern_open_parantheses =  re.compile("[()]")
 		pattern_close_parantheses = re.compile("[)]")
@@ -225,7 +225,7 @@ class ExecuteProgram(object):
 									global func_count
 									func_count += 1	 							
 									fp.write("***************************************************************************************\n")
-									fp.write("THIS ROW IS PRINTED BECAUSE A STRING (WITHOUT HYPHEN) IS PRESENT IN PLACE OF INTEGER IN COLUMN ") 
+									fp.write("THIS ROW IS PRINTED BECAUSE A STRING (WITHOUT HYPHEN) IS PRESENT IN COLUMN ") 
 									fp.write(mylist[a])
 									fp.write(" OF THE CSV FILE\n")
 									fp.write("***************************************************************************************\n")
