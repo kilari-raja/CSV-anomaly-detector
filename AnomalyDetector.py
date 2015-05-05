@@ -117,6 +117,7 @@ class ExecuteProgram(object):
 		patter_zipcode_four_digits = re.compile('^\d{4}$')
 		pattern_zipcode_two_hyphen = re.compile('^\d{5}--\d{4}$')
 		pattern_special_characters = re.compile("[!|$|\\\\|/|%|^|+|=|_|*|}|~|\[|\]|:|?|`|<|>|{]")
+		pattern_special_characters_website = re.compile("[!|$|\\\\|%|^|+|=|_|*|}|~|\[|\]|:|?|`|<|>|{]")
 		pattern_special_characters_phone = re.compile("[!|$|\\\\|/|%|^|=|_|*|}|~|\[|\]|:|?|`|<|>|{]")
 		pattern_open_parantheses =  re.compile("[()]")
 		pattern_close_parantheses = re.compile("[)]")
@@ -500,9 +501,9 @@ class ExecuteProgram(object):
 				row_no_in_original_file = 0	
 				for row in real_data :			
 					for i in range(int(globvar),int(globar)):				
-						find_special_characters=re.findall(pattern_special_characters_phone,row[mylist[i]])
+						find_special_characters_phone=re.findall(pattern_special_characters_phone,row[mylist[i]])
 						row_no_in_original_file += 1
-						if find_special_characters :
+						if find_special_characters_phone :
 							with open('improperData.txt','a') as fp :
 								defective_rows += 1
 								if defective_rows == 1 : 
@@ -518,7 +519,35 @@ class ExecuteProgram(object):
 								fp.write(str(defective_rows) + "\n")
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write("Row no in original file is ")
-								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")								
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")	
+
+
+		def print_special_characters_website():
+			with open(filename,'rU') as data :
+				real_data = csv.DictReader(data)	
+				defective_rows = 0
+				row_no_in_original_file = 0	
+				for row in real_data :			
+					for i in range(int(globvar),int(globar)):				
+						find_special_characters_website=re.findall(pattern_special_characters_website,row[mylist[i]])
+						row_no_in_original_file += 1
+						if find_special_characters_website :
+							with open('improperData.txt','a') as fp :
+								defective_rows += 1
+								if defective_rows == 1 : 
+									global func_count
+									func_count += 1	
+									fp.write("***************************************************************************************\n")
+									fp.write("THIS ROW IS PRINTED BECAUSE A SPECIAL CHARACTER (unlikely for website) IS PRESENT IN THE COLUMN ")
+									fp.write(mylist[a])
+									fp.write(" OF THE CSV FILE\n")
+									fp.write("***************************************************************************************\n")
+								fp.write(str(row)+ "\n")
+								fp.write("Defective row No:")
+								fp.write(str(defective_rows) + "\n")
+								new_row_no_in_original_file = row_no_in_original_file + 1
+								fp.write("Row no in original file is ")
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")															
 
 		def print_hyphen():
 			with open(filename,'rU') as data :
@@ -1442,6 +1471,7 @@ class ExecuteProgram(object):
 						find_zipcode_four_digits=re.findall(patter_zipcode_four_digits,row[mylist[i]])
 						find_special_characters=re.findall(pattern_special_characters,row[mylist[i]])
 						find_special_characters_phone=re.findall(pattern_special_characters_phone,row[mylist[i]])
+						find_special_characters_website=re.findall(pattern_special_characters_website,row[mylist[i]])
 						find_open_parantheses=re.findall(pattern_open_parantheses,row[mylist[i]])
 						find_close_paranthses=re.findall(pattern_close_parantheses,row[mylist[i]])
 						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
@@ -1845,6 +1875,9 @@ class ExecuteProgram(object):
 				print_space_entries()
 				print_no_dots()
 				# print_integer_more_than_string()
+				if special_characters_print == 0 :
+					print_special_characters_website()
+					special_characters_print+=1
 				print_string_only_entries()
 				# print_uppercase_entries()
 				if(empty) < (counter/10) and empty > 0 :
@@ -1869,9 +1902,10 @@ class ExecuteProgram(object):
 					print_symbols()
 				else :					
 					print_email_entries()
-					print_state_code()					
-					print_special_characters()
-					special_characters_print+=1
+					print_state_code()
+					if special_characters_print == 0:					
+						print_special_characters()
+						special_characters_print+=1
 					print_hyphen()
 					print_symbols()
 					print_integer_entries()
