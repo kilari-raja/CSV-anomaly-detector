@@ -938,14 +938,14 @@ class ExecuteProgram(object):
 					for i in range(int(globvar),int(globar)):				
 						row_no_in_original_file += 1
 						global func_count
-						find_integer = re.findall(pattern_integer,row[mylist[i]])						
+						find_integer = re.findall(pattern_integer,row[mylist[i]])			
 						find_at_the_rate=re.findall(pattern_at_the_rate,row[mylist[i]])
-						find_dot = re.findall(pattern_dot,row[mylist[i]])						
+						find_dot = re.findall(pattern_dot,row[mylist[i]])
+						find_string = re.findall(pattern_string,row[mylist[i]])				
 
-						if find_integer and find_at_the_rate and find_dot and not find_string :															
+						if find_integer and find_at_the_rate and find_dot and not find_string :													
 							defective_rows+=1
-							with open('improperData.txt','a') as fp :
-								
+							with open('improperData.txt','a') as fp :						
 								if defective_rows == 1 :
 									# print "Defective",row[mylist[i]] 
 									# global func_count
