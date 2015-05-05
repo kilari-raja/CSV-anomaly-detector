@@ -2138,6 +2138,25 @@ class countRows(object):
 				row_count+=1
 		print "No of rows in",filename,":",row_count
 
+class printTenRows(object):
+	print "\n"
+	def ten_rows(self,filesname):
+		global filename
+		row_count = 0
+		filename=filesname
+		with open(filename,'rU') as data :
+			for line in data:
+				row_count+=1
+				if row_count < 11:
+					print line
+
+
+@app.command
+def sample(filename="filename"):
+	x = printTenRows()
+	x.ten_rows(filename)
+
+
 @app.command
 def count(filename="filename"):
 	x = countRows()
