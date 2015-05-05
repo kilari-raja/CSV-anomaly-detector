@@ -306,7 +306,7 @@ class ExecuteProgram(object):
 									global func_count
 									func_count += 1										
 									fp.write("***************************************************************************************\n")
-									fp.write("THIS ROW IS PRINTED BECAUSE AN INTEGER(BUT NOT ONLY INTEGER) IS PRESENT IN PLACE OF STRING IN COLUMN ")
+									fp.write("THIS ROW IS PRINTED BECAUSE AN INTEGER(BUT NOT ONLY INTEGER) IS PRESENT IN COLUMN ")
 									fp.write(mylist[a])
 									fp.write(" OF THE CSV FILE\n")
 									fp.write("***************************************************************************************\n")
