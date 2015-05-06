@@ -2,7 +2,7 @@ If you are uncomfortable with git and familiar with pip install our pip package 
 playing right away.
 
 On your terminal<br>
-<code>sudo pip install CSV-anomaly-detector==1.2.7</code>
+<code>sudo pip install CSV-anomaly-detector==1.2.7</code><br>
 (Right now 1.2.7 is the stable version. When upgraded, changes will be reflected here).<br>
 
 Go to any directory that contains that has a .csv file (say sample.csv) and start using the tool. 
@@ -15,7 +15,7 @@ Following commands are available in the tool :<br>
 <b>sample</b> --> prints the first 10 rows of the csv file.<br>
 <b>sampleHeader</b>--> prints the first 10 rows, but only that of the (mentioned) header.<br>
 
-Sample command prompt execution for each of the above commands
+Sample command prompt execution for each of the above commands<br>
 <code>AnomalyDetector columns --filename=mock.csv </code><br>
 <code>AnomalyDetector count --filename=mock.csv</code><br>
 <code>AnomalyDetector executeColumns --filename=mock.csv --columns=email</code><br>
