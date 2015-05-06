@@ -16,34 +16,32 @@ because the final decision rests with the user") to be defective.
 
 <h2> Command line execution </h2>
 
-Let us assume that our .csv file is mock.csv & our source code is AnomalyDetector.py
+Following commands are available in the tool :
 
-To view the headers of the file:	
+columns -- prints the headers of the csv file.
+count -- gives the total number of rows in the csv file
+executeColumns -- scan the particular (mentioned) column to find out bugs.
+execute -- scan the whole file (i.e all columns) to spot bugs
+sample -- prints the first 10 rows of the csv file
+sampleHeader -- prints the first 10 rows, but only that of the (mentioned) header.
 
-<code> python AnomalyDetector.py columns --filename=mock.csv </code>
 
-We will be shown the following result:
+Sample command prompt execution for each of the above commands
+<code>python AnomalyDetector.py columns --filename=mock.csv </code>
+<code>python AnomalyDetector.py count --filename=mock.csv</code>
+<code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email</code>
+<code>python AnomalyDetector.py execute --filename=mock.csv </code>
+<code>python AnomalyDetector.py sample --filename=mock.csv </code>
+<code>python AnomalyDetector.py sampleHeader --column=email --filename=mock.csv</code>
 
-['id', 'first_name', 'last_name', 'email', 'country', 'ip_address']
 
-where each element of the above array is a header
 
-To find out the anomalies in each header (say email):
-
-<code> python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email</code>
-
-To find out anomalies in all headers (i.e the whole file) :
-
-<code> python AnomalyDetector.py execute --filename=mock.csv </code>
-
-The above command executes the scanning process across all columns in one-go.
-
-Upon completion of the scanning process, you will see either of these two responses:
+Upon completion of the scanning process (either execute/executeColumns), you will see either 
+of these two responses:
 <li>This Column appears bug free.</li>
 <li>PLEASE OPEN improperData.txt**</li>
 
-To know the commands available:
-
+To view the commands available:
 <code> python AnomalyDetector.py --help </code>
 
 Please "avoid" spacing in the following areas:
@@ -51,8 +49,6 @@ Please "avoid" spacing in the following areas:
 <p><code>--filename= mock.csv</code>(will throw error)</p>
 <p><code>--filename =mock.csv</code>(will throw error)</p>
 <p><code>--filename=mock.csv</code>(will give result)</p>
-
-The above set of rules also apply for --columns.
 
 All entries are case sensitive
 
@@ -73,9 +69,5 @@ it is enclosed inside quotes.
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name"</code>
 (WORKS LIKE A CHARM)
 
-From the terminal, we can also access .csv files within inner directory. Let's assume sample
-.csv inside a directory "Verticals" placed alongside .py file.
-
-Then the terminal would read:
-
+Relative addressing from the terminal also works:
 <code>python AnomalyDetector.py execute --filename="./Verticals/sample.csv"</code>
