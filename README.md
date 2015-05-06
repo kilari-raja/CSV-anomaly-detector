@@ -51,23 +51,21 @@ Please "avoid" spacing in the following areas:<br>
 <code>--filename =mock.csv</code>(will throw error)<br>
 <code>--filename=mock.csv</code>(will give result)<br>
 
-All entries are case sensitive
-
+All entries are case sensitive<br>
 ** improperData.txt contains all errors. It will be created automatically when .py
-file is executed.
+file is executed.<br>
 
 <h5> Please ensure that the source file (AnomalyDetector.py) and the .csv file are in the 
 same directory. </h5>
 
-<h3> Note: </h3>
+<h3> Note: </h3><br>
 
-If you are using compound words (more than a word ex. first name), please make sure 
-it is enclosed inside quotes.
-
+<li>If you are using compound words (more than a word ex. first name), please make sure 
+it is enclosed inside quotes.</li><br>
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name</code>
 (WON'T WORK)<br>
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name"</code>
-(WORKS LIKE A CHARM)
+(WORKS LIKE A CHARM)<br>
 
-Relative addressing from the terminal also works: <br>
+<li>Relative addressing from the terminal also works:</li> <br>
 <code>python AnomalyDetector.py execute --filename="./Verticals/sample.csv"</code>
