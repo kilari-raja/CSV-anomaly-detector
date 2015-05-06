@@ -45,7 +45,8 @@ of these two responses:
 To view the commands available:
 <code> python AnomalyDetector.py --help </code>
 
-Please "avoid" spacing in the following areas:
+Please "avoid" spacing in the following areas:<br>
+
 <code>--filename = mock.csv </code>(will throw error)<br>
 <code>--filename= mock.csv</code>(will throw error)<br>
 <code>--filename =mock.csv</code>(will throw error)<br>
@@ -65,10 +66,9 @@ If you are using compound words (more than a word ex. first name), please make s
 it is enclosed inside quotes.
 
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name</code>
-(WON'T WORK)
-
+(WON'T WORK)<br>
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name"</code>
 (WORKS LIKE A CHARM)
 
-Relative addressing from the terminal also works:
+Relative addressing from the terminal also works: <br>
 <code>python AnomalyDetector.py execute --filename="./Verticals/sample.csv"</code>
