@@ -2136,7 +2136,11 @@ class countRows(object):
 			real_data = csv.DictReader(data)
 			for row in real_data:
 				row_count+=1
-		print "No of rows in",filename,":",row_count
+		if filename[0]==".":			
+			b = filename.split("/")
+			print "No of rows in",b[len(b)-1],":",row_count
+		else :
+			print "No of rows in",filename,":",row_count
 
 class printTenRows(object):
 	print "\n"
