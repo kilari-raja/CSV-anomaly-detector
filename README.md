@@ -27,17 +27,13 @@ sampleHeader -- prints the first 10 rows, but only that of the (mentioned) heade
 
 
 Sample command prompt execution for each of the above commands
-<code>python AnomalyDetector.py columns --filename=mock.csv </code>
 
-<code>python AnomalyDetector.py count --filename=mock.csv</code>
-
-<code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email</code>
-
-<code>python AnomalyDetector.py execute --filename=mock.csv </code>
-
-<code>python AnomalyDetector.py sample --filename=mock.csv </code>
-
-<code>python AnomalyDetector.py sampleHeader --column=email --filename=mock.csv</code>
+<code>python AnomalyDetector.py columns --filename=mock.csv </code><br>
+<code>python AnomalyDetector.py count --filename=mock.csv</code><br>
+<code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=email</code><br>
+<code>python AnomalyDetector.py execute --filename=mock.csv </code><br>
+<code>python AnomalyDetector.py sample --filename=mock.csv </code><br>
+<code>python AnomalyDetector.py sampleHeader --column=email --filename=mock.csv</code><br>
 
 
 
