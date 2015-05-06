@@ -18,12 +18,12 @@ because the final decision rests with the user") to be defective.
 
 Following commands are available in the tool :
 
-columns -- prints the headers of the csv file.
-count -- gives the total number of rows in the csv file
-executeColumns -- scan the particular (mentioned) column to find out bugs.
-execute -- scan the whole file (i.e all columns) to spot bugs
-sample -- prints the first 10 rows of the csv file
-sampleHeader -- prints the first 10 rows, but only that of the (mentioned) header.
+columns -- prints the headers of the csv file.<br>
+count -- gives the total number of rows in the csv file.<br>
+executeColumns -- scan the particular (mentioned) column to find out bugs.<br>
+execute -- scan the whole file (i.e all columns) to spot bugs.<br>
+sample -- prints the first 10 rows of the csv file.<br>
+sampleHeader -- prints the first 10 rows, but only that of the (mentioned) header.<br>
 
 
 Sample command prompt execution for each of the above commands
@@ -42,11 +42,10 @@ of these two responses:
 <li>This Column appears bug free.</li>
 <li>PLEASE OPEN improperData.txt**</li>
 
-To view the commands available:
+To view the commands available:<br>
 <code> python AnomalyDetector.py --help </code>
 
 Please "avoid" spacing in the following areas:<br>
-
 <code>--filename = mock.csv </code>(will throw error)<br>
 <code>--filename= mock.csv</code>(will throw error)<br>
 <code>--filename =mock.csv</code>(will throw error)<br>
