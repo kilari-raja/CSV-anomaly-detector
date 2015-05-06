@@ -2110,6 +2110,41 @@ class executerHeader(object):
 		elif else_count == 0:
 			print "header is not available"
 
+
+class executeSampleHeader(object):
+	def sample_header(self,filesname,columns) :
+		global filename				
+		filename = filesname
+		global else_count 
+		global columnsd
+		columnsd = columns
+		table=""
+		row_count=0
+		with open(filename,'rU') as data :
+			r = csv.reader(open(filesname, "rU"), dialect=csv.excel_tab)
+			line1=r.next()	
+			arrt = []
+			for element in line1:
+				mylist = element.split(',')
+
+		for i in range(0,len(mylist)):
+			if columns in mylist[i]:				
+				start = mylist.index(columns)
+				with open(filename,'rU') as data :
+					for line in data :
+						row_count+=1
+						if row_count <= 11:
+							cells = line.split(",")
+							table+=cells[start] + "\n"
+					print table
+				else_count += 1
+		if else_count == 1:
+			pass
+		elif else_count == 0:
+			print "header is not available"
+
+
+
 class executeAll(object):
 	def whole_file(self,filesname):
 		global filename				
@@ -2159,6 +2194,11 @@ class printTenRows(object):
 def sample(filename="filename"):
 	x = printTenRows()
 	x.ten_rows(filename)
+
+@app.command
+def sampleHeader(filename="filename",columns="headerName"):
+	x = executeSampleHeader()
+	x.sample_header(filename,columns)
 
 
 @app.command
