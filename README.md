@@ -18,12 +18,12 @@ because the final decision rests with the user") to be defective.
 
 Following commands are available in the tool :
 
-columns -- prints the headers of the csv file.<br>
-count -- gives the total number of rows in the csv file.<br>
-executeColumns -- scan the particular (mentioned) column to find out bugs.<br>
-execute -- scan the whole file (i.e all columns) to spot bugs.<br>
-sample -- prints the first 10 rows of the csv file.<br>
-sampleHeader -- prints the first 10 rows, but only that of the (mentioned) header.<br>
+<b>columns</b> -- prints the headers of the csv file.<br>
+<b>count</b> -- gives the total number of rows in the csv file.<br>
+<b>executeColumns</b> -- scan the particular (mentioned) column to find out bugs.<br>
+<b>execute</b> -- scan the whole file (i.e all columns) to spot bugs.<br>
+<b>sample</b> -- prints the first 10 rows of the csv file.<br>
+<b>sampleHeader</b>-- prints the first 10 rows, but only that of the (mentioned) header.<br>
 
 
 Sample command prompt execution for each of the above commands
