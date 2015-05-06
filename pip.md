@@ -2,8 +2,8 @@ If you are uncomfortable with git and familiar with pip install our pip package 
 playing right away.
 
 On your terminal<br>
-<code>sudo pip install CSV-anomaly-detector==1.2.7</code><br>
-(Right now 1.2.7 is the stable version. When upgraded, changes will be reflected here).<br>
+<code>sudo pip install CSV-anomaly-detector==1.2.10</code><br>
+(Right now 1.2.10 is the stable version. When upgraded, changes will be reflected here).<br>
 
 Go to any directory that contains that has a .csv file (say sample.csv) and start using the tool. 
 
