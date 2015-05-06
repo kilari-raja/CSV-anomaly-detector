@@ -58,14 +58,12 @@ file is executed.<br>
 <h5> Please ensure that the source file (AnomalyDetector.py) and the .csv file are in the 
 same directory. </h5>
 
-<h3> Note: </h3><br>
-
+<h3> Note: </h3>
 <li>If you are using compound words (more than a word ex. first name), please make sure 
-it is enclosed inside quotes.</li><br>
+it is enclosed inside quotes.</li>
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns=first name</code>
 (WON'T WORK)<br>
 <code>python AnomalyDetector.py executeColumns --filename=mock.csv --columns="first name"</code>
 (WORKS LIKE A CHARM)<br>
-
-<li>Relative addressing from the terminal also works:</li> <br>
+<li>Relative addressing from the terminal also works:</li> 
 <code>python AnomalyDetector.py execute --filename="./Verticals/sample.csv"</code>
