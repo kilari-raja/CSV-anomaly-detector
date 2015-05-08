@@ -1507,8 +1507,11 @@ class ExecuteProgram(object):
 							elif find_string and find_email and not find_dot :
 								print row[mylist[i]],"is string with @ instead of at"
 								string_with_symbol_instead_of_at+=1
-							elif (find_string and find_website and find_dot and find_word_after_dot and not find_space) or (find_string and find_word_after_dot and find_http and find_dot and not find_space) :
+							elif (find_string and find_website and find_dot and find_word_after_dot and not find_space) or (find_string and find_word_after_dot and find_http and find_dot and not find_space and len(find_dot) > 1) :
 								print row[mylist[i]],"is possible website"
+								website+=1
+							elif (find_string and find_website and find_dot and find_word_after_dot and not find_space) or (find_string and find_word_after_dot and find_http and find_dot and not find_space and len(find_dot) > 1) :
+								print row[mylist[i]],"could be website but contains only one dot instead of two"
 								website+=1
 							elif find_space and find_string and not find_integer :
 								print row[mylist[i]],"is string with spaces but no integer"
