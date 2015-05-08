@@ -153,6 +153,7 @@ class ExecuteProgram(object):
 								fp.write("Row no in original file is ")
 								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
 
+
 		def print_empty_entries():
 			with open(filename,'rU') as data :
 				real_data = csv.DictReader(data)
@@ -574,7 +575,8 @@ class ExecuteProgram(object):
 								fp.write(str(defective_rows) + "\n")
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write("Row no in original file is ")
-								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")								
+								fp.write(str(new_row_no_in_original_file)+"\n" + "\n")
+			return func_count								
 
 		def print_space_entries() :
 			with open(filename,'rU') as data :
@@ -1480,115 +1482,118 @@ class ExecuteProgram(object):
 
 						if find_string :
 							if find_string and find_integer and find_space:						
-								#print "string with integer and spaces"
+								print row[mylist[i]],"is string with integer and spaces"
 								string_with_integer_spaces+=1
 							elif find_string and find_special_characters :
 								string_with_special_characters+=1
-								# print row[mylist[i]]
+								print row[mylist[i]],"is string with special characters"
 							elif (find_string and find_http and find_slash and find_dot) or (find_string and find_http and find_slash and find_dot and find_integer):
-								#print "possible website with http and slash"
+								print row[mylist[i]],"is possible website with http and slash"
 								website+=1
 							elif find_string and find_dot and find_integer and find_email and not find_empty and not find_no_entry:
-								#print "possible email with integer"
+								print row[mylist[i]],"is possible email with integer"
 								email_with_integer+=1
 								email_array.append(row[mylist[i]])
 							elif find_string and not find_space and find_integer and not find_email and not find_website and not find_dot and not find_phone:
-								#print "string with integer without spaces"
+								print row[mylist[i]],"is string with integer without spaces"
 								string_with_integer_without_spaces+=1
 							elif find_string and not find_integer and not find_empty and not find_no_entry and not find_email and not find_http and not find_dot and not find_caps and row[mylist[i]] not in lower_states and row[mylist[i]] not in upper_states :
-								#print "string without integer and without spaces"
+								print row[mylist[i]],"is string without integer and without spaces"
 								string_without_integer_without_spaces+=1
 							elif find_string and find_email and find_dot and not find_empty and not find_integer and not find_no_entry:
-								#print "possible email but without integer"
+								print row[mylist[i]],"is possible email but without integer"
 								email_without_integer+=1
 								email_array.append(row[mylist[i]])
 							elif find_string and find_email and not find_dot :
-								#print "string with @ instead of at"
+								print row[mylist[i]],"is string with @ instead of at"
 								string_with_symbol_instead_of_at+=1
 							elif (find_string and find_website and find_dot and find_word_after_dot and not find_space) or (find_string and find_word_after_dot and find_http and find_dot and not find_space) :
-								#print "possible website"
+								print row[mylist[i]],"is possible website"
 								website+=1
 							elif find_space and find_string and not find_integer :
-								#print "string with spaces but no integer"
+								print row[mylist[i]],"is string with spaces but no integer"
 								string_with_space_no_integer+=1
 							elif find_string and find_phone and find_integer and not find_dot and len(find_integer) >= 6 :						
-								#print "possible phone no but with alphabets"
+								print row[mylist[i]],"is possible phone no but with alphabets"
 								phone_no_with_alphabets+=1
 							elif find_string and find_phone and find_integer and not find_dot and len(find_integer) < 6 :
-								#print "Mixture of string integer and hyphen"
+								print row[mylist[i]],"is Mixture of string integer and hyphen"
 								string_with_integer_hyphen += 1
 
 							if find_string and find_dot and not find_website and not find_email and  find_word_after_dot and not find_slash and not find_space and not find_hashtag and not find_comma and (len(find_string) > 5):								
 								if len(find_dot) > 1 :
 									x = [j for j,val in enumerate(row[mylist[i]]) if val=="."]
 									if((x[len(x)-1]-x[0]) >= 3) :								
-										#print "possible website but without www (2 dot) and without slashes"
+										print row[mylist[i]],"is possible website but without www (2 dot) and without slashes"
 										website_without_www+=1
 									else :
-										#print "string with more than one dot but not website."
+										print row[mylist[i]],"is string with more than one dot but not website."
 										string_with_dots_not_email_not_website+=1
 
 								elif len(find_dot) <= 1 :
 									x = [j for j,val in enumerate(row[mylist[i]]) if val=="."]		
 									if(len(row[mylist[i]])-x[0] > 4):
-										#print "string with one dot but one website"
+										print row[mylist[i]],"is string with one dot but one website"
 										string_with_dots_not_email_not_website+=1
 									else :
-										#print "possible website but without www (1 dot)."
+										print row[mylist[i]],"is possible website but without www (1 dot)."
 										website_without_www+=1
 
 								else :
-									#print "possible website but without www (1 dot) and without slashes"
+									print row[mylist[i]],"is possible website but without www (1 dot) and without slashes"
 									website_without_www+=1 
 
 
 							elif find_string and find_slash and find_dot and not find_website and find_word_after_dot and not find_space and not find_hashtag and not find_comma and (len(find_string) > 5):						
 								x = [j for j,val in enumerate(row[mylist[i]]) if val=="."]
 								if((x[len(x)-1]-x[0]) >= 3) :
-									#print "possible website but without www and with slashes"
+									print row[mylist[i]],"is possible website but without www and with slashes"
 									website_without_www+=1
 
 							else :						
 								if len(find_caps) and len((find_string)) == 2 and not find_integer and not find_empty and not find_no_entry  and not find_dot and not find_slash and not find_small:		
 									matching = [s for s in states if row[mylist[i]] == s] 		
 									if matching  :		
-										#print "possible state code"
+										print row[mylist[i]],"is possible state code"
 										state_code+=1
 									else :
-										#print "two lettered uppercase string not state code"
+										print row[mylist[i]],"is two lettered uppercase string not state code"
 										two_letter_uppercase_string_not_state_code += 1
 
 
 								if len(find_small) and len((find_string)) == 2 and not find_integer and not find_empty and not find_dot and not find_no_entry and not find_slash:			
 									matching_lower = [s for s in lower_states if row[mylist[i]] == s]
 									if matching_lower :		
-										#print "possible state code in lowercase"
+										print row[mylist[i]],"is possible state code in lowercase"
 										state_code+=1
 									else :
-										#print "two lettered lowercase string not state code"
+										print row[mylist[i]],"is two lettered lowercase string not state code"
 										two_letter_lowercase_string_not_state_code += 1
 
 								if len(find_caps) == len(find_string) and len(find_string) > 2 and not find_integer and not find_empty and not find_no_entry and not find_dot and not find_slash:			
 									matching_upper = [s for s in upper_states if row[mylist[i]] == s]
 
 									if matching_upper :								
-										#print "possible state name in capital letters"
+										print row[mylist[i]],"is possible state name in capital letters"
 										state_code+=1
 									else :
-										#print "uppercase string"
+										print row[mylist[i]],"is uppercase string"
 										two_letter_uppercase_string_not_state_code += 1
 
 								elif (find_string and find_integer and not find_empty and not find_no_entry and find_dot and not find_email) or (find_string and not find_integer and not find_empty and find_dot and not find_email and not find_website):
-									#print "string with dot but not email"
+									print row[mylist[i]],"is string with dot but not email"
 									string_with_dots_not_email_not_website += 1
-								elif len(find_caps) == 1 and not find_integer and not find_empty and not find_no_entry and not find_dot and not find_slash:
-									#print "string with single caps with no integer or spaces."
+								elif len(find_caps) == 1 and not find_integer and not find_empty and not find_no_entry and not find_dot and not find_slash and len(find_string) > 1:
+									print row[mylist[i]],"is string with single caps with no integer or spaces."
+									string_without_integer_without_spaces += 1
+								elif len(find_caps) == 1 and not find_integer and not find_empty and not find_no_entry and not find_dot and not find_slash and len(find_string) == 1:
+									print row[mylist[i]],"is string of unit length with single caps."
 									string_without_integer_without_spaces += 1
 								elif len(find_string) > 2 and len(find_caps) == len(find_string) and not find_integer and not find_empty and not find_no_entry and not find_dot and not find_slash:
-									#print "pure uppercase string with more than 2 characters"
+									print row[mylist[i]],"is pure uppercase string with more than 2 characters"
 									pure_uppercase_string+=1
 								elif find_caps and len(find_caps) != len(find_string) and not find_integer and not find_empty and not find_no_entry and not find_dot and not find_slash and not find_space:
-									#print "string with capital letters but not state code nor pure uppercase"
+									print row[mylist[i]],"is string with capital letters but not state code nor pure uppercase"
 									string_without_integer_without_spaces += 1
 
 						if find_integer :
@@ -1596,65 +1601,72 @@ class ExecuteProgram(object):
 								if(find_zipcode_one_hyphen):
 									c = row[mylist[i]].split("-")
 									if c[0] in zipcodes :
-										#print row[mylist[i]], "is Most probably a zipcode with one hyphen"
+										print row[mylist[i]], "is Most probably a zipcode with one hyphen"
 										# zipcode_array.append(row[mylist[i]])
 										mostly_zipcode_with_one_hyphen += 1	
 									else :
-										#print row[mylist[i]], "has one hyphen but is not a zipcode."
+										print row[mylist[i]], "has one hyphen but is not a zipcode."
 										pure_integer += 1
 
 								if(find_zipcode_two_hyphen) :
 									c = row[mylist[i]].split("--")
 									if c[0] in zipcodes :
-										#print row[mylist[i]], "is Most probably a zipcode with two hyphen"
+										print row[mylist[i]], "is Most probably a zipcode with two hyphen"
 										mostly_zipcode_with_two_hyphen += 1
 
-								if len(find_phone) == 2 and len(find_integer) == 10 and not find_successive_hyphens and len(find_integer) > len(find_string):
-										#print "possible phone no because of two hyphens"
-										phone_no_two_hyphens+=1	
+								# if len(find_phone) == 2 and len(find_integer) == 10 and not find_successive_hyphens and len(find_integer) > len(find_string):
+								# 		print row[mylist[i]],"is possible phone no because of two hyphens"
+								# 		phone_no_two_hyphens+=1	
 								if len(find_phone) == 1 and len(find_integer) == 10 and not find_successive_hyphens and len(find_integer) > len(find_string) and find_slash:
-										#print "possible phone no but with slash instead of one of the hyphens"
+										print row[mylist[i]],"is possible phone no but with slash instead of one of the hyphens"
 										phone_no_one_hyphen+=1					
 
 								if len(find_phone) == 1 and len(find_integer) != 10 and not find_successive_hyphens and len(find_integer) > len(find_string) and find_slash:
-										#print "possible phone no without ten integers but with slash instead of one of the hyphens"
+										print row[mylist[i]],"is possible phone no without ten integers but with slash instead of one of the hyphens"
 										phone_no_one_hyphen+=1
 								if len(find_phone) == 2 and len(find_integer) != 10 and not find_successive_hyphens and not find_string :
 									y = row[mylist[i]].split("-")
 									if(len(y[0])>3):
 										if row[mylist[i]] in zipcodes :
-											#print row[mylist[i]] , "is possible zip codes but with two but not succesive hyphens"
+											print row[mylist[i]], "is possible zip codes but with two but not succesive hyphens"
 											zipcode_with_two_not_successive_hyphens+=1
 									else :
-										#print "integers separated by hyphen but not zipcode or phone number"
+										print row[mylist[i]],"is integers separated by hyphen but not zipcode or phone number"
 										integer_seperated_by_hyphen_not_zip_or_phone+=1												
 									
-								if len(find_phone) == 1 and len(find_integer) != 10 and not find_string and not find_hashtag and find_pattern_phone_parantheses :
+								if len(find_phone) == 1 and len(find_integer) == 10 and not find_string and not find_hashtag and find_pattern_phone_parantheses :
+									if find_phone_three_parts_one_hyphen_one_parantheses and not find_string :
+										print row[mylist[i]],"is phone no with three parts with one hyphen and a parantheseses"
+										phone_three_parts_one_hyphen_one_parantheses +=1
+
+									else :
 										open_brace = [phone for phone,val in enumerate(row[mylist[i]]) if val=="("]
 										close_brace = [phone for phone,val in enumerate(row[mylist[i]]) if val==")"]
-										if open_brace and close_brace :
-											#print "phone no with parantheses"					
-											phone_no_with_parantheses+=1
+										# if open_brace and close_brace :
+										# 	print row[mylist[i]],"is phone no with parantheses"					
+										# 	phone_no_with_parantheses+=1
 										if open_brace and not close_brace :
-											#print "phone no with only open parantheses"				
+											print row[mylist[i]],"is phone no with only open parantheses"				
 											phone_no_with_only_open_parantheses+=1
 										if close_brace and not open_brace :
-											#print "phone no with only close parantheses"
+											print row[mylist[i]],"is phone no with only close parantheses"
 											phone_no_with_only_close_parantheses+=1						
 
 								if (len(find_phone) == 1 and len(find_integer) != 10 and not find_string and find_hashtag) or (find_string and find_integer and len(find_space) > 1 and len(find_string) > len(find_integer)):
-									#print "possible line1 of address"
+									print row[mylist[i]],"is possible line1 of address"
 									string_first_line_address += 1
 
-								if find_pattern_phone_parantheses and not find_website and not find_string and len(find_integer) == 10:
-									#print "phone no with parantheses"							
+								if find_pattern_phone_parantheses and not find_website and not find_string and len(find_integer) == 10 and not find_pattern_phone_10_digits and not find_phone_three_parts_two_hyphens and not find_phone_three_parts_one_hyphen_one_parantheses and not find_pattern_phone_three_parts_plus_one and not find_pattern_phone_11_digits :
+									print row[mylist[i]],"is phone no with parantheses"							
 									phone_no_with_parantheses+=1
 
 								if find_phone_three_parts_two_hyphens and not find_string :
+									print row[mylist[i]], "is phone with two hyphens"
 									phone_three_parts_two_hyphens+=1
 
-								if find_phone_three_parts_one_hyphen_one_parantheses and not find_string :
-									phone_three_parts_one_hyphen_one_parantheses+=1								
+								# if find_phone_three_parts_one_hyphen_one_parantheses and not find_string :
+								# 	print row[mylist[i]], "is phone with one hyphen and one parantheses"
+								# 	phone_three_parts_one_hyphen_one_parantheses+=1								
 
 						if find_integer and not find_phone :
 							if(find_zipcode_without_hyphen):
@@ -1662,11 +1674,11 @@ class ExecuteProgram(object):
 									# for j in range(0,len(zipcodes)-1):
 										# a = a.split("-")[0]
 										# if row[mylist[i]] == zipcodes[j] :
-									#print row[mylist[i]], "is most probably a zipcode (without hyphen)" 
+									print row[mylist[i]], "is most probably a zipcode (without hyphen)" 
 											# zipcode_array.append(row[mylist[i]])
 									mostly_zipcode_without_hyphen += 1
 								else :
-									#print row[mylist[i]], "is not a Zipcode"
+									print row[mylist[i]], "is not a Zipcode"
 									pure_integer += 1
 									zipcode_array.append(row[mylist[i]])
 							if(find_zipcode_four_digits):
@@ -1675,27 +1687,34 @@ class ExecuteProgram(object):
 									# for j in range(0,len(zipcodes)-1):
 										# a = a.split("-")[0]
 										# if c == zipcodes[j] :									
-									#print row[mylist[i]], "is most probably a zipcode (four digits) " 
+									print row[mylist[i]], "is most probably a zipcode (four digits) " 
 											# zipcode_array.append(row[mylist[i]])
 									mostly_zipcode_four_digits += 1
 								else :
-									#print row[mylist[i]], "is a four digit integer"
+									print row[mylist[i]], "is a four digit integer"
 									pure_integer += 1
 
 							if not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and find_dot:
-								#print "Integer with decimals"
+								print row[mylist[i]],"is Integer with decimals"
 								decimal_integer += 1
 								# print "no of dots is",len(find_dot)
 								decimal_integer_lengths.append(len(find_dot))
-							if not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and not find_dot:
-								#print "Pure integer"
+							
+							if not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and not find_dot and not find_pattern_phone_10_digits and not find_phone_three_parts_two_hyphens and not find_phone_three_parts_one_hyphen_one_parantheses and not find_pattern_phone_three_parts_plus_one and not find_pattern_phone_11_digits :
+								print row[mylist[i]],"is Pure integer"
 								pure_integer += 1
 
+							if not find_zipcode_without_hyphen and not find_zipcode_four_digits and not find_string and not find_dot and find_pattern_phone_10_digits and not find_pattern_phone_11_digits:
+								print row[mylist[i]],"is 10 digit phone no"
+								phone_10_digits += 1
+
 							if find_pattern_phone_three_parts_plus_one and not find_string :
-									phone_three_parts_plus_one+=1
+								print row[mylist[i]],"is phone with four parts containing three spaces and +1"
+								phone_three_parts_plus_one+=1
 
 							if find_pattern_phone_11_digits and not find_string :
 								if row[mylist[i]][0]=="1":
+									print row[mylist[i]], "is 11 digit phone no i.e starts with 1 followed by 10 digits"
 									phone_11_digits+=1
 								else :
 									print "11 digit number but not phone no"
@@ -1704,14 +1723,15 @@ class ExecuteProgram(object):
 							if find_pattern_phone_10_digits and not find_string :
 								phone_10_digits+=1
 
+
 						if find_integer and find_dot and find_phone and not find_string and row[mylist[i]][0] == "-" :
-								#print "Negative integer with decimals"
+								print row[mylist[i]],"is Negative integer with decimals"
 								decimal_integer += 1
-								# print "no of dots is",len(find_dot)
+								print "no of dots is",len(find_dot)
 								decimal_integer_lengths.append(len(find_dot))
 
 						if find_integer and not find_dot and find_phone and not find_string and row[mylist[i]][0] == "-" :
-							#print "Negative integer without decimals"
+							print row[mylist[i]],"is Negative integer without decimals"
 							pure_integer += 1
 
 						if find_integer and find_special_characters :
@@ -1732,83 +1752,83 @@ class ExecuteProgram(object):
 				print "***********************************************************"
 				print "Your file has imperfect commas. Please open improperData.txt"
 				print "*************************************************************"
-			else:
-				print "\nYour file is perfectly comma separated"
-			if string_with_integer_spaces != 0 :
-				print "No of string with integer and spaces", string_with_integer_spaces
-			if string_with_integer_without_spaces != 0 :
-				print "No of string with integer without spaces", string_with_integer_without_spaces	
-			if string_without_integer_without_spaces != 0 :				
-				print "No of string without integer and without spaces / string with single caps with no integer or spaces / string with capital letters but not state code nor pure uppercase", string_without_integer_without_spaces
-			if string_with_dots_not_email_not_website != 0 :
-				print "No of string with dot but not email", string_with_dots_not_email_not_website
-			if two_letter_uppercase_string_not_state_code != 0 :
-				print "No of two lettered uppercase string not state code", two_letter_uppercase_string_not_state_code
-			if two_letter_lowercase_string_not_state_code != 0 :
-				print "No of two lettered lowercase string not state code",two_letter_lowercase_string_not_state_code	
-			if string_with_symbol_instead_of_at != 0 :
-				print "No of string with @ instead of at", string_with_symbol_instead_of_at
-			if string_with_integer_hyphen != 0 :
-				print "No of string with integer and hyphen", string_with_integer_hyphen
-			if email_without_integer != 0 :
-				print "No of possible email without integer",  email_without_integer
-			if email_with_integer != 0 :
-				print "No of possible email with integer", email_with_integer
-			if website != 0 :
-				print "No of possible website with http and slash/ possible website", website
-			if string_with_space_no_integer != 0 :
-				print "No of string with spaces but no integer", string_with_space_no_integer
-			if string_first_line_address != 0 :
-				print "No of possible line1 of address" , string_first_line_address
-			if phone_no_with_alphabets != 0 :
-				print "No of possible phone no but with alphabets",phone_no_with_alphabets
-			if website_without_www != 0 :
-				print "No of possible website but without www and with slashes / possible website but without www (1 dot) and without slashes / possible website but without www (2 dot) and without slashes", website_without_www
-			if state_code != 0 :
-				print "No of possible state code", state_code
-			if pure_uppercase_string != 0 :
-				print "No of pure uppercase string with more than 2 characters", pure_uppercase_string
-			if phone_no_two_hyphens != 0 :
-				print "No of possible phone no because of two hyphens", phone_no_two_hyphens
-			if phone_no_one_hyphen != 0 :
-				print "No of possible phone no without ten integers but with slash instead of one of the hyphens / possible phone no but with slash instead of one of the hyphens", phone_no_one_hyphen
-			if phone_no_with_parantheses != 0 :
-				print "No of phone no with parantheses", phone_no_with_parantheses
-			if phone_no_without_hyphen_or_alphabets != 0 :
-				print "No of possible phone no but without hyphen or alphabets", phone_no_without_hyphen_or_alphabets
-			if phone_no_with_only_open_parantheses != 0 :
-				print "No of phone no with only open parantheses",phone_no_with_only_open_parantheses
-			if phone_no_with_only_close_parantheses != 0 :
-				print "No of phone no with only close parantheses", phone_no_with_only_close_parantheses
-			# print "No of valid zipcode without hyphen as verified from unitedstateszipcodes.org", valid_verified_zipcode_without_hyphen
-			# print "No of valid zipcode with one hyphen as verified from unitedstateszipcodes.org", valid_verified_zipcode_with_one_hyphen
-			# print "No of valid zipcode with two hyphen as verified from unitedstateszipcodes.org", valid_verified_zipcode_with_two_hyphen
-			if zipcode_with_two_not_successive_hyphens != 0 :
-				print "No of possible zip codes but with two but not succesive hyphens", zipcode_with_two_not_successive_hyphens
-			# if empty != 0 :
-			print "No of empty entries", empty
-			if counter != 0 :
-				print "Total no of lines", counter
-			if decimal_integer != 0 :
-				print "Total no of decimal integers", decimal_integer
-			if pure_integer != 0 :
-				print "No of PURE integer", pure_integer
-			if integer_seperated_by_hyphen_not_zip_or_phone != 0 :
-				print "No of integers separated by hyphen but not zipcode or phone number", integer_seperated_by_hyphen_not_zip_or_phone
-			if uncertain_entries != 0 :
-				print "No of Hard to say if it's a zip code or phone no.", uncertain_entries
-			if mostly_zipcode_with_one_hyphen != 0 :
-				print "No of Zipcode with one hyphen found by regular expression", mostly_zipcode_with_one_hyphen	
-			if mostly_zipcode_without_hyphen != 0 :
-				print "No of Zipcode without hyphen found by regular expression",mostly_zipcode_without_hyphen
-			if mostly_zipcode_with_two_hyphen != 0 :
-				print "No of zipcode with two hyphens found by regular expression", mostly_zipcode_with_two_hyphen
-			if mostly_zipcode_four_digits != 0 :
-				print "No of zipcode without hyphen but four digits", mostly_zipcode_four_digits
-			if string_with_special_characters != 0 :
-				print "No of string entries with special characters :"	, string_with_special_characters
-			if integer_with_special_characters != 0 :
-				print "No of integer entries with special characters :", integer_with_special_characters
+			# else:
+			# 	print "\nYour file is perfectly comma separated"
+			# if string_with_integer_spaces != 0 :
+			# 	print "No of string with integer and spaces", string_with_integer_spaces
+			# if string_with_integer_without_spaces != 0 :
+			# 	print "No of string with integer without spaces", string_with_integer_without_spaces	
+			# if string_without_integer_without_spaces != 0 :				
+			# 	print "No of string without integer and without spaces / string with single caps with no integer or spaces / string with capital letters but not state code nor pure uppercase", string_without_integer_without_spaces
+			# if string_with_dots_not_email_not_website != 0 :
+			# 	print "No of string with dot but not email", string_with_dots_not_email_not_website
+			# if two_letter_uppercase_string_not_state_code != 0 :
+			# 	print "No of two lettered uppercase string not state code", two_letter_uppercase_string_not_state_code
+			# if two_letter_lowercase_string_not_state_code != 0 :
+			# 	print "No of two lettered lowercase string not state code",two_letter_lowercase_string_not_state_code	
+			# if string_with_symbol_instead_of_at != 0 :
+			# 	print "No of string with @ instead of at", string_with_symbol_instead_of_at
+			# if string_with_integer_hyphen != 0 :
+			# 	print "No of string with integer and hyphen", string_with_integer_hyphen
+			# if email_without_integer != 0 :
+			# 	print "No of possible email without integer",  email_without_integer
+			# if email_with_integer != 0 :
+			# 	print "No of possible email with integer", email_with_integer
+			# if website != 0 :
+			# 	print "No of possible website with http and slash/ possible website", website
+			# if string_with_space_no_integer != 0 :
+			# 	print "No of string with spaces but no integer", string_with_space_no_integer
+			# if string_first_line_address != 0 :
+			# 	print "No of possible line1 of address" , string_first_line_address
+			# if phone_no_with_alphabets != 0 :
+			# 	print "No of possible phone no but with alphabets",phone_no_with_alphabets
+			# if website_without_www != 0 :
+			# 	print "No of possible website but without www and with slashes / possible website but without www (1 dot) and without slashes / possible website but without www (2 dot) and without slashes", website_without_www
+			# if state_code != 0 :
+			# 	print "No of possible state code", state_code
+			# if pure_uppercase_string != 0 :
+			# 	print "No of pure uppercase string with more than 2 characters", pure_uppercase_string
+			# if phone_no_two_hyphens != 0 :
+			# 	print "No of possible phone no because of two hyphens", phone_no_two_hyphens
+			# if phone_no_one_hyphen != 0 :
+			# 	print "No of possible phone no without ten integers but with slash instead of one of the hyphens / possible phone no but with slash instead of one of the hyphens", phone_no_one_hyphen
+			# if phone_no_with_parantheses != 0 :
+			# 	print "No of phone no with parantheses", phone_no_with_parantheses
+			# if phone_no_without_hyphen_or_alphabets != 0 :
+			# 	print "No of possible phone no but without hyphen or alphabets", phone_no_without_hyphen_or_alphabets
+			# if phone_no_with_only_open_parantheses != 0 :
+			# 	print "No of phone no with only open parantheses",phone_no_with_only_open_parantheses
+			# if phone_no_with_only_close_parantheses != 0 :
+			# 	print "No of phone no with only close parantheses", phone_no_with_only_close_parantheses
+			# # print "No of valid zipcode without hyphen as verified from unitedstateszipcodes.org", valid_verified_zipcode_without_hyphen
+			# # print "No of valid zipcode with one hyphen as verified from unitedstateszipcodes.org", valid_verified_zipcode_with_one_hyphen
+			# # print "No of valid zipcode with two hyphen as verified from unitedstateszipcodes.org", valid_verified_zipcode_with_two_hyphen
+			# if zipcode_with_two_not_successive_hyphens != 0 :
+			# 	print "No of possible zip codes but with two but not succesive hyphens", zipcode_with_two_not_successive_hyphens
+			# # if empty != 0 :
+			# print "No of empty entries", empty
+			# if counter != 0 :
+			# 	print "Total no of lines", counter
+			# if decimal_integer != 0 :
+			# 	print "Total no of decimal integers", decimal_integer
+			# if pure_integer != 0 :
+			# 	print "No of PURE integer", pure_integer
+			# if integer_seperated_by_hyphen_not_zip_or_phone != 0 :
+			# 	print "No of integers separated by hyphen but not zipcode or phone number", integer_seperated_by_hyphen_not_zip_or_phone
+			# if uncertain_entries != 0 :
+			# 	print "No of Hard to say if it's a zip code or phone no.", uncertain_entries
+			# if mostly_zipcode_with_one_hyphen != 0 :
+			# 	print "No of Zipcode with one hyphen found by regular expression", mostly_zipcode_with_one_hyphen	
+			# if mostly_zipcode_without_hyphen != 0 :
+			# 	print "No of Zipcode without hyphen found by regular expression",mostly_zipcode_without_hyphen
+			# if mostly_zipcode_with_two_hyphen != 0 :
+			# 	print "No of zipcode with two hyphens found by regular expression", mostly_zipcode_with_two_hyphen
+			# if mostly_zipcode_four_digits != 0 :
+			# 	print "No of zipcode without hyphen but four digits", mostly_zipcode_four_digits
+			# if string_with_special_characters != 0 :
+			# 	print "No of string entries with special characters :"	, string_with_special_characters
+			# if integer_with_special_characters != 0 :
+			# 	print "No of integer entries with special characters :", integer_with_special_characters
 
 			total_zipcode =  valid_verified_zipcode_without_hyphen + valid_verified_zipcode_with_two_hyphen + zipcode_with_two_not_successive_hyphens + valid_verified_zipcode_with_one_hyphen + mostly_zipcode_with_one_hyphen + mostly_zipcode_without_hyphen + mostly_zipcode_with_two_hyphen + mostly_zipcode_four_digits
 			total_phone = phone_no_two_hyphens + phone_no_without_hyphen_or_alphabets + phone_no_with_alphabets + phone_no_with_parantheses + phone_no_one_hyphen + phone_no_with_only_open_parantheses + phone_no_with_only_close_parantheses + phone_three_parts_two_hyphens + phone_three_parts_one_hyphen_one_parantheses + phone_three_parts_plus_one + phone_10_digits                                                            
@@ -1824,20 +1844,20 @@ class ExecuteProgram(object):
 			# print "length of decimal_integer_lengths array is", len(decimal_integer_lengths)
 
 			
-			if total_zipcode != 0 :
-				print "Total Zipcode",total_zipcode
-			if total_phone != 0 :
-				print "Total phone", total_phone
-			if total_phone_only_integers != 0 :
-				print "Total phone only integers",total_phone_only_integers
-			if total_string != 0 :
-				print "Total string", total_string
-			if total_pure_string != 0 :
-				print "Total pure string", total_pure_string
-			if total_website != 0 :
-				print "Total Website", total_website
-			if total_special_characters != 0 :
-				print "Total special characters", total_special_characters
+			# if total_zipcode != 0 :
+			# 	print "Total Zipcode",total_zipcode
+			# if total_phone != 0 :
+			# 	print "Total phone", total_phone
+			# if total_phone_only_integers != 0 :
+			# 	print "Total phone only integers",total_phone_only_integers
+			# if total_string != 0 :
+			# 	print "Total string", total_string
+			# if total_pure_string != 0 :
+			# 	print "Total pure string", total_pure_string
+			# if total_website != 0 :
+			# 	print "Total Website", total_website
+			# if total_special_characters != 0 :
+			# 	print "Total special characters", total_special_characters
 			# print "Zipcode array with defective entries", zipcode_array
 			
 			
@@ -2078,7 +2098,7 @@ class ExecuteProgram(object):
 
 			# print "decimals array of",columnsd,"is", decimal_integer_lengths
 			
-
+testing_execute_program = ExecuteProgram()
 # @app.command
 # def execute(filename="filename",begin="something",to="small"):
 # 	x = ExecuteProgram()
@@ -2109,6 +2129,8 @@ class executerHeader(object):
 			pass
 		elif else_count == 0:
 			print "header is not available"
+
+testing_execute_header = executerHeader()
 
 
 class executeSampleHeader(object):
@@ -2161,6 +2183,8 @@ class executeAll(object):
 				end = i+1
 				x = ExecuteProgram()
 				x.fix_file(filename,start,end)
+
+testing_execute_all = executeAll()			
 
 class countRows(object):
 	def count_rows(self,filesname):
