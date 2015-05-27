@@ -24,13 +24,17 @@ def commaChecker(filesname):
 	return counter
 
 def startTool(filesname,start,end):
+	# email_array = []
 	returnCommaChecker = commaChecker(filesname)
 	if returnCommaChecker == row_no_in_original_file :		
 		global you,datum
 		you = get_mylist(filesname)
-		datum = get_real_data(filesname)		
+		datum = get_real_data(filesname)
+		print "datum is",datum
+		email_array = []
 		for i in range(1,len(datum)):
 			# for j in range(0,len(you)):
+			# email_array = []
 			regular_expressions(datum[i][start])
 			purestringFunction(datum[i][start])
 			stringFunction(datum[i][start])
@@ -38,15 +42,16 @@ def startTool(filesname,start,end):
 			stringWithSpecialCharactersFunction(datum[i][start])
 			websiteFunction(datum[i][start])
 			websiteWithoutWWWFunction(datum[i][start])
-			emailFunction(datum[i][start])								
+			emailReturn = emailFunction(datum[i][start],email_array)								
 			zipcodeFunction(datum[i][start])
 			phoneFunction(datum[i][start])
 			integerFunction(datum[i][start])
 			stateCodeFunction(datum[i][start])
 			emptyFunction(datum[i][start])
-			calculation()
-		print "bdict before observations",bdict
-		observations(filesname,start,end,returnCommaChecker)		
+			calculation()			
+		# print "bdict before observations is",bdict
+		# print "emailReturn is",emailReturn
+		observations(filesname,start,end,returnCommaChecker,datum,emailReturn)		
 	return "return from startTool"
 	InstanceExecuteProgram = ExecuteProgram('mock.csv','2','3')	
 def printHeader(filesname):
@@ -91,20 +96,20 @@ def work_header(filesname,columns) :
 		if columns in you[i]:				
 			start = you.index(columns)
 			end = you.index(columns)+1
-			startTool(filesname,start,end)			
+			startTool(filesname,start,end)
 			else_count += 1	
 	if else_count == 0:
 		print "header is not available"
 	return "return from work_header"
 def whole_file(filesname):
 	you = get_mylist(filesname)
-	datum = get_real_data(filesname)	
+	# datum = get_real_data(filesname)	
 	with open(filesname,'rU') as data :		
-		# for variable in range(0,len(you)):
-		# 	start = variable
-		# 	end = variable+1
+		for variable in range(0,len(you)):
+			start = variable
+			end = variable+1
 			# fix_file(filesname,start,end)
-		startTool(filesname)		
+			startTool(filesname,start,end)
 	return "return from whole_file"
 @app.command
 def columns(filename="something"):	

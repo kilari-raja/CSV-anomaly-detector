@@ -4,7 +4,7 @@ This file classifies the input string into various datatypes depending on the re
 import sys
 from Reader import *
 bdict={}
-bdict[' valid_verified_zipcode_without_hyphen']=bdict['valid_verified_zipcode_with_two_hyphen']=bdict['zipcode_with_two_not_successive_hyphens']=bdict['valid_verified_zipcode_with_one_hyphen']=bdict['mostly_zipcode_with_one_hyphen']=bdict['mostly_zipcode_without_hyphen']=bdict['mostly_zipcode_with_two_hyphen']=bdict['mostly_zipcode_four_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['phone_three_parts_two_hyphens']=bdict['phone_three_parts_one_hyphen_one_parantheses']=bdict['phone_three_parts_plus_one']=bdict['phone_10_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['string_with_space_no_integer']=bdict['string_with_integer_spaces']=bdict['pure_uppercase_string']=bdict['string_with_integer_hyphen']=bdict['string_without_integer_without_spaces']=bdict['string_with_symbol_instead_of_at']=bdict['two_letter_uppercase_string_not_state_code']=bdict['string_first_line_address']=bdict['string_with_dots_not_email_not_website']=bdict['two_letter_lowercase_string_not_state_code']=bdict['string_with_integer_without_spaces']=bdict['website']=bdict['website_without_www']=bdict['string_without_integer_without_spaces']=bdict['string_with_space_no_integer']=bdict['pure_uppercase_string']=bdict['two_letter_uppercase_string_not_state_code']=bdict['email_without_integer']=bdict['state_code']=bdict['string_with_special_characters']=bdict['integer_with_special_characters']=bdict['email_with_integer']=bdict['email_without_integer']=0
+bdict[' valid_verified_zipcode_without_hyphen']=bdict['valid_verified_zipcode_with_two_hyphen']=bdict['zipcode_with_two_not_successive_hyphens']=bdict['valid_verified_zipcode_with_one_hyphen']=bdict['mostly_zipcode_with_one_hyphen']=bdict['mostly_zipcode_without_hyphen']=bdict['mostly_zipcode_with_two_hyphen']=bdict['mostly_zipcode_four_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['phone_three_parts_two_hyphens']=bdict['phone_three_parts_one_hyphen_one_parantheses']=bdict['phone_three_parts_plus_one']=bdict['phone_10_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['string_with_space_no_integer']=bdict['string_with_integer_spaces']=bdict['pure_uppercase_string']=bdict['string_with_integer_hyphen']=bdict['string_without_integer_without_spaces']=bdict['string_with_symbol_instead_of_at']=bdict['two_letter_uppercase_string_not_state_code']=bdict['string_first_line_address']=bdict['string_with_dots_not_email_not_website']=bdict['two_letter_lowercase_string_not_state_code']=bdict['string_with_integer_without_spaces']=bdict['website']=bdict['website_without_www']=bdict['string_without_integer_without_spaces']=bdict['string_with_space_no_integer']=bdict['pure_uppercase_string']=bdict['two_letter_uppercase_string_not_state_code']=bdict['email_without_integer']=bdict['state_code']=bdict['string_with_special_characters']=bdict['integer_with_special_characters']=bdict['email_with_integer']=bdict['email_without_integer']=bdict['decimal_integer'] = bdict['integer_with_at'] = 0
 # from Displayer import *
 # from Calculator import *
 import re
@@ -240,21 +240,21 @@ def websiteWithoutWWWFunction(entry):
 			website_without_www+=1
 			bdict['website_without_www']=website_without_www	
 
-def emailFunction(entry):
+def emailFunction(entry,email_array):	
 	#regular_expressions(entry)
 	if adict['find_string'] and adict['find_dot'] and adict['find_integer'] and adict['find_email'] and not adict['find_empty'] and not adict['find_no_entry']:		
-		global email_with_integer
+		global email_with_integer		
 		email_with_integer+=1
 		bdict['email_with_integer'] = email_with_integer
 		email_array.append(entry)
-		return "email_with_integer"
+		# return "email_with_integer"
 	elif adict['find_string'] and adict['find_email'] and adict['find_dot'] and not adict['find_empty'] and not adict['find_integer'] and not adict['find_no_entry']:		
-		global email_without_integer
+		global email_without_integer		
 		email_without_integer+=1
 		bdict['email_without_integer'] = email_without_integer
 		email_array.append(entry)	
-		return "is possible email but without integer"
-	
+		# return "is possible email but without integer"
+	return email_array
 
 def phoneFunction(entry):
 	#regular_expressions(entry)	
@@ -308,7 +308,7 @@ def phoneFunction(entry):
 	if adict['find_phone_three_parts_two_hyphens'] and not adict['find_string'] and len(adict['find_integer']) >= 10 :
 		global pure_integer
 		pure_integer+=1
-		print "pure integdfdfsdffsder entry is",entry
+		# print "pure integer entry for",entry
 		bdict['pure_integer']=pure_integer
 		return "more than 10 integers and thus not a phone no"	
 
@@ -325,7 +325,7 @@ def zipcodeFunction(entry):
 	if adict['find_integer'] and adict['find_phone'] and adict['find_zipcode_one_hyphen'] and single_hyphen_split[0] not in zipcodes :				
 		global pure_integer
 		pure_integer += 1
-		print "pure integer entrdfsdfsdfsdfsfsdfsdy is",entry
+		# print "pure integfffer entry for",entry
 		bdict['pure_integer']=pure_integer
 		return  "has one hyphen but is not a zipcode"
 	if adict['find_integer'] and adict['find_phone'] and adict['find_zipcode_two_hyphen'] and double_hyphen_split[0] in zipcodes :
@@ -336,7 +336,7 @@ def zipcodeFunction(entry):
 	if adict['find_integer'] and adict['find_phone'] and adict['find_zipcode_two_hyphen'] and double_hyphen_split[0] not in zipcodes :
 		# global pure_integer
 		pure_integer += 1
-		print "pure integer entry isdsdfsfsdfsdfs",entry
+		# print "pure integer enffftry for",entry
 		bdict['pure_integer']=pure_integer
 		return  "has two hyphen but is not a zipcode"
 	if len(adict['find_phone']) == 2 and len(adict['find_integer']) != 10 and not adict['find_successive_hyphens'] and not adict['find_string'] and len(single_hyphen_split[0])>3 and single_hyphen_split[0] in zipcodes :					
@@ -356,7 +356,12 @@ def zipcodeFunction(entry):
 		return "is integers separated by hyphen but not zipcode or phone number"
 
 def integerFunction(entry):	
-	#regular_expressions(entry)	
+	#regular_expressions(entry)
+	if adict['find_integer'] and adict['find_at_the_rate'] and not adict['find_dot'] and not adict['find_string']:
+		global integer_with_at
+		integer_with_at += 1
+		bdict['integer_with_at']=integer_with_at
+		return "is integer with @"
 	if adict['find_string'] and not adict['find_space'] and adict['find_integer'] and not adict['find_email'] and not adict['find_website'] and not adict['find_dot'] and not adict['find_phone']:		
 		global string_with_integer_without_spaces
 		string_with_integer_without_spaces+=1
@@ -386,7 +391,7 @@ def integerFunction(entry):
 		else :
 			global pure_integer						
 			pure_integer += 1
-			print "pugfdgre integer entry is",entry
+			# print "pure integer entrffffffsdy for",entry			
 			bdict['pure_integer']=pure_integer
 			zipcode_array.append(entry)
 			return  "is not a Zipcode"
@@ -400,7 +405,7 @@ def integerFunction(entry):
 		else :				
 			# global pure_integer
 			pure_integer += 1
-			print "pure intfddfdeger entry is",entry
+			# print "purfsdfsde integer entry for",entry			
 			bdict['pure_integer']=pure_integer
 			return  "is a four digit integer"
 	if adict['find_integer'] and not adict['find_phone'] and  not adict['find_zipcode_without_hyphen'] and not adict['find_zipcode_four_digits'] and not adict['find_string'] and adict['find_dot']:			
@@ -409,11 +414,11 @@ def integerFunction(entry):
 		bdict['decimal_integer'] = decimal_integer
 		global decimal_integer_lengths
 		decimal_integer_lengths.append(len(adict['find_dot']))			
-		return "is Integer with decimals"		
-	if adict['find_integer'] and not adict['find_phone'] and  not adict['find_zipcode_without_hyphen'] and not adict['find_zipcode_four_digits'] and not adict['find_string'] and not adict['find_dot'] and not adict['find_pattern_phone_10_digits'] and not adict['find_phone_three_parts_two_hyphens'] and not adict['find_phone_three_parts_one_hyphen_one_parantheses'] and not adict['find_pattern_phone_three_parts_plus_one'] and not adict['find_pattern_phone_11_digits'] and not adict['find_special_characters'] :		
+		return "is Integer with decimals"
+	if adict['find_integer'] and not adict['find_phone'] and  not adict['find_zipcode_without_hyphen'] and not adict['find_zipcode_four_digits'] and not adict['find_string'] and not adict['find_dot'] and not adict['find_pattern_phone_10_digits'] and not adict['find_phone_three_parts_two_hyphens'] and not adict['find_phone_three_parts_one_hyphen_one_parantheses'] and not adict['find_pattern_phone_three_parts_plus_one'] and not adict['find_pattern_phone_11_digits'] and not adict['find_special_characters'] and not adict['find_email'] :		
 		# global pure_integer
 		pure_integer += 1
-		print "pure integer enfdfsdtry is",entry
+		# print "pure integer entry forfsdfsdfsd",entry
 		bdict['pure_integer'] = pure_integer
 		return "is Pure integer"
 	if adict['find_integer'] and not adict['find_phone'] and  not adict['find_zipcode_without_hyphen'] and not adict['find_zipcode_four_digits'] and not adict['find_string'] and not adict['find_dot'] and adict['find_pattern_phone_10_digits'] and not adict['find_pattern_phone_11_digits'] and not adict['find_string']:	
@@ -435,7 +440,7 @@ def integerFunction(entry):
 	if adict['find_integer'] and not adict['find_phone'] and  adict['find_pattern_phone_11_digits'] and not adict['find_string'] and entry[0]!="1" :
 		# global pure_integer
 		pure_integer+=1
-		print "pure integer enffdfftry is",entry
+		# print "pudsaasddasre integer entry for",entry
 		bdict['pure_integer']=pure_integer
 		return "11 digit number but not phone no"		
 	if adict['find_decimal'] and adict['find_phone'] and not adict['find_string'] and entry[0] == "-" :		
@@ -447,12 +452,12 @@ def integerFunction(entry):
 	if adict['find_integer'] and not adict['find_dot'] and adict['find_phone'] and not adict['find_string'] and entry[0] == "-" and not adict['find_special_characters']:		
 		# global pure_integer
 		pure_integer += 1
-		print "pure integer entry isdfdfsd",entry
+		# print "pure integer entry fsfdfsdfsdfsdor",entry
 		bdict['pure_integer']=pure_integer
 		return "is Negative integer without decimals"
 	if adict['find_integer'] and not adict['find_dot'] and adict['find_phone'] and not adict['find_string'] and entry[0] == "-" and adict['find_special_characters']:		
 		pure_integer+=1
-		print "psfsdfsdure integer entry is",entry
+		# print "pudasdasdasdre integer entry for",entry
 		bdict['pure_integer']=pure_integer
 		return "is Negative integer with special characters"
 	if adict['find_integer'] and adict['find_dot'] and adict['find_phone'] and not adict['find_string'] and entry[0] == "-" and not adict['find_decimal']:		
