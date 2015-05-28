@@ -3,8 +3,8 @@ This file classifies the input string into various datatypes depending on the re
 """
 import sys
 from Reader import *
-bdict={}
-bdict[' valid_verified_zipcode_without_hyphen']=bdict['valid_verified_zipcode_with_two_hyphen']=bdict['zipcode_with_two_not_successive_hyphens']=bdict['valid_verified_zipcode_with_one_hyphen']=bdict['mostly_zipcode_with_one_hyphen']=bdict['mostly_zipcode_without_hyphen']=bdict['mostly_zipcode_with_two_hyphen']=bdict['mostly_zipcode_four_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['phone_three_parts_two_hyphens']=bdict['phone_three_parts_one_hyphen_one_parantheses']=bdict['phone_three_parts_plus_one']=bdict['phone_10_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['string_with_space_no_integer']=bdict['string_with_integer_spaces']=bdict['pure_uppercase_string']=bdict['string_with_integer_hyphen']=bdict['string_without_integer_without_spaces']=bdict['string_with_symbol_instead_of_at']=bdict['two_letter_uppercase_string_not_state_code']=bdict['string_first_line_address']=bdict['string_with_dots_not_email_not_website']=bdict['two_letter_lowercase_string_not_state_code']=bdict['string_with_integer_without_spaces']=bdict['website']=bdict['website_without_www']=bdict['string_without_integer_without_spaces']=bdict['string_with_space_no_integer']=bdict['pure_uppercase_string']=bdict['two_letter_uppercase_string_not_state_code']=bdict['email_without_integer']=bdict['state_code']=bdict['string_with_special_characters']=bdict['integer_with_special_characters']=bdict['email_with_integer']=bdict['email_without_integer']=bdict['decimal_integer'] = bdict['integer_with_at'] = 0
+# bdict={}
+# bdict[' valid_verified_zipcode_without_hyphen']=bdict['valid_verified_zipcode_with_two_hyphen']=bdict['zipcode_with_two_not_successive_hyphens']=bdict['valid_verified_zipcode_with_one_hyphen']=bdict['mostly_zipcode_with_one_hyphen']=bdict['mostly_zipcode_without_hyphen']=bdict['mostly_zipcode_with_two_hyphen']=bdict['mostly_zipcode_four_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['phone_three_parts_two_hyphens']=bdict['phone_three_parts_one_hyphen_one_parantheses']=bdict['phone_three_parts_plus_one']=bdict['phone_10_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['string_with_space_no_integer']=bdict['string_with_integer_spaces']=bdict['pure_uppercase_string']=bdict['string_with_integer_hyphen']=bdict['string_without_integer_without_spaces']=bdict['string_with_symbol_instead_of_at']=bdict['two_letter_uppercase_string_not_state_code']=bdict['string_first_line_address']=bdict['string_with_dots_not_email_not_website']=bdict['two_letter_lowercase_string_not_state_code']=bdict['string_with_integer_without_spaces']=bdict['website']=bdict['website_without_www']=bdict['string_without_integer_without_spaces']=bdict['string_with_space_no_integer']=bdict['pure_uppercase_string']=bdict['two_letter_uppercase_string_not_state_code']=bdict['email_without_integer']=bdict['state_code']=bdict['string_with_special_characters']=bdict['integer_with_special_characters']=bdict['email_with_integer']=bdict['email_without_integer']=bdict['decimal_integer'] = bdict['integer_with_at'] = bdict['pure_integer'] = 0
 # from Displayer import *
 # from Calculator import *
 import re
@@ -45,7 +45,7 @@ pattern_uppercase = re.compile("[A-Z]")
 pattern_lowercase = re.compile("[a-z]")
 pattern_decimal = re.compile("\d\.\d")
 
-def regular_expressions(entry):
+def regular_expressions(entry):	
 	find_string = re.findall(pattern_string,entry)
 	adict['find_string'] = find_string
 	find_integer = re.findall(pattern_integer,entry)
@@ -120,7 +120,7 @@ def regular_expressions(entry):
 	adict['find_decimal'] = find_decimal
 	return adict
 
-def purestringFunction(entry):	
+def purestringFunction(entry,bdict):	
 	#regular_expressions(entry)
 	if adict['find_string'] and not adict['find_integer'] and not adict['find_empty'] and not adict['find_no_entry'] and not adict['find_email'] and not adict['find_http'] and not adict['find_dot'] and not adict['find_caps'] and adict['find_string'] not in lower_states and adict['find_string'] not in upper_states :		
 		global string_without_integer_without_spaces		
@@ -148,7 +148,7 @@ def purestringFunction(entry):
 		bdict['string_without_integer_without_spaces']=string_without_integer_without_spaces
 		return "is string with capital letters but not state code nor pure uppercase"
 
-def stringFunction(entry) :
+def stringFunction(entry,bdict):
 	#regular_expressions(entry)
 	if (adict['find_string'] and adict['find_integer'] and not adict['find_empty'] and not adict['find_http']  and not adict['find_no_entry'] and adict['find_dot'] and not adict['find_email']) or (adict['find_string'] and not adict['find_integer'] and not adict['find_empty'] and adict['find_dot'] and not adict['find_email'] and not adict['find_website'] and not adict['find_http']) :		
 		global string_with_dots_not_email_not_website
@@ -166,7 +166,7 @@ def stringFunction(entry) :
 		bdict['string_first_line_address'] = string_first_line_address
 		return "is possible line1 of address"
 
-def pureStringWithSpacesFunction(entry):
+def pureStringWithSpacesFunction(entry,bdict):
 	#regular_expressions(entry)
 	if (adict['find_space']) and (len(adict['find_string']) + len(adict['find_space']) == len(entry)):		
 		global pureStringWithSpaces
@@ -179,15 +179,15 @@ def pureStringWithSpacesFunction(entry):
 		bdict['string_with_space_no_integer']=string_with_space_no_integer
 		return "is string with spaces but no integer"
 
-def stringWithSpecialCharactersFunction(entry):
+def stringWithSpecialCharactersFunction(entry,bdict):
 	#regular_expressions(entry)
 	if (adict['find_string'] and adict['find_special_characters']) and (len(adict['find_string'])+ len(adict['find_special_characters']) == len(entry)):
 		global string_with_special_characters
 		string_with_special_characters+=1
 		bdict['string_with_special_characters']=string_with_special_characters
 		return "is string with special characters"
-def websiteFunction(entry):
-	#regular_expressions(entry)
+def websiteFunction(entry,bdict):
+	# regular_expressions(entry)
 	if (adict['find_string'] and adict['find_http'] and adict['find_slash'] and adict['find_dot']) or (adict['find_string'] and adict['find_http'] and adict['find_slash'] and adict['find_dot'] and adict['find_integer']):		
 		global website
 		website+=1
@@ -203,7 +203,7 @@ def websiteFunction(entry):
 		else :
 			return "single character domain name"					
 
-def websiteWithoutWWWFunction(entry):
+def websiteWithoutWWWFunction(entry,bdict):
 	#regular_expressions(entry)
 	if adict['find_string'] and adict['find_dot'] and not adict['find_website'] and not adict['find_email'] and  adict['find_word_after_dot'] and not adict['find_slash'] and not adict['find_space'] and not adict['find_hashtag'] and not adict['find_comma'] and (len(adict['find_string']) > 5) and len(adict['find_dot']) > 1 :
 		x = [j for j,val in enumerate(entry) if val=="."]
@@ -240,7 +240,7 @@ def websiteWithoutWWWFunction(entry):
 			website_without_www+=1
 			bdict['website_without_www']=website_without_www	
 
-def emailFunction(entry,email_array):	
+def emailFunction(entry,email_array,bdict):	
 	#regular_expressions(entry)
 	if adict['find_string'] and adict['find_dot'] and adict['find_integer'] and adict['find_email'] and not adict['find_empty'] and not adict['find_no_entry']:		
 		global email_with_integer		
@@ -256,7 +256,7 @@ def emailFunction(entry,email_array):
 		# return "is possible email but without integer"
 	return email_array
 
-def phoneFunction(entry):
+def phoneFunction(entry,bdict):
 	#regular_expressions(entry)	
 	if adict['find_string'] and adict['find_phone'] and not adict['find_slash']  and adict['find_integer'] and not adict['find_dot'] and len(adict['find_integer']) >= 6 :		
 		global phone_no_with_alphabets
@@ -312,7 +312,7 @@ def phoneFunction(entry):
 		bdict['pure_integer']=pure_integer
 		return "more than 10 integers and thus not a phone no"	
 
-def zipcodeFunction(entry):
+def zipcodeFunction(entry,bdict):
 	#regular_expressions(entry)
 	single_hyphen_split = entry.split("-")
 	double_hyphen_split = entry.split("--")
@@ -355,7 +355,7 @@ def zipcodeFunction(entry):
 		bdict['integer_seperated_by_hyphen_not_zip_or_phone'] =integer_seperated_by_hyphen_not_zip_or_phone
 		return "is integers separated by hyphen but not zipcode or phone number"
 
-def integerFunction(entry):	
+def integerFunction(entry,bdict):	
 	#regular_expressions(entry)
 	if adict['find_integer'] and adict['find_at_the_rate'] and not adict['find_dot'] and not adict['find_string']:
 		global integer_with_at
@@ -470,7 +470,7 @@ def integerFunction(entry):
 		return "is integer with special characters"
 
 
-def stateCodeFunction(entry):
+def stateCodeFunction(entry,bdict):
 	#regular_expressions(entry)
 	matching = [s for s in states if entry == s]
 	matching_lower = [s for s in lower_states if entry == s]
@@ -501,7 +501,7 @@ def stateCodeFunction(entry):
 			state_code+=1
 			bdict['state_code']=state_code
 			return "is possible state name in lowercase"
-	if len(adict['find_small']) == len(adict['find_string'])and len(adict['find_small']) and len((adict['find_string'])) > 2 and not adict['find_integer'] and not adict['find_empty'] and not adict['find_dot'] and not adict['find_no_entry'] and not adict['find_slash'] and not matching_lower and adict['find_special_characters']:		
+	if len(adict['find_small']) == len(adict['find_string'])and len(adict['find_small']) > 2 and len(adict['find_string']) > 2 and not adict['find_integer'] and not adict['find_empty'] and not adict['find_dot'] and not adict['find_no_entry'] and not adict['find_slash'] and not matching_lower and not adict['find_special_characters']:		
 			# global two_letter_lowercase_string_not_state_code
 			two_letter_lowercase_string_not_state_code += 1			
 			bdict['two_letter_lowercase_string_not_state_code']=two_letter_lowercase_string_not_state_code
@@ -517,7 +517,7 @@ def stateCodeFunction(entry):
 			bdict['pure_uppercase_string']=pure_uppercase_string
 			return "is uppercase string"
 
-def emptyFunction(entry):
+def emptyFunction(entry,bdict):
 	#regular_expressions(entry)
 	if adict['find_empty'] :			
 		global empty

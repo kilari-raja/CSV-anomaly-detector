@@ -5,9 +5,7 @@ from Classifier import *
 from Reader import *
 from DisplayerIII import *
 count = 0
-def calculation():	
-	return "return from calculation function"
-def observations(filesname,start,end,counter,datum,emailReturn):
+def observations(filesname,start,end,counter,datum,emailReturn,bdict):
 	if count > 0:
 		print "***********************************************************"
 		print "Your file has imperfect commas. Please open improperData.txt"
@@ -23,12 +21,13 @@ def observations(filesname,start,end,counter,datum,emailReturn):
 		total_special_characters = bdict['string_with_special_characters']+bdict['integer_with_special_characters']
 		total_email = bdict['email_with_integer']+bdict['email_without_integer']
 		total_decimal_integer = bdict['decimal_integer']
-		total_pure_integer = bdict['pure_integer']			
+		total_pure_integer = bdict['pure_integer']
 		counter_decimal_integer = Counter(decimal_integer_lengths)
 
-	print "\nOBSERVATIONS:"
+	print "\nOBSERVATIONS:"	
 	# print "datum is",datum
 	global special_characters_print,returnPrintFunction
+	# print "total_pure_integer is",total_pure_integer
 	# print "total_email is",total_email
 	# print "counter is",counter
 	# print "empty is",empty
@@ -170,7 +169,7 @@ def observations(filesname,start,end,counter,datum,emailReturn):
 		local_count += 1
 		if ((string_with_integer_spaces > (7*(counter-empty))/10)) :
 			print "\tVery high probability that this is a line of address"				
-			returnPrintFunction = print_email_entries(filesname,start,end,datum)					
+			returnPrintFunction = print_email_entries(filesname,start,end,datum)		
 		if (pure_integer != 0):						
 			returnPrintFunction = print_integer_only_entries(filesname,start,end,datum)
 		if(email !=0) :

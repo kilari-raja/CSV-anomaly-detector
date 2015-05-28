@@ -2,7 +2,7 @@ from Classifier import *
 from Reader import *
 # from Calculator import *
 # from Displayer import *
-arr = rows = []
+arr = [] 
 dictator = {}
 row_no_in_original_file = 0
 open('improperData.txt', 'w').close()
@@ -13,16 +13,13 @@ def get_mylist(filesname) :
 		mylist = element.split(',')
 	return mylist
 def get_real_data(filesname) :
+	rows = []
 	with open(filesname,'rU') as data :
 		real_data = csv.reader(data)
 		for row in real_data :
-			rows.append(row)	
+			rows.append(row)
 	return rows	
-# you = get_mylist()
-# datum = get_real_data('mock.csv')
-# header = datum[0]
-# del(datum[0])
-j =0
+# j =0
 def print_uppercase_entries(filesname,start,end,datum):	
 	defective_rows = row_no_in_original_file = 0
 	for i in range(1,len(datum)):
@@ -35,23 +32,23 @@ def print_uppercase_entries(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE AN UPPERCASE STRING IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE AN UPPERCASE STRING IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains uppercase\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
-def print_empty_entries(filesname,start,end,datum):		
+def print_empty_entries(filesname,start,end,datum):	
 	defective_rows = row_no_in_original_file = 0
 	for i in range(1,len(datum)):
 		find_empty = re.findall(pattern_empty,datum[i][start])
 		find_no_entry = re.findall(pattern_no_entry,datum[i][start])
 		row_no_in_original_file += 1			
-		if find_empty or find_no_entry :			
+		if find_empty or find_no_entry :
 			with open('improperData.txt','a') as fp :
 				defective_rows+=1
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE COLUMN " + datum[0][start] + " OF THE CSV FILE IS EMPTY \n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE COLUMN " + datum[0][start] + " OF THE CSV FILE IS EMPTY \n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write("This row" + " has empty entry \n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -61,12 +58,12 @@ def print_string_entries(filesname,start,end,datum):
 		find_string = re.findall(pattern_string,datum[i][start])
 		row_no_in_original_file += 1
 		if find_string :
-			with open('improperData.txt','a') as fp :
+			with open('improperData.txt','a') as fp :				
 				defective_rows+=1
 				if defective_rows == 1 :
 					global func_count
-					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A STRING IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					func_count += 1					
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A STRING IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains string \n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -82,7 +79,7 @@ def print_string_without_hyphen_entries(filesname,start,end,datum):
 				if defective_rows == 1 :
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A STRING WITHOUT HYPHEN IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A STRING IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains string without hyphen \n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count
@@ -97,7 +94,7 @@ def print_string_only_entries(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE CONTAINS ONLY STRINGS\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE CONTAINS ONLY STRINGS\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains string only entry\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -112,7 +109,7 @@ def print_string_with_integer_and_space_entries(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A STRING WITH INTGER AND SPACES IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A STRING WITH INTGER AND SPACES IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains string with integer and spaces\n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count	
@@ -127,7 +124,7 @@ def print_integer_entries(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE AN INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE AN INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains integer entries\n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -143,7 +140,7 @@ def print_integer_only_entries(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE ONLY INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE ONLY INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains integer only entries \n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -161,7 +158,7 @@ def print_improper_decimal_integers(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE IMPROPER DECIMAL INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE IMPROPER DECIMAL INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains improper decimal entry\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -183,7 +180,7 @@ def improper_integer_entries(filesname,start,end,datum):
 				if defective_rows == 1 :
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE IMPROPER INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE IMPROPER INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains improper integer entries\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -200,7 +197,7 @@ def print_email_entries(filesname,start,end,datum):
 				if defective_rows == 1 :
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A EMAIL IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A EMAIL IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains email entry\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -216,7 +213,7 @@ def print_website_entries(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE WEBSITE IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE WEBSITE IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains website entry\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -231,7 +228,7 @@ def print_special_characters(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPECIAL CHARACTERS ARE PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPECIAL CHARACTERS ARE PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains special character entry\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -246,7 +243,7 @@ def print_special_characters_phone(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPECIAL CHARACTERS (unlikely for phone) ARE PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPECIAL CHARACTERS (unlikely for phone) ARE PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains special character entry\n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count	
@@ -261,7 +258,7 @@ def print_special_characters_website(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPECIAL CHARACTERS (unlikely for website) IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPECIAL CHARACTERS (unlikely for website) IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains special character entry\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -276,7 +273,7 @@ def print_hyphen(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A HYPHEN IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE A HYPHEN IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains hyphen\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -293,7 +290,7 @@ def print_space_entries(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPACE IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE SPACE IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains space\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -309,7 +306,7 @@ def print_no_dots(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE NO DOTS ARE PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE NO DOTS ARE PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains no dot\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -329,7 +326,7 @@ def print_pure_integer_not_zipcode(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE PURE INTEGER(but not zipcode) IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE PURE INTEGER(but not zipcode) IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains integer entry but not zipcode\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )					
 	return func_count
@@ -346,7 +343,7 @@ def print_integer_more_than_string(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE INTEGERS DOMINATE STRING IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE INTEGERS DOMINATE STRING IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains more integer than string\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -362,7 +359,7 @@ def print_string_more_than_integer(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " HAS MORE STRING THAN INTEGER\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " HAS MORE STRING THAN INTEGER\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains more string than integer\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -376,7 +373,7 @@ def print_not_state_code(filesname,start,end,datum):
 				if defective_rows == 1 :
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " IS NOT A US STATE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " IS NOT A US STATE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " is not a statecode\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -403,7 +400,7 @@ def print_string_with_symbol_at_but_not_email (filesname,start,end,datum):
 				if defective_rows == 1 :		 
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE CONTAINS @ BUT IS NOT EMAIL\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE CONTAINS @ BUT IS NOT EMAIL\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains @but is not email\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -421,7 +418,7 @@ def print_string_with_hashtag_without_space (filesname,start,end,datum):
 				if defective_rows == 1 :
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE # IS FOUND ALONGSIDE STRINGS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE # IS FOUND ALONGSIDE STRINGS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains #\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count	
@@ -439,7 +436,7 @@ def print_integer_with_hashtag_without_space (filesname,start,end,datum):
 				if defective_rows == 1 :
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE # IS FOUND ALONGSIDE INTEGERS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE # IS FOUND ALONGSIDE INTEGERS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains # alongside integers\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -457,7 +454,7 @@ def print_string_with_parantheses (filesname,start,end,datum):
 				if defective_rows == 1 :		
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE PARANTHESES IS FOUND ALONGSIDE STRING IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE PARANTHESES IS FOUND ALONGSIDE STRING IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains parantheses\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
 	return func_count
@@ -475,7 +472,7 @@ def print_integer_with_symbol_at_but_not_email (filesname,start,end,datum):
 				if defective_rows == 1 :
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS FOUND ALONGSIDE INTEGERS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS FOUND ALONGSIDE INTEGERS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains @ and integers\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )					
 	return func_count	
@@ -494,7 +491,7 @@ def print_integer_with_symbol_at_and_dot (filesname,start,end,datum):
 				if defective_rows == 1 :
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS FOUND ALONGSIDE DECIMAL INTEGERS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS FOUND ALONGSIDE DECIMAL INTEGERS IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains @ and decimal integers\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )		
 	return func_count			
@@ -512,7 +509,7 @@ def print_integer_with_parantheses  (filesname,start,end,datum):
 				if defective_rows == 1 :		 
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE INTEGER WITH PARANTHESES IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE INTEGER WITH PARANTHESES IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains integer with parantheses\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )							
 	return func_count
@@ -532,7 +529,7 @@ def print_decimal_values(filesname,start,end,datum):
 				if defective_rows == 1 :		
 					# global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE DECIMAL INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE DECIMAL INTEGER IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains decimal\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count
@@ -549,7 +546,7 @@ def print_state_code(filesname,start,end,datum):
 						if defective_rows == 1 : 
 							global func_count
 							func_count += 1	 							
-							fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS A US STATE\n" + "_"*90 + "\n")
+							fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS A US STATE\n" + "*"*90 + "\n")
 						new_row_no_in_original_file = row_no_in_original_file + 1
 						fp.write(str(datum[i][start]) + " found in this row" + "is a statecode\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 		else : 
@@ -566,7 +563,7 @@ def print_state_code_lowercase(filesname,start,end,datum):
 				if defective_rows == 1 : 
 					global func_count
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS A US STATE IN LOWERCASE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS A US STATE IN LOWERCASE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + "is a statecode in lowercase\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 		else : 
@@ -597,7 +594,7 @@ def print_zip_code(filesname,start,end,datum):
 									if defective_rows == 1 :
 										global func_count
 										func_count += 1							
-										fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS POSSIBLY A ZIP CODE WITH HYPHEN\n" + "_"*90 + "\n")
+										fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS POSSIBLY A ZIP CODE WITH HYPHEN\n" + "*"*90 + "\n")
 									new_row_no_in_original_file = row_no_in_original_file + 1
 									fp.write(str(datum[i][start]) + " found in this row" + " is zipcode\n" + str(datum[i])+"Zipcode" + str(datum[i][start]) + " " + "belongs to " + zipcodes[j+1] + " in the state of " + zipcodes[j+2] + "\n" +  "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n")										
 				else :
@@ -611,7 +608,7 @@ def print_zip_code(filesname,start,end,datum):
 							with open('improperData.txt','a') as fp :
 								if defective_rows == 1 :
 									func_count += 1							
-									fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS POSSIBLY A ZIP CODE \n" + "_"*90 + "\n")
+									fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS POSSIBLY A ZIP CODE \n" + "*"*90 + "\n")
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write(str(datum[i][start]) + " found in this row" + " is zipcode\n" + str(datum[i])+	"Zipcode" + str(datum[i][start]) + " " + "belongs to " + zipcodes[j+1] + " in the state of " + zipcodes[j+2] + "\n" +  "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n")
 				else :
@@ -626,7 +623,7 @@ def print_zip_code(filesname,start,end,datum):
 							with open('improperData.txt','a') as fp :
 								if defective_rows == 1 :		
 									func_count += 1							
-									fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS POSSIBLY A ZIP CODE \n" + "_"*90 + "\n")
+									fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED THE ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS POSSIBLY A ZIP CODE \n" + "*"*90 + "\n")
 								new_row_no_in_original_file = row_no_in_original_file + 1
 								fp.write(str(datum[i][start]) + " found in this row" + " is zipcode\n" + str(datum[i])+	"Zipcode" + str(datum[i][start]) + " " + "belongs to " + zipcodes[j+1] + " in the state of " + zipcodes[j+2] + "\n" +  "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n")
 				else: 
@@ -646,12 +643,12 @@ def print_duplicate_email_entries(filesname,start,end,datum):
 					if defective_rows == 1 :
 						global func_count
 						func_count += 1	 							
-						fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE EMAIL ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS DUPLICATED\n" + "_"*90 + "\n")
+						fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE EMAIL ENTRY IN COLUMN " + datum[0][start] + " OF THE CSV FILE IS DUPLICATED\n" + "*"*90 + "\n")
 					new_row_no_in_original_file = row_no_in_original_file + 1
 					fp.write(str(datum[i][start]) + " found in this row" + " is zipcode\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count
 def print_improper_email_entries(filesname,start,end,datum):
-	print "datum is",datum	
+	# print "datum is",datum	
 	print_email_with_more_than_one_at(filesname,start,end,datum)
 	print_email_with_space(filesname,start,end,datum)
 	print_email_without_dot(filesname,start,end,datum)
@@ -671,7 +668,7 @@ def print_email_with_more_than_one_at(filesname,start,end,datum):
 				defective_rows += 1
 				if defective_rows == 1 :		
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ OCCURS TWICE IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ OCCURS TWICE IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains multiple @\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count
@@ -689,7 +686,7 @@ def print_email_with_space(filesname,start,end,datum):
 				defective_rows += 1
 				if defective_rows == 1 :		
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE AN EMAIL WITH EMPTY SPACE IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE AN EMAIL WITH EMPTY SPACE IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains email with space\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count
@@ -707,7 +704,7 @@ def print_email_without_dot(filesname,start,end,datum):
 				defective_rows += 1
 				if defective_rows == 1 :
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS PRESENT BUT DOT IS NOT PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS PRESENT BUT DOT IS NOT PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " has @ but no dot\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count					
@@ -726,7 +723,7 @@ def print_string_without_email(filesname,start,end,datum):
 				defective_rows += 1
 				if defective_rows == 1 :		
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS NOT PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE @ IS NOT PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " has no @\n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count	
@@ -748,7 +745,12 @@ def print_string_with_dots_not_email_not_website(filesname,start,end,datum):
 				defective_rows += 1
 				if defective_rows == 1 :		
 					func_count += 1	 							
-					fp.write("_"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE DOT IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "_"*90 + "\n")
+					fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE DOT IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")
 				new_row_no_in_original_file = row_no_in_original_file + 1
 				fp.write(str(datum[i][start]) + " found in this row" + " contains dot but is not email or website\n" + str(datum[i])+	 "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )	
 	return func_count
+
+
+# butt  = print_uppercase_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']])
+
+# print "butt is",butt

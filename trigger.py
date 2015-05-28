@@ -3,11 +3,13 @@ from Classifier import *
 from Calculator import *
 
 def commaChecker(filesname):
-	you = get_mylist(filesname)	
+	global row_no_in_original_file,counter
+	counter = row_no_in_original_file = 0
+	# print "gounder isss",counter
+	you = get_mylist(filesname)
 	with open(filesname,'rU') as data :
 		defective_rows = count = 0		
 		for row in data :
-			global row_no_in_original_file
 			row_no_in_original_file += 1
 			if (len(row.split(",")) != len(you)) :					
 				defective_rows += 1
@@ -18,40 +20,39 @@ def commaChecker(filesname):
 					new_row_no_in_original_file = row_no_in_original_file + 1
 					fp.write("Row no in original file is ")
 					fp.write(str(row_no_in_original_file)+"\n" + "\n")				
-			if (len(row.split(",")) == len(you)):				
-				global counter
+			if (len(row.split(",")) == len(you)):
 				counter+=1
 	return counter
 
 def startTool(filesname,start,end):
-	# email_array = []
-	returnCommaChecker = commaChecker(filesname)
+	returnCommaChecker = commaChecker(filesname)	
+	# print "returnCommaChecker is",returnCommaChecker
+	# print "row_no_in_original_file is",row_no_in_original_file
 	if returnCommaChecker == row_no_in_original_file :		
 		global you,datum
 		you = get_mylist(filesname)
 		datum = get_real_data(filesname)
-		print "datum is",datum
 		email_array = []
-		for i in range(1,len(datum)):
-			# for j in range(0,len(you)):
-			# email_array = []
+		bdict={}
+		bdict[' valid_verified_zipcode_without_hyphen']=bdict['valid_verified_zipcode_with_two_hyphen']=bdict['zipcode_with_two_not_successive_hyphens']=bdict['valid_verified_zipcode_with_one_hyphen']=bdict['mostly_zipcode_with_one_hyphen']=bdict['mostly_zipcode_without_hyphen']=bdict['mostly_zipcode_with_two_hyphen']=bdict['mostly_zipcode_four_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['phone_three_parts_two_hyphens']=bdict['phone_three_parts_one_hyphen_one_parantheses']=bdict['phone_three_parts_plus_one']=bdict['phone_10_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['string_with_space_no_integer']=bdict['string_with_integer_spaces']=bdict['pure_uppercase_string']=bdict['string_with_integer_hyphen']=bdict['string_without_integer_without_spaces']=bdict['string_with_symbol_instead_of_at']=bdict['two_letter_uppercase_string_not_state_code']=bdict['string_first_line_address']=bdict['string_with_dots_not_email_not_website']=bdict['two_letter_lowercase_string_not_state_code']=bdict['string_with_integer_without_spaces']=bdict['website']=bdict['website_without_www']=bdict['string_without_integer_without_spaces']=bdict['string_with_space_no_integer']=bdict['pure_uppercase_string']=bdict['two_letter_uppercase_string_not_state_code']=bdict['email_without_integer']=bdict['state_code']=bdict['string_with_special_characters']=bdict['integer_with_special_characters']=bdict['email_with_integer']=bdict['email_without_integer']=bdict['decimal_integer'] = bdict['integer_with_at'] = bdict['pure_integer'] = 0
+		for i in range(1,len(datum)):			
 			regular_expressions(datum[i][start])
-			purestringFunction(datum[i][start])
-			stringFunction(datum[i][start])
-			# pureStringWithSpacesFunction(datum[i][start])
-			stringWithSpecialCharactersFunction(datum[i][start])
-			websiteFunction(datum[i][start])
-			websiteWithoutWWWFunction(datum[i][start])
-			emailReturn = emailFunction(datum[i][start],email_array)								
-			zipcodeFunction(datum[i][start])
-			phoneFunction(datum[i][start])
-			integerFunction(datum[i][start])
-			stateCodeFunction(datum[i][start])
-			emptyFunction(datum[i][start])
-			calculation()			
+			purestringFunction(datum[i][start],bdict)
+			stringFunction(datum[i][start],bdict)
+			# pureStringWithSpacesFunction(datum[i][start],bdict)
+			stringWithSpecialCharactersFunction(datum[i][start],bdict)
+			websiteFunction(datum[i][start],bdict)
+			websiteWithoutWWWFunction(datum[i][start],bdict)
+			emailReturn = emailFunction(datum[i][start],email_array,bdict)								
+			zipcodeFunction(datum[i][start],bdict)
+			phoneFunction(datum[i][start],bdict)
+			integerFunction(datum[i][start],bdict)
+			stateCodeFunction(datum[i][start],bdict)
+			emptyFunction(datum[i][start],bdict)
+			# calculation()			
 		# print "bdict before observations is",bdict
-		# print "emailReturn is",emailReturn
-		observations(filesname,start,end,returnCommaChecker,datum,emailReturn)		
+		# print "emailReturn is",emailReturn			
+		observations(filesname,start,end,returnCommaChecker,datum,emailReturn,bdict)		
 	return "return from startTool"
 	InstanceExecuteProgram = ExecuteProgram('mock.csv','2','3')	
 def printHeader(filesname):
@@ -103,12 +104,11 @@ def work_header(filesname,columns) :
 	return "return from work_header"
 def whole_file(filesname):
 	you = get_mylist(filesname)
-	# datum = get_real_data(filesname)	
+	# datum = get_real_data(filesname)
 	with open(filesname,'rU') as data :		
 		for variable in range(0,len(you)):
 			start = variable
-			end = variable+1
-			# fix_file(filesname,start,end)
+			end = variable+1			
 			startTool(filesname,start,end)
 	return "return from whole_file"
 @app.command
