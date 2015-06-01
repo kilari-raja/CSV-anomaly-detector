@@ -5,17 +5,14 @@ dictator = {}
 row_no_in_original_file = 0
 open('improperData.txt', 'w').close()
 def get_mylist(filesname) :
-	r = csv.reader(open(filesname, "rU"), dialect=csv.excel_tab)	
-	line1=r.next()
-	for element in line1:
-		mylist = element.split(',')
+	r = csv.reader(open(filesname, "rU"), dialect=csv.excel_tab)
+	mylist = r.next()[0].split(",")	
 	return mylist
 def get_real_data(filesname) :
 	rows = []
 	with open(filesname,'rU') as data :
 		real_data = csv.reader(data)
-		for row in real_data :
-			rows.append(row)
+		[rows.append(row) for row in real_data]
 	return rows	
 def print_uppercase_entries(filesname,start,end,datum):	
 	defective_rows = row_no_in_original_file = func_count =0
