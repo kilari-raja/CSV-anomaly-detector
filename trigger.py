@@ -4,14 +4,13 @@ from Calculator import *
 
 def commaChecker(filesname):
 	global row_no_in_original_file,counter
-	counter = row_no_in_original_file = 0
-	# print "gounder isss",counter
+	counter = row_no_in_original_file = 0	
 	you = get_mylist(filesname)
 	with open(filesname,'rU') as data :
-		defective_rows = count = 0		
-		for row in data :
+		defective_rows = count = 0
+		for row in reader(data) :
 			row_no_in_original_file += 1
-			if (len(row.split(",")) != len(you)) :					
+			if (len(row) != len(you)) :					
 				defective_rows += 1
 				with open('improperData.txt','a') as fp :
 					count+=1
@@ -20,7 +19,7 @@ def commaChecker(filesname):
 					new_row_no_in_original_file = row_no_in_original_file + 1
 					fp.write("Row no in original file is ")
 					fp.write(str(row_no_in_original_file)+"\n" + "\n")				
-			if (len(row.split(",")) == len(you)):
+			if (len(row) == len(you)):
 				counter+=1
 	return counter
 
