@@ -2,13 +2,8 @@
 """
 This file basically contains only the global data of the whole tool
 """
-
-
-# from Classifier import *
-# from Displayer import *
-# from Calculator import *
-
 import re,csv,sys,requests,compago
+from csv import reader
 from collections import Counter
 app = compago.Application()
 two_letter_lowercase_string_not_state_code = string_with_integer_spaces = email = website = string_with_space_no_integer = phone_no_with_alphabets = website_without_www = state_code = pure_uppercase_string = phone_no_two_hyphens = phone_no_with_parantheses = phone_no_without_hyphen_or_alphabets =  empty = string_with_integer_without_spaces = pure_integer = two_letter_uppercase_string_not_state_code = zipcode_with_two_not_successive_hyphens = string_without_integer_without_spaces = string_with_symbol_instead_of_at = string_first_line_address = integer_seperated_by_hyphen_not_zip_or_phone =  phone_no_one_hyphen = phone_no_with_only_open_parantheses = phone_no_with_only_close_parantheses = uncertain_entries = string_with_dots_not_email_not_website = mostly_zipcode_with_one_hyphen = mostly_zipcode_without_hyphen = mostly_zipcode_with_two_hyphen = mostly_zipcode_four_digits = requests_made = decimal_integer = string_with_integer_hyphen = string_with_special_characters = integer_with_special_characters = email_with_integer = email_without_integer = print_empty_count = string_dots_no_email_or_website = special_characters_print =email_dominant_column= phone_three_parts_two_hyphens= phone_three_parts_one_hyphen_one_parantheses=phone_three_parts_plus_one=phone_11_digits=phone_10_digits=row_count= else_count = func_count = returnPrintFunction = local_count = count = counter = globvar = purestring = pureStringWithSpaces = you = integer_with_at = 0
@@ -21,12 +16,9 @@ upper_states = []
 arr= []
 zipcode_array = []
 datum = []
-
 decimal_integer_lengths= []
 counter_decimal_integer = Counter(decimal_integer_lengths)
-for t in range(0,len(states)-1):
-	lower_states.append(states[t].lower())
-for t in range(0,len(states)-1):
-	upper_states.append(states[t].upper()) 
+[lower_states.append(states[t].lower()) for t in range(0,len(states)-1)]
+[upper_states.append(states[t].upper()) for t in range(0,len(states)-1)]
 globar = 1
 adict={}
