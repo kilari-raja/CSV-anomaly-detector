@@ -5,7 +5,7 @@ from Calculator import *
 def commaChecker(filesname):
 	global row_no_in_original_file,counter
 	counter = row_no_in_original_file = 0	
-	you = get_mylist(filesname)
+	you = get_mylist(filesname)	
 	with open(filesname,'rU') as data :
 		defective_rows = count = 0
 		for row in reader(data) :
@@ -24,12 +24,9 @@ def commaChecker(filesname):
 	return counter
 
 def startTool(filesname,start,end):
-	returnCommaChecker = commaChecker(filesname)	
-	# print "returnCommaChecker is",returnCommaChecker
-	# print "row_no_in_original_file is",row_no_in_original_file
-	if returnCommaChecker == row_no_in_original_file :		
-		global you,datum
-		you = get_mylist(filesname)
+	returnCommaChecker = commaChecker(filesname)
+	if returnCommaChecker == row_no_in_original_file :
+		global datum		
 		datum = get_real_data(filesname)
 		email_array = []
 		bdict={}
