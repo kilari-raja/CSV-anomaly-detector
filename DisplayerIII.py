@@ -273,7 +273,9 @@ def print_symbols(filesname,start,end,datum,print_array):
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,39)
 		if (find_integer and find_open_parantheses) or (find_integer and find_close_paranthses):
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,15)
-			
+	print_array.append(funct_count)
+	return print_array
+	
 def print_decimal_values(filesname,start,end,datum,print_array):		
 	defective_rows = row_no_in_original_file = func_count =funct_count =0
 	for i in range(1,len(datum)):		
