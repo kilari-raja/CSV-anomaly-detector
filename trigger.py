@@ -1,32 +1,23 @@
 from DisplayerIII import *
 from Classifier import *
 from Calculator import *
-
+from commonFunc import *
 def commaChecker(filesname):
 	global row_no_in_original_file,counter
 	counter = row_no_in_original_file = 0	
 	you = get_mylist(filesname)
 	with open(filesname,'rU') as data :
 		defective_rows = count = 0
-		for row in reader(data) :
+		for row in reader(data) :			
 			row_no_in_original_file += 1
-			if (len(row) != len(you)) :					
+			if (len(row) != len(you)) :
 				defective_rows += 1
-				with open('improperData.txt','a') as fp :
-					count+=1
-					if count == 1:							
-						fp.write("_"*90 + "\n" + "THESE ROWS ARE PRINTED BECAUSE THEY HAVE IMPERFECT COMMAS\n" + "_"*90 + "\n" + str(row)+ "\n" + "Defective row No:" + str(defective_rows) + "\n")
-					new_row_no_in_original_file = row_no_in_original_file + 1
-					fp.write("Row no in original file is ")
-					fp.write(str(row_no_in_original_file)+"\n" + "\n")				
+				print "This file has rows with imperfect commas. Open \"improperData.txt\""
+				print_improper_comma(defective_rows,row_no_in_original_file,row)			
 			if (len(row) == len(you)):
 				counter+=1
 	return counter
-
-def startTool(filesname,start,end):
-	returnCommaChecker = commaChecker(filesname)	
-	# print "returnCommaChecker is",returnCommaChecker
-	# print "row_no_in_original_file is",row_no_in_original_file
+def startTool(filesname,start,end,returnCommaChecker):	
 	if returnCommaChecker == row_no_in_original_file :		
 		global you,datum
 		you = get_mylist(filesname)
@@ -43,15 +34,12 @@ def startTool(filesname,start,end):
 			stringWithSpecialCharactersFunction(datum[i][start],bdict)
 			websiteFunction(datum[i][start],bdict)
 			websiteWithoutWWWFunction(datum[i][start],bdict)
-			emailReturn = emailFunction(datum[i][start],email_array,bdict)								
+			emailReturn = emailFunction(datum[i][start],email_array,bdict)			
 			zipcodeFunction(datum[i][start],bdict)
 			phoneFunction(datum[i][start],bdict)
 			integerFunction(datum[i][start],bdict)
 			stateCodeFunction(datum[i][start],bdict)
-			emptyFunction(datum[i][start],bdict)
-			# calculation()			
-		# print "bdict before observations is",bdict
-		# print "emailReturn is",emailReturn			
+			emptyFunction(datum[i][start],bdict)		
 		observations(filesname,start,end,returnCommaChecker,datum,emailReturn,bdict,print_array)		
 	return "return from startTool"
 	InstanceExecuteProgram = ExecuteProgram('mock.csv','2','3')	
@@ -92,24 +80,25 @@ def ten_rows(filesname):
 	return "return from ten_rows"
 def work_header(filesname,columns) :
 	else_count = 0
-	you = get_mylist(filesname)		
+	you = get_mylist(filesname)
+	returnCommaChecker = commaChecker(filesname)		
 	for i in range(0,len(you)):		
 		if columns in you[i]:				
 			start = you.index(columns)
 			end = you.index(columns)+1
-			startTool(filesname,start,end)
+			startTool(filesname,start,end,returnCommaChecker)
 			else_count += 1	
 	if else_count == 0:
 		print "header is not available"
 	return "return from work_header"
 def whole_file(filesname):
-	you = get_mylist(filesname)
-	# datum = get_real_data(filesname)
-	with open(filesname,'rU') as data :		
+	you = get_mylist(filesname)	
+	with open(filesname,'rU') as data :
+		returnCommaChecker = commaChecker(filesname)
 		for variable in range(0,len(you)):
 			start = variable
 			end = variable+1			
-			startTool(filesname,start,end)
+			startTool(filesname,start,end,returnCommaChecker)
 	return "return from whole_file"
 @app.command
 def columns(filename="something"):	

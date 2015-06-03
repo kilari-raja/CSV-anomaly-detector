@@ -1,6 +1,5 @@
-"""
-This file classifies the input string into various datatypes depending on the regular_expressions.
-"""
+""" This file classifies the input string into various datatypes depending on the regular_expressions. """
+
 from Reader import *
 pattern_string = re.compile("[a-zA-Z]")
 pattern_caps = re.compile("[A-Z]")
@@ -156,12 +155,12 @@ def stringFunction(entry,bdict):
 		return "possible line1 of address"
 
 def pureStringWithSpacesFunction(entry,bdict):	
-	if (adict['find_space']) and (len(adict['find_string']) + len(adict['find_space']) == len(entry)):		
+	if (adict['find_space']) and (len(adict['find_string']) + len(adict['find_space']) == len(entry)):
 		global pureStringWithSpaces
 		pureStringWithSpaces+=1
 		bdict['pureStringWithSpaces'] = pureStringWithSpaces
 		return "a pure string with spaces"
-	elif adict['find_space'] and adict['find_string'] and not adict['find_integer'] :		
+	elif adict['find_space'] and adict['find_string'] and not adict['find_integer'] :
 		global string_with_space_no_integer
 		string_with_space_no_integer+=1
 		bdict['string_with_space_no_integer']=string_with_space_no_integer
@@ -197,9 +196,7 @@ def websiteWithoutWWWFunction(entry,bdict):
 			bdict['website_without_www']=website_without_www
 			return "possible website but without www (2 dot) and without slashes"
 		else :				
-			"""
-			.......there can't be a single character domain name.
-			"""
+			"""	.......there can't be a single character domain name..... """
 			global string_with_dots_not_email_not_website
 			string_with_dots_not_email_not_website+=1
 			bdict['string_with_dots_not_email_not_website']=string_with_dots_not_email_not_website
