@@ -246,93 +246,34 @@ def print_not_state_code(filesname,start,end,datum,print_array):
 	print_array.append(funct_count)
 	return print_array
 def print_symbols(filesname,start,end,datum,print_array):
-	primary_return = print_string_with_symbol_at_but_not_email(filesname,start,end,datum,print_array)	
-	primary_return = print_string_with_parantheses(filesname,start,end,datum,print_array)	
-	primary_return = print_integer_with_symbol_at_but_not_email(filesname,start,end,datum,print_array)	
-	primary_return = print_integer_with_symbol_at_and_dot(filesname,start,end,datum,print_array)	
-	primary_return = print_integer_with_parantheses(filesname,start,end,datum,print_array)	
-	primary_return = print_string_with_hashtag_without_space(filesname,start,end,datum,print_array)	
-	primary_return = print_integer_with_hashtag_without_space(filesname,start,end,datum,print_array)	
-	return primary_return
-	# return "inside function print_symbols"
-def print_string_with_symbol_at_but_not_email (filesname,start,end,datum,print_array):		
 	defective_rows = row_no_in_original_file = func_count =funct_count =0
 	for i in range(1,len(datum)):		
 		row_no_in_original_file += 1
 		find_string = re.findall(pattern_string,datum[i][start])
 		find_at_the_rate=re.findall(pattern_at_the_rate,datum[i][start])
-		find_dot = re.findall(pattern_dot,datum[i][start])					
+		find_dot = re.findall(pattern_dot,datum[i][start])
+		find_string = re.findall(pattern_string,datum[i][start])
+		find_hashtag = re.findall(pattern_hashtag,datum[i][start])
+		find_space = re.findall(pattern_space,datum[i][start])
+		find_open_parantheses=re.findall(pattern_open_parantheses,datum[i][start])
+		find_close_paranthses=re.findall(pattern_close_parantheses,datum[i][start])
+		find_integer = re.findall(pattern_integer,datum[i][start])
+
 		if find_string and find_at_the_rate and not find_dot :			
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,37)
-	print_array.append(funct_count)
-	return print_array
-def print_string_with_hashtag_without_space (filesname,start,end,datum,print_array):		
-	defective_rows = row_no_in_original_file = func_count =funct_count =0
-	for i in range(1,len(datum)):		
-		row_no_in_original_file += 1
-		find_string = re.findall(pattern_string,datum[i][start])
-		find_hashtag = re.findall(pattern_hashtag,datum[i][start])
-		find_space = re.findall(pattern_space,datum[i][start])
 		if find_string and find_hashtag and not find_space :
-			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,1)
-	print_array.append(funct_count)
-	return print_array	
-def print_integer_with_hashtag_without_space (filesname,start,end,datum,print_array):					
-	defective_rows = row_no_in_original_file = func_count =funct_count =0
-	for i in range(1,len(datum)):		
-		row_no_in_original_file += 1
-		find_integer = re.findall(pattern_integer,datum[i][start])				
-		find_hashtag = re.findall(pattern_hashtag,datum[i][start])
-		find_space = re.findall(pattern_space,datum[i][start])
+			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,1)		
 		if find_integer and find_hashtag and not find_space :
-			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,0)			
-	print_array.append(funct_count)
-	return print_array
-def print_string_with_parantheses (filesname,start,end,datum,print_array):		
-	defective_rows = row_no_in_original_file = func_count =funct_count =0
-	for i in range(1,len(datum)):		
-		row_no_in_original_file += 1		
-		find_string = re.findall(pattern_string,datum[i][start])	
-		find_open_parantheses=re.findall(pattern_open_parantheses,datum[i][start])
-		find_close_paranthses=re.findall(pattern_close_parantheses,datum[i][start])
+			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,0)				
 		if (find_string and find_open_parantheses) or (find_string and find_close_paranthses):
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,22)
-	print_array.append(funct_count)
-	return print_array
-def print_integer_with_symbol_at_but_not_email (filesname,start,end,datum,print_array):		
-	defective_rows = row_no_in_original_file = func_count =funct_count =0
-	for i in range(1,len(datum)):		
-		row_no_in_original_file += 1
-		find_integer = re.findall(pattern_integer,datum[i][start])		
-		find_at_the_rate=re.findall(pattern_at_the_rate,datum[i][start])
-		find_dot = re.findall(pattern_dot,datum[i][start])
 		if find_integer and find_at_the_rate and not find_dot :
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,40)
-	print_array.append(funct_count)
-	return print_array	
-def print_integer_with_symbol_at_and_dot (filesname,start,end,datum,print_array):		
-	defective_rows = row_no_in_original_file = func_count =funct_count =0
-	for i in range(1,len(datum)):
-		row_no_in_original_file += 1
-		find_integer = re.findall(pattern_integer,datum[i][start])			
-		find_at_the_rate=re.findall(pattern_at_the_rate,datum[i][start])
-		find_dot = re.findall(pattern_dot,datum[i][start])
-		find_string = re.findall(pattern_string,datum[i][start])	
 		if find_integer and find_at_the_rate and find_dot and not find_string:
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,39)
-	print_array.append(funct_count)
-	return print_array			
-def print_integer_with_parantheses  (filesname,start,end,datum,print_array):		
-	defective_rows = row_no_in_original_file = func_count =funct_count =0
-	for i in range(1,len(datum)):		
-		row_no_in_original_file += 1
-		find_integer = re.findall(pattern_integer,datum[i][start])
-		find_open_parantheses=re.findall(pattern_open_parantheses,datum[i][start])
-		find_close_paranthses=re.findall(pattern_close_parantheses,datum[i][start])
 		if (find_integer and find_open_parantheses) or (find_integer and find_close_paranthses):
-			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,15)	
-	print_array.append(funct_count)
-	return print_array
+			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,15)
+			
 def print_decimal_values(filesname,start,end,datum,print_array):		
 	defective_rows = row_no_in_original_file = func_count =funct_count =0
 	for i in range(1,len(datum)):		
@@ -354,8 +295,7 @@ def print_state_code(filesname,start,end,datum,print_array):
 			for j in range(i+1,len(row)):
 				key = (datum[i][start], row[you[j]])
 				if key[0] == key[1] :
-					funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,33)
-		
+					funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,33)		
 	print_array.append(funct_count)
 	return print_array
 def print_state_code_lowercase(filesname,start,end,datum,print_array):	
@@ -380,7 +320,7 @@ def print_zip_code(filesname,start,end,datum,print_array):
 		find_slash = re.findall(pattern_slash,datum[i][start])
 		find_space = re.findall(pattern_space,datum[i][start])
 		find_dot = re.findall(pattern_dot,datum[i][start])
-		if len(find_phone) == 1 and len(find_integer) < 10 and not find_string and not find_hashtag and not find_pattern_phone_parantheses and not find_slash and not find_space  :
+		if len(find_phone) == 1 and len(find_integer) < 10 and not find_string and not find_hashtag and not find_pattern_phone_parantheses and not find_slash and not find_space :
 			y = datum[i][start].split("-")[0]						
 			for j in range(0,len(zipcodes)-1):
 				if y == zipcodes[j] :
@@ -479,7 +419,13 @@ def print_string_with_dots_not_email_not_website(filesname,start,end,datum,print
 		find_no_entry = re.findall(pattern_no_entry,datum[i][start])
 		find_website = re.findall(pattern_website,datum[i][start])
 		row_no_in_original_file += 1
-		if (find_string and find_integer and not find_empty and not find_no_entry  and find_dot and not find_email and not find_website) or (find_string and not find_integer and not find_empty and find_dot and not find_email and not find_website and not find_no_entry):
+		
+		if ((find_string and find_integer and not find_empty and not find_no_entry  and 
+			find_dot and not find_email and not find_website) or
+			(find_string and not find_integer and not find_empty and
+			 find_dot and not find_email and not find_website and not
+			  find_no_entry)):
+
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,3)
 	print_array.append(funct_count)
 	return print_array
