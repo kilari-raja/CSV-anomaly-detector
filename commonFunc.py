@@ -1,3 +1,5 @@
+""" This function is used while printing. This is where the dict in config.py comes in """
+
 import config
 def print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,print_count,i,key_value):
 	print "key_value is",key_value

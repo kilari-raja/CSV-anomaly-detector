@@ -1,31 +1,23 @@
-"""
-This file ,based on the input, analyses the columns and decides which entry is anomalous and which isn't.
-"""
+""" This file identifies defective entries and calls respective functions to prints them """
+
 from Classifier import *
 from Reader import *
 from DisplayerIII import *
-count = 0
-def observations(filesname,start,end,counter,datum,emailReturn,bdict,print_array):
-	if count > 0:
-		print "***********************************************************"
-		print "Your file has imperfect commas. Please open improperData.txt"
-		print "*************************************************************"
-	else:		
-		global total_zipcode,total_phone,total_phone_only_integers,total_string,total_website,total_pure_string,total_special_characters, total_email
-		total_zipcode = bdict['zipcode_with_two_not_successive_hyphens']+bdict['mostly_zipcode_with_one_hyphen']+bdict['mostly_zipcode_without_hyphen']+bdict['mostly_zipcode_with_two_hyphen']+bdict['mostly_zipcode_four_digits']
-		total_phone = bdict['phone_no_two_hyphens']+bdict['phone_no_without_hyphen_or_alphabets']+bdict['phone_no_with_alphabets']+bdict['phone_no_with_parantheses']+bdict['phone_no_one_hyphen']+bdict['phone_no_with_only_open_parantheses']+bdict['phone_no_with_only_close_parantheses']+bdict['phone_three_parts_two_hyphens']+bdict['phone_three_parts_one_hyphen_one_parantheses']+bdict['phone_three_parts_plus_one']+bdict['phone_10_digits']
-		total_phone_only_integers = bdict['phone_no_two_hyphens']+bdict['phone_no_without_hyphen_or_alphabets']+bdict['phone_no_with_parantheses']+bdict['phone_no_one_hyphen']+bdict['phone_no_with_only_open_parantheses']+bdict['phone_no_with_only_close_parantheses']
-		total_string = bdict['string_with_space_no_integer']+bdict['string_with_integer_spaces']+bdict['pure_uppercase_string']+bdict['string_with_integer_hyphen']+bdict['string_without_integer_without_spaces']+bdict['string_with_symbol_instead_of_at']+bdict['two_letter_uppercase_string_not_state_code']+bdict['string_first_line_address']+bdict['string_with_dots_not_email_not_website']+bdict['two_letter_lowercase_string_not_state_code']+bdict['string_with_integer_without_spaces']
-		total_website = bdict['website']+bdict['website_without_www']
-		total_pure_string = bdict['string_without_integer_without_spaces']+bdict['string_with_space_no_integer']+bdict['pure_uppercase_string']+bdict['two_letter_uppercase_string_not_state_code']+bdict['state_code']
-		total_special_characters = bdict['string_with_special_characters']+bdict['integer_with_special_characters']
-		total_email = bdict['email_with_integer']+bdict['email_without_integer']
-		total_decimal_integer = bdict['decimal_integer']
-		total_pure_integer = bdict['pure_integer']
-		counter_decimal_integer = Counter(decimal_integer_lengths)
 
-	print "\nOBSERVATIONS:"		
-	global special_characters_print,returnPrintFunction	
+def observations(filesname,start,end,counter,datum,bdict,print_array):	
+	global total_zipcode,total_phone,total_phone_only_integers,total_string,total_website,total_pure_string,total_special_characters, total_email,special_characters_print,returnPrintFunction
+	total_zipcode = bdict['zipcode_with_two_not_successive_hyphens']+bdict['mostly_zipcode_with_one_hyphen']+bdict['mostly_zipcode_without_hyphen']+bdict['mostly_zipcode_with_two_hyphen']+bdict['mostly_zipcode_four_digits']
+	total_phone = bdict['phone_no_two_hyphens']+bdict['phone_no_without_hyphen_or_alphabets']+bdict['phone_no_with_alphabets']+bdict['phone_no_with_parantheses']+bdict['phone_no_one_hyphen']+bdict['phone_no_with_only_open_parantheses']+bdict['phone_no_with_only_close_parantheses']+bdict['phone_three_parts_two_hyphens']+bdict['phone_three_parts_one_hyphen_one_parantheses']+bdict['phone_three_parts_plus_one']+bdict['phone_10_digits']
+	total_phone_only_integers = bdict['phone_no_two_hyphens']+bdict['phone_no_without_hyphen_or_alphabets']+bdict['phone_no_with_parantheses']+bdict['phone_no_one_hyphen']+bdict['phone_no_with_only_open_parantheses']+bdict['phone_no_with_only_close_parantheses']
+	total_string = bdict['string_with_space_no_integer']+bdict['string_with_integer_spaces']+bdict['pure_uppercase_string']+bdict['string_with_integer_hyphen']+bdict['string_without_integer_without_spaces']+bdict['string_with_symbol_instead_of_at']+bdict['two_letter_uppercase_string_not_state_code']+bdict['string_first_line_address']+bdict['string_with_dots_not_email_not_website']+bdict['two_letter_lowercase_string_not_state_code']+bdict['string_with_integer_without_spaces']
+	total_website = bdict['website']+bdict['website_without_www']
+	total_pure_string = bdict['string_without_integer_without_spaces']+bdict['string_with_space_no_integer']+bdict['pure_uppercase_string']+bdict['two_letter_uppercase_string_not_state_code']+bdict['state_code']
+	total_special_characters = bdict['string_with_special_characters']+bdict['integer_with_special_characters']
+	total_email = bdict['email_with_integer']+bdict['email_without_integer']
+	total_decimal_integer = bdict['decimal_integer']
+	total_pure_integer = bdict['pure_integer']
+	counter_decimal_integer = Counter(decimal_integer_lengths)
+	print "\nOBSERVATIONS:"
 	if((total_email) > (9*(counter - empty))/10):		
 		print "\tEmail dominates this column. Hence any other type of entries is considered a defective entry."				
 		returnPrintFunction = print_improper_email_entries(filesname,start,end,datum,print_array)		
@@ -104,7 +96,7 @@ def observations(filesname,start,end,counter,datum,emailReturn,bdict,print_array
 			returnPrintFunction = print_zip_code(filesname,start,end,datum,print_array)
 	if(total_phone_only_integers + total_pure_integer) > (5*counter)/10 :	
 		print "\tPure integer occupy a large portion of this column. Hence any string entries are considered defective"
-		returnPrintFunction = print_string_without_hyphen_entries(filesname,start,end,datum,print_array)		
+		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)		
 		if(total_phone) > (4*counter)/10 :
 			if special_characters_print == 0:
 				returnPrintFunction = print_special_characters_phone(filesname,start,end,datum,print_array)				
@@ -113,13 +105,7 @@ def observations(filesname,start,end,counter,datum,emailReturn,bdict,print_array
 			if special_characters_print == 0:
 				returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)				
 				special_characters_print+=1
-		returnPrintFunction = print_string_with_symbol_at_but_not_email(filesname,start,end,datum,print_array)
-		returnPrintFunction = print_string_with_parantheses(filesname,start,end,datum,print_array)
-		returnPrintFunction = print_integer_with_symbol_at_but_not_email(filesname,start,end,datum,print_array)
-		returnPrintFunction = print_integer_with_symbol_at_and_dot(filesname,start,end,datum,print_array)		
-		returnPrintFunction = print_string_with_hashtag_without_space(filesname,start,end,datum,print_array)
-		returnPrintFunction = print_integer_with_hashtag_without_space(filesname,start,end,datum,print_array)
-		returnPrintFunction = print_decimal_values(filesname,start,end,datum,print_array)	
+		returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)		
 	if(total_phone) > (4*counter)/10 :	
 		print "\tPhone numbers occupy a large portion of this column. Hence any string integers are considered defective"
 		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)

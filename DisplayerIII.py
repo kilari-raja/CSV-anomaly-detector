@@ -1,11 +1,9 @@
+""" This file contains the function that prints improper data back to the user."""
+
 from Classifier import *
 from Reader import *
 from commonFunc import *
-arr = [] 
-dictator = {}
 global print_array
-row_no_in_original_file = 0
-open('improperData.txt', 'w').close()
 def get_mylist(filesname) :
 	r = csv.reader(open(filesname, "rU"), dialect=csv.excel_tab)	
 	line1=r.next()
@@ -47,16 +45,16 @@ def print_string_entries(filesname,start,end,datum,print_array):
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,29)			
 	print_array.append(funct_count)
 	return print_array
-def print_string_without_hyphen_entries(filesname,start,end,datum,print_array):	
-	defective_rows = row_no_in_original_file = func_count =funct_count =0	
-	for i in range(1,len(datum)):		
-		find_string = re.findall(pattern_string,datum[i][start])
-		find_phone = re.findall(pattern_phone,datum[i][start])
-		row_no_in_original_file += 1		
-		if find_string and not find_phone :
-			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,30)			
-	print_array.append(funct_count)
-	return print_array
+# def print_string_without_hyphen_entries(filesname,start,end,datum,print_array):	
+# 	defective_rows = row_no_in_original_file = func_count =funct_count =0	
+# 	for i in range(1,len(datum)):		
+# 		find_string = re.findall(pattern_string,datum[i][start])
+# 		find_phone = re.findall(pattern_phone,datum[i][start])
+# 		row_no_in_original_file += 1		
+# 		if find_string and not find_phone :
+# 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,30)			
+# 	print_array.append(funct_count)
+# 	return print_array
 def print_string_only_entries(filesname,start,end,datum,print_array):	
 	defective_rows = row_no_in_original_file = func_count =funct_count =0	
 	for i in range(1,len(datum)):
@@ -258,7 +256,6 @@ def print_symbols(filesname,start,end,datum,print_array):
 		find_open_parantheses=re.findall(pattern_open_parantheses,datum[i][start])
 		find_close_paranthses=re.findall(pattern_close_parantheses,datum[i][start])
 		find_integer = re.findall(pattern_integer,datum[i][start])
-
 		if find_string and find_at_the_rate and not find_dot :			
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,37)
 		if find_string and find_hashtag and not find_space :
@@ -275,7 +272,6 @@ def print_symbols(filesname,start,end,datum,print_array):
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,15)
 	print_array.append(funct_count)
 	return print_array
-	
 def print_decimal_values(filesname,start,end,datum,print_array):		
 	defective_rows = row_no_in_original_file = func_count =funct_count =0
 	for i in range(1,len(datum)):		
@@ -420,14 +416,12 @@ def print_string_with_dots_not_email_not_website(filesname,start,end,datum,print
 		find_empty = re.findall(pattern_empty,datum[i][start])
 		find_no_entry = re.findall(pattern_no_entry,datum[i][start])
 		find_website = re.findall(pattern_website,datum[i][start])
-		row_no_in_original_file += 1
-		
+		row_no_in_original_file += 1		
 		if ((find_string and find_integer and not find_empty and not find_no_entry  and 
 			find_dot and not find_email and not find_website) or
 			(find_string and not find_integer and not find_empty and
 			 find_dot and not find_email and not find_website and not
 			  find_no_entry)):
-
 			funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,3)
 	print_array.append(funct_count)
 	return print_array
