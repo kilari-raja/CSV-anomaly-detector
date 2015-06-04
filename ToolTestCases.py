@@ -1,9 +1,8 @@
 from Classifier import *
-# from Reader import *
 from Calculator import *
 from DisplayerIII import *
 from trigger import *
-
+from starter import *
 import csv,unittest
 bdict={}
 bdict[' valid_verified_zipcode_without_hyphen']=bdict['valid_verified_zipcode_with_two_hyphen']=bdict['zipcode_with_two_not_successive_hyphens']=bdict['valid_verified_zipcode_with_one_hyphen']=bdict['mostly_zipcode_with_one_hyphen']=bdict['mostly_zipcode_without_hyphen']=bdict['mostly_zipcode_with_two_hyphen']=bdict['mostly_zipcode_four_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['phone_three_parts_two_hyphens']=bdict['phone_three_parts_one_hyphen_one_parantheses']=bdict['phone_three_parts_plus_one']=bdict['phone_10_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['string_with_space_no_integer']=bdict['string_with_integer_spaces']=bdict['pure_uppercase_string']=bdict['string_with_integer_hyphen']=bdict['string_without_integer_without_spaces']=bdict['string_with_symbol_instead_of_at']=bdict['two_letter_uppercase_string_not_state_code']=bdict['string_first_line_address']=bdict['string_with_dots_not_email_not_website']=bdict['two_letter_lowercase_string_not_state_code']=bdict['string_with_integer_without_spaces']=bdict['website']=bdict['website_without_www']=bdict['string_without_integer_without_spaces']=bdict['string_with_space_no_integer']=bdict['pure_uppercase_string']=bdict['two_letter_uppercase_string_not_state_code']=bdict['email_without_integer']=bdict['state_code']=bdict['string_with_special_characters']=bdict['integer_with_special_characters']=bdict['email_with_integer']=bdict['email_without_integer']=bdict['decimal_integer'] = bdict['integer_with_at'] = bdict['pure_integer'] = 0
@@ -216,7 +215,7 @@ class TestFunctions(unittest.TestCase):
 		self.assertEqual(print_uppercase_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[1])		
 		self.assertEqual(print_empty_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[0])
 		self.assertEqual(print_string_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[1])
-		self.assertEqual(print_string_without_hyphen_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[1])
+		# self.assertEqual(print_string_without_hyphen_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[1])
 		self.assertEqual(print_string_only_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[1])
 		self.assertEqual(print_string_with_integer_and_space_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[0])
 		self.assertEqual(print_integer_entries('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'P2aul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Ta2mmy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[1])
@@ -249,7 +248,7 @@ class TestFunctions(unittest.TestCase):
 		self.assertEqual(print_string_with_dots_not_email_not_website('xyz.csv',1,2,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Pa.ul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220']],[]),[1])
 
 	def test_startTool(self):
-		self.assertEqual(startTool('mock.csv',0,1,11),"return from startTool")
+		self.assertEqual(startTool('mock.csv',0,1,11,11),"return from startTool")
 
 	def test_observations(self):	
 		self.assertEqual(observations('xyz.csv',2,3,23,[['id', 'first_name', 'last_name', 'email', 'country', 'ip_address'], ['1', 'Paul', 'Matthews', 'pmatthews0@friendfeed.com', 'Indonesia', '235.160.46.28'], ['2', 'Tammy', 'Lane', 'tlane1@typepad.com', 'Russia', '91.226.216.220'], ['3', 'Barbara', 'Webb', 'bwebb2@jiathis.com', 'France', '204.48.177.97']],[],bdict,[]),"return from observation function")
@@ -261,7 +260,7 @@ class TestFunctions(unittest.TestCase):
 		self.assertEqual(sample_header('mock.csv','id'),"return from sample_header function")
 
 	def test_count_rows(self):
-		self.assertEqual(count_rows('mock.csv'),"return from row count")
+		self.assertEqual(count_rows('mock.csv'),4)
 
 	def test_ten_rows(self):
 		self.assertEqual(ten_rows('mock.csv'),"return from ten_rows")

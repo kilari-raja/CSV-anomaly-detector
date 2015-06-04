@@ -38,7 +38,7 @@ pattern_uppercase = re.compile("[A-Z]")
 pattern_lowercase = re.compile("[a-z]")
 pattern_decimal = re.compile("\d\.\d")
 
-def regular_expressions(entry):	
+def regular_expressions(entry):		
 	find_string = re.findall(pattern_string,entry)
 	adict['find_string'] = find_string
 	find_integer = re.findall(pattern_integer,entry)
@@ -468,7 +468,7 @@ def emptyFunction(entry,bdict):
 		empty+=1
 		return "empty"
 
-def	datatypeClassifier(entry,email_array,bdict):	
+def	datatypeClassifier(entry,email_array,bdict):
 	regular_expressions(entry)
 	purestringFunction(entry,bdict)
 	stringFunction(entry,bdict)
@@ -479,8 +479,8 @@ def	datatypeClassifier(entry,email_array,bdict):
 	zipcodeFunction(entry,bdict)
 	phoneFunction(entry,bdict)
 	integerFunction(entry,bdict)
-	stateCodeFunction(entry,bdict)
-	emptyFunction(entry,bdict)
+	stateCodeFunction(entry,bdict)	
+	emptyFunction(entry,bdict)	
 
 def bdictFunction():
 	bdict[' valid_verified_zipcode_without_hyphen']=bdict['valid_verified_zipcode_with_two_hyphen']=bdict['zipcode_with_two_not_successive_hyphens']=bdict['valid_verified_zipcode_with_one_hyphen']=bdict['mostly_zipcode_with_one_hyphen']=bdict['mostly_zipcode_without_hyphen']=bdict['mostly_zipcode_with_two_hyphen']=bdict['mostly_zipcode_four_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['phone_three_parts_two_hyphens']=bdict['phone_three_parts_one_hyphen_one_parantheses']=bdict['phone_three_parts_plus_one']=bdict['phone_10_digits']=bdict['phone_no_two_hyphens']=bdict['phone_no_without_hyphen_or_alphabets']=bdict['phone_no_with_parantheses']=bdict['phone_no_one_hyphen']=bdict['phone_no_with_only_open_parantheses']=bdict['phone_no_with_only_close_parantheses']=bdict['string_with_space_no_integer']=bdict['string_with_integer_spaces']=bdict['pure_uppercase_string']=bdict['string_with_integer_hyphen']=bdict['string_without_integer_without_spaces']=bdict['string_with_symbol_instead_of_at']=bdict['two_letter_uppercase_string_not_state_code']=bdict['string_first_line_address']=bdict['string_with_dots_not_email_not_website']=bdict['two_letter_lowercase_string_not_state_code']=bdict['string_with_integer_without_spaces']=bdict['website']=bdict['website_without_www']=bdict['string_without_integer_without_spaces']=bdict['string_with_space_no_integer']=bdict['pure_uppercase_string']=bdict['two_letter_uppercase_string_not_state_code']=bdict['email_without_integer']=bdict['state_code']=bdict['string_with_special_characters']=bdict['integer_with_special_characters']=bdict['email_with_integer']=bdict['email_without_integer']=bdict['decimal_integer'] = bdict['integer_with_at'] = bdict['pure_integer'] = 0

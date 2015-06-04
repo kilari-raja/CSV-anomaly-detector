@@ -4,7 +4,8 @@ from Classifier import *
 from Reader import *
 from DisplayerIII import *
 
-def observations(filesname,start,end,counter,datum,bdict,print_array):	
+def observations(filesname,start,end,counter,datum,bdict,print_array):
+	print_array = []
 	global total_zipcode,total_phone,total_phone_only_integers,total_string,total_website,total_pure_string,total_special_characters, total_email,special_characters_print,returnPrintFunction
 	total_zipcode = bdict['zipcode_with_two_not_successive_hyphens']+bdict['mostly_zipcode_with_one_hyphen']+bdict['mostly_zipcode_without_hyphen']+bdict['mostly_zipcode_with_two_hyphen']+bdict['mostly_zipcode_four_digits']
 	total_phone = bdict['phone_no_two_hyphens']+bdict['phone_no_without_hyphen_or_alphabets']+bdict['phone_no_with_alphabets']+bdict['phone_no_with_parantheses']+bdict['phone_no_one_hyphen']+bdict['phone_no_with_only_open_parantheses']+bdict['phone_no_with_only_close_parantheses']+bdict['phone_three_parts_two_hyphens']+bdict['phone_three_parts_one_hyphen_one_parantheses']+bdict['phone_three_parts_plus_one']+bdict['phone_10_digits']
@@ -94,9 +95,10 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 			print "\tThere are empty records in this column"
 	if (total_zipcode > 0) and (total_zipcode <= (counter/10)):				
 			returnPrintFunction = print_zip_code(filesname,start,end,datum,print_array)
-	if(total_phone_only_integers + total_pure_integer) > (5*counter)/10 :	
+	if(total_phone_only_integers + total_pure_integer) > (5*counter)/10 :
 		print "\tPure integer occupy a large portion of this column. Hence any string entries are considered defective"
 		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)		
+		print "returnPrintFunction from print_string_entries is",returnPrintFunction
 		if(total_phone) > (4*counter)/10 :
 			if special_characters_print == 0:
 				returnPrintFunction = print_special_characters_phone(filesname,start,end,datum,print_array)				
@@ -161,7 +163,7 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 	if(uncertain_entries):
 		if(local_count == 0):
 			print "\tThis column contains entries which seem anamalous."		
-		improper_integer_entries(filesname,start,end,datum,print_array)	
+		improper_integer_entries(filesname,start,end,datum,print_array)
 	temp_print = 0
 	for i in range(0,len(returnPrintFunction)):
 		if returnPrintFunction[i]>0:			
