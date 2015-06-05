@@ -2,7 +2,7 @@
 
 import config
 def print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,print_count,i,key_value,print_array):
-	print "key_value is",key_value	
+	# print "key_value is",key_value	
 	with open('improperData.txt','a') as fp :
 		# defective_rows += 1
 		if defective_rows == 1 :

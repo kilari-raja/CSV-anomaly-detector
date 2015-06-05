@@ -19,8 +19,8 @@ def get_real_data(filesname) :
     return rows
 def print_uppercase_entries(filesname,start,end,datum,print_array): 
     defective_rows = row_no_in_original_file = func_count =funct_count =0
-    for i in range(1,len(datum)):       
-        find_uppercase = re.findall(pattern_uppercase,datum[i][start])
+    for i in range(1,len(datum)):        
+        find_uppercase = re.findall(pattern_uppercase,datum[i][start])        
         row_no_in_original_file += 1
         if find_uppercase :
             defective_rows += 1
@@ -287,7 +287,7 @@ def print_symbols(filesname,start,end,datum,print_array):
         if find_integer and find_hashtag and not find_space :
             defective_rows += 1
             funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,0,print_array)               
-        if (find_string and find_open_parantheses) or (find_string and find_close_paranthses):
+        if (find_string and find_open_parantheses) or(find_string and find_close_paranthses):
             defective_rows += 1
             funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,22,print_array)
         if find_integer and find_at_the_rate and not find_dot :
@@ -320,15 +320,15 @@ def print_state_code(filesname,start,end,datum,print_array):
     for i in range(1,len(datum)):       
         row_no_in_original_file += 1                        
         if (datum[i][start] in state_code_array) and (datum[i][start] not in states_and_cities) :   
-            for j in range(i+1,len(row)):
-                key = (datum[i][start], row[you[j]])
+            for j in range(i+1,len(datum)):
+                key = (datum[i][start], datum[j][start])
                 if key[0] == key[1] :
                     defective_rows += 1
-            funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,33,print_array)      
+            funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,33,print_array)
     #print_array.append(funct_count)
     return print_array
 def print_state_code_lowercase(filesname,start,end,datum,print_array):  
-    defective_rows = row_no_in_original_file = func_count =funct_count =0                           
+    defective_rows = row_no_in_original_file = func_count =funct_count =0
     for i in range(1,len(datum)):
         row_no_in_original_file += 1
         find_lowercase = re.findall(pattern_lowercase,datum[i][start])          
@@ -350,31 +350,37 @@ def print_zip_code(filesname,start,end,datum,print_array):
         find_slash = re.findall(pattern_slash,datum[i][start])
         find_space = re.findall(pattern_space,datum[i][start])
         find_dot = re.findall(pattern_dot,datum[i][start])
+
+        print "element is",datum[i][start]
+        print "print_array before set of loops is",print_array
+
         if len(find_phone) == 1 and len(find_integer) < 10 and not find_string and not find_hashtag and not find_pattern_phone_parantheses and not find_slash and not find_space :
-            y = datum[i][start].split("-")[0]                       
-            for j in range(0,len(zipcodes)-1):
-                if y == zipcodes[j] :
+            y = datum[i][start].split("-")[0]
+            for j in range(0,len(zipcodes)):
+                if y == zipcodes[j] :                    
                     if(len(y)>3):
-                        for k in range(0,len(you)-1):
+                        for k in range(0,len(you)):
                             if zipcodes[j+3] == row[you[k]]:
                                 defective_rows += 1
-            funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,36,print_array)              
+                                funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,36,print_array)              
         elif len(find_integer) == 5 and not find_phone and not find_hashtag and not find_dot and not find_string and not find_space :
-            for j in range(0,len(zipcodes)-1):
+            for j in range(0,len(zipcodes)):
                 if datum[i][start] == zipcodes[j] :                 
-                    for k in range(0,len(datum[i])-1):
+                    for k in range(0,len(datum[i])):
                         if zipcodes[j+3] == datum[i][k]:
                             defective_rows += 1
-            funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,23,print_array)
+                            funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,23,print_array)
         elif len(find_integer) == 4 and not find_phone and not find_hashtag and not find_dot and not find_string and not find_space :
+            print "y is",y
             c = "0" + datum[i][start]
-            for j in range(0,len(zipcodes)-1):
+            for j in range(0,len(zipcodes)):
                 if c == zipcodes[j] :
-                    for k in range(0,len(you)-1):
+                    for k in range(0,len(you)):
                         if zipcodes[j+3] == row[you[k]]:
                             defective_rows += 1
-            funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,8,print_array)
+                            funct_count = print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,func_count,i,8,print_array)
     #print_array.append(funct_count)
+    print "print_array after set of loops is",print_array
     return print_array
 def print_duplicate_email_entries(filesname,start,end,datum,print_array):   
     defective_rows = row_no_in_original_file = func_count =funct_count =0       

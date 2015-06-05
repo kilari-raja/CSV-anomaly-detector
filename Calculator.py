@@ -19,21 +19,21 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 	total_pure_integer = bdict['pure_integer']
 	counter_decimal_integer = Counter(decimal_integer_lengths)
 	print "\nOBSERVATIONS:"
-	if((total_email) > (9*(counter - empty))/10):		
-		print "\tEmail dominates this column. Hence any other type of entries is considered a defective entry."				
-		returnPrintFunction = print_improper_email_entries(filesname,start,end,datum,print_array)		
-		returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)		
-		returnPrintFunction = print_integer_more_than_string(filesname,start,end,datum,print_array)	
+	if((total_email) > (9*(counter - empty))/10):
+		print "\tEmail dominates this column. Hence any other type of entries is considered a defective entry."	
+		returnPrintFunction = print_improper_email_entries(filesname,start,end,datum,print_array)
+		returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)
+		returnPrintFunction = print_integer_more_than_string(filesname,start,end,datum,print_array)
 	if(empty) < (counter/10) and empty > 0 :
-		print "\tMore than 90 percent of this column is filled with entries. Hence any empty entry is considered defective."		
+		print "\tMore than 90 percent of this column is filled with entries. Hence any empty entry is considered defective."
 		global print_empty_count
-		print_empty_count+=1		
+		print_empty_count+=1
 	if(state_code > (6*(counter - empty))/10):
-		print "\tThis column is dominated by state codes. Hence integer dataypes are considered defective"		
+		print "\tThis column is dominated by state codes. Hence integer dataypes are considered defective"
 		returnPrintFunction = print_not_state_code(filesname,start,end,datum,print_array)
-		returnPrintFunction = print_state_code_lowercase(filesname,start,end,datum,print_array)	
+		returnPrintFunction = print_state_code_lowercase(filesname,start,end,datum,print_array)
 	if(total_decimal_integer > (5*counter)/10) :
-		print "\tDecimal integers dominate this column."		
+		print "\tDecimal integers dominate this column."
 		returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)
 		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)
 		returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)
@@ -42,38 +42,38 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 		print "total_website is",total_website
 		print "couunter is",counter
 		print "\tWebsite entries dominate more than half of the column."
-		returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array) 			
-		returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)		
+		returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)
+		returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)
 		returnPrintFunction = print_space_entries(filesname,start,end,datum,print_array)
-		returnPrintFunction = print_no_dots(filesname,start,end,datum,print_array)		
+		returnPrintFunction = print_no_dots(filesname,start,end,datum,print_array)
 		if special_characters_print == 0 :
-			returnPrintFunction = print_special_characters_website(filesname,start,end,datum,print_array)			
+			returnPrintFunction = print_special_characters_website(filesname,start,end,datum,print_array)
 			special_characters_print+=1
 		returnPrintFunction = print_string_only_entries(filesname,start,end,datum,print_array)
 		if(empty) < (counter/10) and empty > 0 :
 			if print_empty_count == 0:
-				print "\tCertain empty entries are found which are printed"				
+				print "\tCertain empty entries are found which are printed"	
 	if((total_pure_string) > (9*(counter - empty))/10):
 		print "\tThis column is dominated by pure string entries. Hence any other datatype is considered defective "
 		if(state_code > (6*(counter - empty))/10):
 			returnPrintFunction = print_integer_entries(filesname,start,end,datum,print_array)
 			returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)
-			returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)			
-		if(total_email > counter/2):			
+			returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)
+		if(total_email > counter/2):
 			returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)
 			returnPrintFunction = print_space_entries(filesname,start,end,datum,print_array)
 			returnPrintFunction = print_no_dots(filesname,start,end,datum,print_array)
-			returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)			
-		else :								
-			returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)			
-			returnPrintFunction = print_state_code(filesname,start,end,datum,print_array)			
-			if special_characters_print == 0:					
+			returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)
+		else :
+			returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)
+			returnPrintFunction = print_state_code(filesname,start,end,datum,print_array)
+			if special_characters_print == 0:
 				returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)
 				special_characters_print+=1
-			returnPrintFunction = print_hyphen(filesname,start,end,datum,print_array)			
-			returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)			
+			returnPrintFunction = print_hyphen(filesname,start,end,datum,print_array)
+			returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)
 			returnPrintFunction = print_integer_entries(filesname,start,end,datum,print_array)
-			returnPrintFunction = print_string_with_dots_not_email_not_website(filesname,start,end,datum,print_array)			
+			returnPrintFunction = print_string_with_dots_not_email_not_website(filesname,start,end,datum,print_array)
 			returnPrintFunction = print_email_without_dot(filesname,start,end,datum,print_array)
 			global string_dots_no_email_or_website
 			string_dots_no_email_or_website+=1
@@ -90,51 +90,50 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 		print "\tVery high probability that this column represents email"
 		global email_dominant_column
 		email_dominant_column+=1
-		returnPrintFunction = print_improper_email_entries(filesname,start,end,datum,print_array)		
+		returnPrintFunction = print_improper_email_entries(filesname,start,end,datum,print_array)
 		if(empty):
 			print "\tThere are empty records in this column"
-	if (total_zipcode > 0) and (total_zipcode <= (counter/10)):				
+	if (total_zipcode > 0) and (total_zipcode <= (counter/10)):
 			returnPrintFunction = print_zip_code(filesname,start,end,datum,print_array)
 	if(total_phone_only_integers + total_pure_integer) > (5*counter)/10 :
 		print "\tPure integer occupy a large portion of this column. Hence any string entries are considered defective"
-		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)		
-		print "returnPrintFunction from print_string_entries is",returnPrintFunction
+		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)
 		if(total_phone) > (4*counter)/10 :
 			if special_characters_print == 0:
-				returnPrintFunction = print_special_characters_phone(filesname,start,end,datum,print_array)				
+				returnPrintFunction = print_special_characters_phone(filesname,start,end,datum,print_array)
 				special_characters_print+=1
 		else :
 			if special_characters_print == 0:
-				returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)				
+				returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)
 				special_characters_print+=1
-		returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)		
-	if(total_phone) > (4*counter)/10 :	
+		returnPrintFunction = print_symbols(filesname,start,end,datum,print_array)
+	if(total_phone) > (4*counter)/10 :
 		print "\tPhone numbers occupy a large portion of this column. Hence any string integers are considered defective"
 		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)
 		if special_characters_print == 0:
-			returnPrintFunction = print_special_characters_phone(filesname,start,end,datum,print_array)			
+			returnPrintFunction = print_special_characters_phone(filesname,start,end,datum,print_array)
 			special_characters_print+=1
 	if(total_zipcode > (counter/2)) :
 		print "\tHigh probability that this column represents zipcode"
 		returnPrintFunction = print_string_entries(filesname,start,end,datum,print_array)
 		returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)
 		if special_characters_print == 0:
-			returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)			
+			returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)
 			special_characters_print+=1
 		returnPrintFunction = print_pure_integer_not_zipcode(filesname,start,end,datum,print_array)
 	if(total_special_characters > 0) and (total_special_characters < (10*(counter-empty)/100)):
 		print "\tthis column contains special characters"
 		if special_characters_print == 0 and email_dominant_column == 0:
-			returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)			
+			returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)
 			special_characters_print+=1	
 	if(total_string > (9*counter)/10 or total_string > (counter - empty)/2 ) and (total_string > empty):
-		print "\tThis column is definitely not email,website,zipcode or phone number"		
+		print "\tThis column is definitely not email,website,zipcode or phone number"
 		global local_count
 		local_count += 1
 		if ((string_with_integer_spaces > (7*(counter-empty))/10)) :
-			print "\tVery high probability that this is a line of address"				
-			returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)		
-		if (pure_integer != 0):						
+			print "\tVery high probability that this is a line of address"	
+			returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)
+		if (pure_integer != 0):
 			returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)
 		if(email !=0) :
 			returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)
@@ -162,13 +161,15 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 			print "\tHigh probability that this column represents state code"
 	if(uncertain_entries):
 		if(local_count == 0):
-			print "\tThis column contains entries which seem anamalous."		
+			print "\tThis column contains entries which seem anamalous."
 		improper_integer_entries(filesname,start,end,datum,print_array)
 	temp_print = 0
+	print "returnPrintFunction is",returnPrintFunction
+	print "type of returnPrintFunction is",type(returnPrintFunction)
 	for i in range(0,len(returnPrintFunction)):
-		if returnPrintFunction[i]>0:			
-			temp_print+=1		
-	if temp_print >0 :	
+		if returnPrintFunction[i]>0:
+			temp_print+=1
+	if temp_print >0 :
 		print "****************************"
 		print "PLEASE OPEN improperData.txt"
 		print "****************************"
