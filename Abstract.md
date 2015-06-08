@@ -21,7 +21,7 @@
 <h3>Data Acceptor:</h3>
 As soon as the file is received, the function commaChecker (in <b>starter.py</b>) splits each row at commas and looks for rows with improper commas. If any such row is found, the tool stops execution. The improper row is documented in a seperate file (<b>improperData.txt</b>)
 <h3>DataType Classifier :</h3>
-Once the comma check is over, each element in each row is now taken and analyzed (using regex) and given a datatype (in <b>Classifier.py</b>)
+Once the comma check is over, each element in each row is now taken and analyzed (using regular expressions in <b>regex.py</b>) and given a datatype (in <b>Classifier.py</b>)
 Datatypes cover not just string, integer. The tool dives a bit deeper and subclassifies string further into string with spaces,string with integers, string with integer and spaces and so on.
 To get an idea of the different types of datatypes that are handled, please use <b>ToolTestCases.py</b>
 <h3>Data Calculator :</h3>

@@ -204,9 +204,9 @@ class TestFunctions(unittest.TestCase):
 		regular_expressions("alaska")
 		self.assertEqual(stateCodeFunction("alaska",bdict),'possible state name in lowercase')
 		regular_expressions("tamilnadu")
-		self.assertEqual(stateCodeFunction("tamilnadu",bdict),'not state name')
+		self.assertEqual(stateCodeFunction("tamilnadu",bdict),'is not a state code just string in lowercase')
 		regular_expressions("INDIA")
-		self.assertEqual(stateCodeFunction("INDIA",bdict),'uppercase string')
+		self.assertEqual(stateCodeFunction("INDIA",bdict),'is not a state code just string in uppercase')
 
 	def test_empty(self):
 		regular_expressions("")
@@ -215,7 +215,6 @@ class TestFunctions(unittest.TestCase):
 		self.assertEqual(emptyFunction(" ",bdict),"empty")
 
 	def test_print_functions(self):
-		# print "datum is",datum
 		self.assertEqual(print_uppercase_entries('test.csv',1,2,datum,[]),[1,0,0,0,0,0,0,0,0,0])
 		self.assertEqual(print_empty_entries('test.csv',2,3,datum,[]),[1,0,0])
 		self.assertEqual(print_string_entries('test.csv',1,2,datum,[]),[1,0,0,0,0,0,0,0,0,0])		
@@ -251,8 +250,8 @@ class TestFunctions(unittest.TestCase):
 	def test_startTool(self):
 		self.assertEqual(startTool('test.csv',0,1,11,11),"return from startTool")
 
-	# def test_observations(self):
-	# 	self.assertEqual(observations('test.csv',2,3,23,datum,bdictReturn,[]),"return from observation function")
+	def test_observations(self):
+		self.assertEqual(observations('test.csv',2,3,23,datum,bdictReturn,[]),"return from observation function")
 	#The function "observations" can't be tested seperately cos it depends on inputs from startool. Hence when, startool is tested successfully it is implied that observations also works.
 
 	def test_work_header(self):

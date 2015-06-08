@@ -1,3 +1,5 @@
+""" This file contains only regular expressions """
+
 from Reader import *
 pattern_string = re.compile("[a-zA-Z]")
 pattern_caps = re.compile("[A-Z]")

@@ -12,7 +12,7 @@ def startTool(filesname,start,end,returnCommaChecker,returnRowCount):
         bdictReturn = bdictFunction()
         for i in range(1,len(datum)):
             datatypeClassifier(datum[i][start],email_array,bdictReturn)
-            #Above function classifies incoming entry into differnt dataypes 
+            #Above function (datatypeClassifier) classifies incoming entry into differnt dataypes 
         observations(filesname,start,end,returnCommaChecker,datum,bdictReturn,print_array)
         #the above function (observations) identifies "defects" and prints them out.
     return "return from startTool"
