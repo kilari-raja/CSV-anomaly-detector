@@ -44,3 +44,17 @@ customDict = dict(
 	DOT_BUT_NOT_EMAIL_OR_WEBSITE = "DOT (but not email or website)",   #3
 )
 sortedDict = [(key,customDict[key]) for key in sorted(customDict)]
+
+import re
+pattern_string = re.compile("[a-zA-Z]")
+pattern_integer = re.compile("[0-9]")
+pattern_email = 're.compile("[\w+|\W+]@[\w+|\W+]")'
+pattern_phone = re.compile("-")
+
+regexDict  = dict(
+	find_string  = pattern_string,
+	find_integer = pattern_integer,
+	find_email = pattern_email,
+	find_phone = pattern_phone,
+)
+sortedregexDict = [(key,regexDict[key]) for key in sorted(regexDict)]

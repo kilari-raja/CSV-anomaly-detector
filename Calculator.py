@@ -163,9 +163,7 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 		if(local_count == 0):
 			print "\tThis column contains entries which seem anamalous."
 		improper_integer_entries(filesname,start,end,datum,print_array)
-	temp_print = 0
-	print "returnPrintFunction is",returnPrintFunction
-	print "type of returnPrintFunction is",type(returnPrintFunction)
+	temp_print = 0	
 	for i in range(0,len(returnPrintFunction)):
 		if returnPrintFunction[i]>0:
 			temp_print+=1
