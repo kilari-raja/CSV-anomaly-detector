@@ -4,7 +4,7 @@ from Classifier import *
 from Reader import *
 from DisplayerIII import *
 
-def observations(filesname,start,end,counter,datum,bdict,print_array):
+def observations(filesname,start,end,counter,datum,bdict,print_array):	
 	print_array = []
 	global total_zipcode,total_phone,total_phone_only_integers,total_string,total_website,total_pure_string,total_special_characters, total_email,special_characters_print,returnPrintFunction
 	total_zipcode = bdict['zipcode_with_two_not_successive_hyphens']+bdict['mostly_zipcode_with_one_hyphen']+bdict['mostly_zipcode_without_hyphen']+bdict['mostly_zipcode_with_two_hyphen']+bdict['mostly_zipcode_four_digits']
@@ -137,6 +137,7 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 			returnPrintFunction = print_integer_only_entries(filesname,start,end,datum,print_array)
 		if(email !=0) :
 			returnPrintFunction = print_email_entries(filesname,start,end,datum,print_array)
+		else :
 	if(total_pure_string < (10*(counter-empty)/100)) and total_pure_string !=0 :
 		if(total_string > counter-empty/2):
 			print "\tString with other datatypes dominate but pure strings are also present"
@@ -145,7 +146,7 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 		else :
 			print "\tFew string entries are found. Hence printed"
 			returnPrintFunction = print_string_only_entries(filesname,start,end,datum,print_array)
-	if string_with_dots_not_email_not_website > 0 :
+	if bdict['string_with_dots_not_email_not_website'] > 0 :		
 		if total_website > 5*(counter-empty)/10 :
 			print "\tThis column is dominated by website entries"
 		elif total_email > 5*(counter-empty)/10 :
@@ -156,14 +157,15 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 			print "\tthis column is dominated by string with dots but they are not email or website"
 			if string_dots_no_email_or_website == 0 :
 				returnPrintFunction = print_string_with_dots_not_email_not_website(filesname,start,end,datum,print_array)
-	if (state_code > (9*counter)/10) :
+	if (bdict['state_code'] > (9*counter)/10) :
 		if(local_count == 0):
 			print "\tHigh probability that this column represents state code"
-	if(uncertain_entries):
-		if(local_count == 0):
-			print "\tThis column contains entries which seem anamalous."
-		improper_integer_entries(filesname,start,end,datum,print_array)
-	temp_print = 0	
+	# if(uncertain_entries):
+	# 	if(local_count == 0):
+	# 		print "\tThis column contains entries which seem anamalous."
+	# 	improper_integer_entries(filesname,start,end,datum,print_array)
+	temp_print = 0
+	print "returnPrintFunction is",returnPrintFunction
 	for i in range(0,len(returnPrintFunction)):
 		if returnPrintFunction[i]>0:
 			temp_print+=1
