@@ -84,8 +84,6 @@ def websiteWithoutWWWFunction(entry,bdict):
 			if not adict['find_slash'] and len(adict['find_dot']) > 1 and not adict['find_email'] :
 				return "possible website but without www (2 dot) and without slashes"
 			if adict['find_slash'] :
-				website_without_www+=1
-				bdict['website_without_www']=website_without_www
 				return "possible website but without www and with slashes"
 		if not adict['find_email'] and not adict['find_slash'] and len(adict['find_dot']) <= 1 :
 			if(len(entry)-x[0] > 4):
@@ -249,13 +247,16 @@ def integerFunction(entry,bdict):
 			pure_integer += 1
 			bdict['pure_integer']=pure_integer
 			return  "a four digit integer"
-	if adict['find_integer'] and not adict['find_phone'] and not adict['find_zipcode_without_hyphen'] and not adict['find_zipcode_four_digits']and not adict['find_string'] and adict['find_dot']:
+	if adict['find_integer'] and adict['find_dot'] and not adict['find_phone'] and not adict['find_zipcode_without_hyphen'] and not adict['find_zipcode_four_digits']and not adict['find_string']:
 		global decimal_integer
 		decimal_integer += 1
 		bdict['decimal_integer'] = decimal_integer
 		global decimal_integer_lengths
-		decimal_integer_lengths.append(len(adict['find_dot']))			
-		return "Integer with decimals"
+		decimal_integer_lengths.append(len(adict['find_dot']))
+		if adict['find_decimal']:
+			return "Integer with decimals"
+		else :
+			return "decimal integer with misplaced dot"
 	if adict['find_integer'] and not adict['find_phone'] and  not adict['find_zipcode_without_hyphen'] and not adict['find_zipcode_four_digits'] and not adict['find_string'] and not adict['find_dot'] and adict['find_pattern_phone_10_digits'] and not adict['find_pattern_phone_11_digits'] and not adict['find_string']:	
 		global phone_10_digits
 		phone_10_digits += 1
@@ -266,7 +267,7 @@ def integerFunction(entry,bdict):
 		phone_three_parts_plus_one+=1
 		bdict['phone_three_parts_plus_one']=phone_three_parts_plus_one
 		return "phone with four parts containing three spaces and +1"
-	if adict['find_integer'] and not adict['find_phone'] and  adict['find_pattern_phone_11_digits'] and not adict['find_string']  :
+	if adict['find_integer'] and not adict['find_phone'] and  adict['find_pattern_phone_11_digits'] and not adict['find_string'] :
 		if entry[0]=="1":
 			global phone_11_digits
 			phone_11_digits+=1
