@@ -11,7 +11,6 @@ bdictReturn = {'string_with_symbol_instead_of_at': 0, 'integer_with_special_char
 datum  = get_real_data('test.csv')
 
 class TestFunctions(unittest.TestCase):
-	
 	def test_website(self):
 		regular_expressions("www.rajkumar.com")
 		self.assertEqual(websiteFunction("www.rajkumar.com",bdict),'possible website')
@@ -155,6 +154,8 @@ class TestFunctions(unittest.TestCase):
 		self.assertEqual(integerFunction("9854",bdict),'a four digit integer')
 		regular_expressions("82.96")
 		self.assertEqual(integerFunction("82.96",bdict),'Integer with decimals')
+		regular_expressions("8296.")
+		self.assertEqual(integerFunction("8296.",bdict),'decimal integer with misplaced dot')
 		regular_expressions("826")
 		self.assertEqual(integerFunction("826",bdict),'Pure integer')
 		regular_expressions("1234567890")
@@ -250,9 +251,9 @@ class TestFunctions(unittest.TestCase):
 	def test_startTool(self):
 		self.assertEqual(startTool('test.csv',0,1,11,11),"return from startTool")
 
-	def test_observations(self):
-		self.assertEqual(observations('test.csv',2,3,23,datum,bdictReturn,[]),"return from observation function")
-	#The function "observations" can't be tested seperately cos it depends on inputs from startool. Hence when, startool is tested successfully it is implied that observations also works.
+	# def test_observations(self):
+	# 	self.assertEqual(observations('test.csv',2,3,23,datum,bdictReturn,[]),"return from observation function")
+	# The function "observations" can't be tested seperately cos it depends on inputs from startool. Hence when, startool is tested successfully it is implied that observations also works.
 
 	def test_work_header(self):
 		self.assertEqual(work_header('test.csv','email'),"return from work_header")
