@@ -24,7 +24,7 @@ def purestringFunction(entry,bdict):
 			return "pure uppercase string with more than 2 characters"
 
 def stringFunction(entry,bdict):	
-	if (adict['find_string'] and adict['find_integer'] and not adict['find_empty'] and not adict['find_http']  and not adict['find_no_entry'] and adict['find_dot'] and not adict['find_email']) or (adict['find_string'] and not adict['find_integer'] and not adict['find_empty'] and adict['find_dot'] and not adict['find_email'] and not adict['find_website'] and not adict['find_http']) :		
+	if (adict['find_string'] and adict['find_integer'] and not adict['find_empty'] and not adict['find_http']  and not adict['find_no_entry'] and adict['find_dot'] and not adict['find_email']) or (adict['find_string'] and not adict['find_integer'] and not adict['find_empty'] and adict['find_dot'] and not adict['find_email'] and not adict['find_website'] and not adict['find_http']) :
 		global string_with_dots_not_email_not_website
 		string_with_dots_not_email_not_website += 1
 		bdict['string_with_dots_not_email_not_website']=string_with_dots_not_email_not_website
@@ -71,11 +71,11 @@ def websiteFunction(entry,bdict):
 			website+=1
 			bdict['website']=website
 			return "possible website"
-		else :
+		else : # there can't be a single character domain name
 			return "single character domain name"					
 
 def websiteWithoutWWWFunction(entry,bdict):
-	if adict['find_string'] and adict['find_dot'] and not adict['find_website']  and  adict['find_word_after_dot'] and not adict['find_space'] and not adict['find_hashtag'] and not adict['find_comma'] and (len(adict['find_string']) > 5) :
+	if adict['find_string'] and adict['find_dot'] and not adict['find_website']  and  adict['find_word_after_dot'] and not adict['find_space'] and not adict['find_email'] and not adict['find_hashtag'] and not adict['find_comma'] and (len(adict['find_string']) > 5) :
 		x = [j for j,val in enumerate(entry) if val=="."]
 		if((x[len(x)-1]-x[0]) >= 3) :
 			global website_without_www
@@ -86,7 +86,7 @@ def websiteWithoutWWWFunction(entry,bdict):
 			if adict['find_slash'] :
 				return "possible website but without www and with slashes"
 		if not adict['find_email'] and not adict['find_slash'] and len(adict['find_dot']) <= 1 :
-			if(len(entry)-x[0] > 4):
+			if(len(entry)-x[0] > 4):				
 				global string_with_dots_not_email_not_website
 				string_with_dots_not_email_not_website+=1
 				bdict['string_with_dots_not_email_not_website']=string_with_dots_not_email_not_website
@@ -95,7 +95,7 @@ def websiteWithoutWWWFunction(entry,bdict):
 				website_without_www+=1
 				bdict['website_without_www']=website_without_www
 				return "possible website but without www (1 dot)"
-		else :  # there can't be a single character domain name					
+		else :  
 			string_with_dots_not_email_not_website+=1
 			bdict['string_with_dots_not_email_not_website']=string_with_dots_not_email_not_website
 			return "string with more than one dot but not website"
