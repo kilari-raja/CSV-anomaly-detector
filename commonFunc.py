@@ -12,7 +12,7 @@ def print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,prin
 			fp.write("*"*90 + "\n" + "THIS ROW IS PRINTED BECAUSE " + config.sortedDict[key_value][1] + " IS PRESENT IN COLUMN " + datum[0][start] + " OF THE CSV FILE\n" + "*"*90 + "\n")		
 		print_array.append(print_count)
 		new_row_no_in_original_file = row_no_in_original_file + 1
-		fp.write(str(datum[i][start]) + " found in this row contains " + config.sortedDict[key_value][0] + " entries\n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n" + "\n" )
+		fp.write("\n"+str(datum[i][start]) + " found in this row contains " + config.sortedDict[key_value][0] + " entries\n\n" + str(datum[i])+ "\n" + "Defective row No:" + str(defective_rows) + "\n" + "Row no in original file is " + str(new_row_no_in_original_file)+"\n\n" )
 	return print_count
 
 def print_improper_comma(defective_rows,row_no_in_original_file,row):
