@@ -42,6 +42,7 @@ def count_rows(filesname):
             row_count+=1
     print "No of rows in",filesname,":",row_count
     return row_count
+
 def ten_rows(filesname):    
     row_count = 0       
     with open(filesname,'rU') as data :
@@ -51,6 +52,7 @@ def ten_rows(filesname):
                 stutter =''.join(line)
                 print "\n" + stutter
     return "return from ten_rows"
+    
 def work_header(filesname,columns) :
     else_count = 0
     you = get_mylist(filesname)
