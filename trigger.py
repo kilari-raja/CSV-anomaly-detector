@@ -5,7 +5,7 @@ from Classifier import *
 from Calculator import *
 from commonFunc import *
 
-def startTool(filesname,start,end,returnCommaChecker,returnRowCount):  
+def startTool(filesname, start, end,returnCommaChecker,returnRowCount):  
     if returnCommaChecker == returnRowCount :  #this line checks for improper commas
         global datum
         datum = get_real_data(filesname)
