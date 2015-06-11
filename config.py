@@ -40,7 +40,6 @@ customDict = dict(
 	at_the_rate_WITH_INTEGERS = "@ WITH INTEGERS", #36
 	email_with_improper_format = "WRONGLY FORMATTED EMAIL", #37	
 	improper_symbols = "IMPROPER SYMBOLS", #38
-	zipcode_that_does_not_match_with_state_code = "MISMATCHED ZIPCODE"  #39
-	
+	zipcode_that_does_not_match_with_state_code = "MISMATCHED ZIPCODE"  #39	
 )
 sortedDict = [(key,customDict[key]) for key in sorted(customDict)]
