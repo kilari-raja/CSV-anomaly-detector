@@ -25,6 +25,7 @@ def print_improper_comma(defective_rows,row_no_in_original_file,row):
 		fp.write("Row no in original file is ")
 		fp.write(str(row_no_in_original_file)+"\n" + "\n")	
 
+# print datum[i][start] ,"belongs to",zipcodes[datum[i][start]][0],"in the state of",zipcodes[datum[i][start]][1]
 
 def correct_place(datum):
 	with open('improperData.txt','a') as fp :
