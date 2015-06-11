@@ -1,6 +1,8 @@
 """ This function is used while printing. This is where the dict in config.py comes in """
 
 import config
+from Reader import *
+
 def print_in_improperTxt(datum,start,defective_rows,row_no_in_original_file,print_count,i,key_value,print_array):
 	# print "key_value is",key_value	
 	with open('improperData.txt','a') as fp :
@@ -22,3 +24,8 @@ def print_improper_comma(defective_rows,row_no_in_original_file,row):
 		new_row_no_in_original_file = row_no_in_original_file + 1
 		fp.write("Row no in original file is ")
 		fp.write(str(row_no_in_original_file)+"\n" + "\n")	
+
+
+def correct_place(datum):
+	with open('improperData.txt','a') as fp :
+		fp.write(datum + " belongs to " + zipcodes[datum][0] + " in the state of " + zipcodes[datum][1] + "\n\n")
