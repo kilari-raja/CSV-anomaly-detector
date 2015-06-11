@@ -1,9 +1,14 @@
 """ This file integrates all other files. Function below is where it all begins and ends"""
 
-from DisplayerIII import *
-from Classifier import *
-from Calculator import *
-from commonFunc import *
+# from DisplayerIII import *
+# from Classifier import *
+# from Calculator import *
+# from commonFunc import *
+
+from DisplayerIII import get_real_data
+from Classifier import bdictFunction,datatypeClassifier
+from Reader import email_array,print_array
+from Calculator import observations
 
 def startTool(filesname, start, end,returnCommaChecker,returnRowCount):  
     if returnCommaChecker == returnRowCount :  #this line checks for improper commas
