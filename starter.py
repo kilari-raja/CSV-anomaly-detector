@@ -1,6 +1,12 @@
 """ This file integrates command line execution to the tool. This redirects to trigger.py """
 
-from trigger import *
+# from trigger import *
+
+from Reader import app
+from csv import reader
+from DisplayerIII import get_mylist
+from trigger import startTool
+from commonFunc import print_improper_comma
 
 def commaChecker(filesname):
     global row_no_in_original_file,counter
