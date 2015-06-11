@@ -1,11 +1,15 @@
-""" This file identifies defective entries and calls respective functions to prints them """
+""" This file identifies defective entries and calls respective functions to print them """
 
-from Classifier import *
-from Reader import *
-from DisplayerIII import *
+# from Classifier import *
+# from Reader import *
+# from DisplayerIII import *
+
+from collections import Counter
+from Reader import decimal_integer_lengths,point_eight,empty,point_one,state_code,point_six,point_five,point_nine,point_three,email_without_integer,email_with_integer,point_four
+from DisplayerIII import print_string_entries,print_email_entries,print_improper_zip_code,special_characters_print,print_special_characters,print_pure_integer_not_zipcode,print_state_code,print_hyphen,print_symbols,print_integer_entries,print_string_with_dots_not_email_not_website,string_dots_no_email_or_website,local_count,string_with_integer_spaces,point_seven,pure_integer,email,print_improper_email_entries,print_integer_only_entries,print_integer_more_than_string,print_space_entries,print_no_dots
 
 def observations(filesname,start,end,counter,datum,bdict,print_array):
-	print "bdict inside observations is",bdict
+	# print "bdict inside observations is",bdict
 	print_array = []
 	global total_zipcode,total_phone,total_phone_only_integers,total_string,total_website,total_pure_string,total_special_characters, total_email,special_characters_print,returnPrintFunction
 	total_zipcode = bdict['zipcode_with_two_not_successive_hyphens']+bdict['mostly_zipcode_with_one_hyphen']+bdict['mostly_zipcode_without_hyphen']+bdict['mostly_zipcode_with_two_hyphen']+bdict['mostly_zipcode_four_digits']
@@ -19,7 +23,9 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 	total_decimal_integer = bdict['decimal_integer']
 	total_pure_integer = bdict['pure_integer']
 	counter_decimal_integer = Counter(decimal_integer_lengths)
-	print "\nOBSERVATIONS:"	
+	print "\nOBSERVATIONS:"
+	# print "total_email is",total_email
+	# print "point_nine*counter-empty is",(point_eight*(counter - empty))
 	if((total_email) > (point_eight*(counter - empty))):
 		print "\tEmail dominates this column. Hence any other type of entries is considered a defective entry."	
 		returnPrintFunction = print_improper_email_entries(filesname,start,end,datum,print_array)
@@ -129,7 +135,7 @@ def observations(filesname,start,end,counter,datum,bdict,print_array):
 			returnPrintFunction = print_special_characters(filesname,start,end,datum,print_array)
 			special_characters_print+=1	
 	if(total_string > (point_nine*counter) or total_string > point_five*(counter - empty)) and (total_string > empty):
-		print "total_string is",total_string
+		# print "total_string is",total_string
 		print "\tThis column is definitely not email,website,zipcode or phone number"
 		global local_count
 		local_count += 1
